@@ -12,9 +12,11 @@
         <jdkCompileVersion>1.7</jdkCompileVersion>
         <javaServletVersion>3.1.0</javaServletVersion>
         <jettyVersion>9.3.6.v20151106</jettyVersion>
+        <cometdVersion>3.0.9</cometdVersion>
+        <jerseyVersion>2.23.1</jerseyVersion>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jackson.version>2.7.0-rc3</jackson.version>
+        <jackson.version>2.7.5</jackson.version>
     </properties>
 
     <dependencies>
@@ -89,16 +91,42 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-client</artifactId>
-            <version>8.1.8.v20121106</version>
+            <version>${jettyVersion}</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-util -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+
 
 
         <!-- https://mvnrepository.com/artifact/org.cometd.java/cometd-java-client -->
         <dependency>
             <groupId>org.cometd.java</groupId>
             <artifactId>cometd-java-client</artifactId>
-            <version>2.5.1</version>
+            <version>${cometdVersion}</version>
         </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.connectors/jersey-jetty-connector -->
+        <dependency>
+            <groupId>org.glassfish.jersey.connectors</groupId>
+            <artifactId>jersey-jetty-connector</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+
 
 
 

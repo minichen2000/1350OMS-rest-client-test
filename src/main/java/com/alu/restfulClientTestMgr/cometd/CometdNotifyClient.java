@@ -13,7 +13,7 @@ import org.cometd.client.BayeuxClient;
 import org.cometd.client.transport.ClientTransport;
 import org.cometd.client.transport.LongPollingTransport;
 import org.cometd.common.JSONContext;
-import org.cometd.common.JacksonJSONContextClient;
+import org.cometd.common.Jackson2JSONContextClient;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.cometd.bayeux.Channel;
@@ -27,7 +27,7 @@ public class CometdNotifyClient {
 	private String cometURL;
 	private Boolean isAttached = false;
 	private static CometdNotifyClient instance;
-	private HttpClient httpClient = new HttpClient(new SslContextFactory());
+	private HttpClient httpClient = new HttpClient(new SslContextFactory(true));
 	private BayeuxClient client;
 	private ScheduledThreadPoolExecutor tpe = new ScheduledThreadPoolExecutor(1);
 	private ScheduledFuture<?> future;
@@ -42,10 +42,7 @@ public class CometdNotifyClient {
 		return instance;
 	}
 	
-	/**
-	 * ����CometD������
-	 * @throws Exception
-	 */
+
 	public void attachToCometdServer() throws Exception {
 
 		String baseUrl = null;
@@ -63,7 +60,6 @@ public class CometdNotifyClient {
 		try {
 			if (httpClient != null)
 				httpClient.stop();
-			//httpClient.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
 			httpClient.start();
 		} catch (Exception ex) {
 			log.error("Exception while starting httpclient");
@@ -74,9 +70,9 @@ public class CometdNotifyClient {
 		tpe.setKeepAliveTime(10, TimeUnit.SECONDS);
 
 		Map<String, Object> transportOptions = new HashMap<String, Object>();
-		//JSONContext.Client jsonContext = new JacksonJSONContextClient();
+		JSONContext.Client jsonContext = new Jackson2JSONContextClient();
 
-		//transportOptions.put(ClientTransport.JSON_CONTEXT, jsonContext);
+		transportOptions.put(ClientTransport.JSON_CONTEXT_OPTION, jsonContext);
 		ClientTransport transport = new LongPollingTransport(transportOptions, httpClient);
 		
 		
@@ -156,18 +152,28 @@ public class CometdNotifyClient {
 		}
 	}
 
-	public void subscribe(String cometdChannel,
-			ClientSessionChannel.MessageListener cometEventListener) {
+	public void subscribe(final String cometdChannel,
+						  ClientSessionChannel.MessageListener cometEventListener) {
 		log.debug("Subscribing to the channel : " + cometdChannel);
 
-		client.getChannel(cometdChannel).subscribe(cometEventListener);
+		client.getChannel(cometdChannel).subscribe(cometEventListener, new ClientSessionChannel.MessageListener(){
+			@Override
+			public void onMessage(ClientSessionChannel clientSessionChannel, Message message) {
+				log.debug("Subscription successful: "+cometdChannel);
+			}
+		});
 	}
 
-	public void unsubscribe(String cometdChannel,
-			ClientSessionChannel.MessageListener cometEventListener) {
+	public void unsubscribe(final String cometdChannel,
+							ClientSessionChannel.MessageListener cometEventListener) {
 		log.debug("Unsubscribing to the channel : " + cometdChannel);
 
-		client.getChannel(cometdChannel).unsubscribe(cometEventListener);
+		client.getChannel(cometdChannel).unsubscribe(cometEventListener, new ClientSessionChannel.MessageListener(){
+			@Override
+			public void onMessage(ClientSessionChannel clientSessionChannel, Message message) {
+				log.debug("Unsubscription successful: "+cometdChannel);
+			}
+		});
 	}
 
 	public void disconnect(){

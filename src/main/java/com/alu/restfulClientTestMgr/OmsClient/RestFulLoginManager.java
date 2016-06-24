@@ -1,5 +1,6 @@
 package com.alu.restfulClientTestMgr.OmsClient;
 
+import com.alu.restfulClientTestMgr.JerseyClientService.HttpCall;
 import com.alu.restfulClientTestMgr.cometd.CometdEntrance;
 import org.apache.log4j.Logger;
 

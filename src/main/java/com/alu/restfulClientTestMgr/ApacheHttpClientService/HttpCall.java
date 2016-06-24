@@ -1,4 +1,4 @@
-package com.alu.restfulClientTestMgr.OmsClient;
+package com.alu.restfulClientTestMgr.ApacheHttpClientService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

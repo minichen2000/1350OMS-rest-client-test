@@ -1,8 +1,6 @@
 package com.alu.restfulClientTestMgr.TestMgrServer.servlet;
 
-import com.alu.restfulClientTestMgr.OmsClient.ConfLoader;
-import com.alu.restfulClientTestMgr.OmsClient.HttpCall;
-import com.alu.restfulClientTestMgr.OmsClient.RestFulLoginManager;
+import com.alu.restfulClientTestMgr.ApacheHttpClientService.HttpCall;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

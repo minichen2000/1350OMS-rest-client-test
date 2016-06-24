@@ -1,4 +1,4 @@
-package com.alu.restfulClientTestMgr.OmsClient;
+package com.alu.restfulClientTestMgr.ApacheHttpClientService;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
