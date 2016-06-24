@@ -1,0 +1,50 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list>
+      <Biscuit>
+        <option name="date" value="-1" />
+        <option name="domain" value="135.251.96.33" />
+        <option name="name" value="JSESSIONID" />
+        <option name="path" value="/oms1350/" />
+        <option name="value" value="899DBDFB8859153D967F213A37A50BCC" />
+      </Biscuit>
+    </list>
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="https://135.251.96.33:8443" />
+  <option name="urlPath" value="/oms1350/data/plat/session/login" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Content-Type" />
+        <option name="value" value="application/x-www-form-urlencoded" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="ticket" />
+        <option name="value" value="ST-174-B6KEFAdXMACwAWyFaDC3-cas01.example.org" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="user" />
+        <option name="value" value="alcatel" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="password" />
+        <option name="value" value="Lucent2.@" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="presentation" />
+        <option name="value" value="135.251.96.34" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="false" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>
