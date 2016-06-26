@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public class HttpCall
 
     private String sendRequest(Invocation.Builder ib, String method, Entity entity){
         Response resp=null;
+        log.debug("ib:"+ib.toString());
         if(null!=entity){
             resp=ib.method(method, entity);
         }else{
@@ -82,8 +84,15 @@ public class HttpCall
         }
 
         Entity entity=null;
+        /*
         if(null!=inputParam && !inputParam.isEmpty()){
             entity=Entity.entity(inputParam, contentType);
+        }*/
+        if(null!=inputParam && !inputParam.isEmpty()){
+            Form form=new Form();
+            form.param("username", "alcatel");
+            form.param("password", "Lucent2.@");
+            entity=Entity.entity(form, contentType);
         }
         return sendRequest(ib, "post", entity);
 

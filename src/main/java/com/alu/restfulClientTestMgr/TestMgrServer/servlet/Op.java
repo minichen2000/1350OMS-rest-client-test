@@ -1,6 +1,6 @@
 package com.alu.restfulClientTestMgr.TestMgrServer.servlet;
 
-import com.alu.restfulClientTestMgr.ApacheHttpClientService.HttpCall;
+import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpCall;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

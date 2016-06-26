@@ -15,10 +15,11 @@ public class CometdEntrance
                 client.disconnect();
             }
             client.attachToCometdServer();
-            //CometdEventListener listener = new CometdEventListener();
-            client.subscribe("/oms1350/events/155811cd03732/Request", new CometdEventListener());
+            //client.subscribe("/events/map/link/avc", new CometdEventListener());
+            //client.subscribe("/oms1350/events/155811cd03732/Request", new CometdEventListener());
             client.subscribe("/oms1350/events/npr/PhysicalConn", new CometdEventListener());
-            client.subscribe("/events/map/link/avc", new CometdEventListener());
+            client.subscribe("/oms1350/events/otn/trail", new CometdEventListener());
+            client.subscribe("/oms1350/events/otn/path", new CometdEventListener());
 
         }
         catch( Exception e )

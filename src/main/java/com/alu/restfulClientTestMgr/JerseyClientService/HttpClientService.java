@@ -1,8 +1,10 @@
 package com.alu.restfulClientTestMgr.JerseyClientService;
 
 import org.apache.log4j.Logger;
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jetty.connector.JettyConnectorProvider;
+import org.glassfish.jersey.logging.LoggingFeature;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -11,6 +13,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import java.net.CookieStore;
 import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
@@ -30,47 +33,19 @@ public class HttpClientService
 
     void init()
     {
-        SSLContext sslContext = null;
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.connectorProvider(new ApacheConnectorProvider());
+        clientConfig.property(LoggingFeature.LOGGING_FEATURE_VERBOSITY_CLIENT, LoggingFeature.Verbosity.PAYLOAD_ANY);
+
         try {
-            sslContext = SSLContext.getInstance( "TLS" );
-        } catch (Exception e) {
+            httpClient = ClientHelper.getClient(clientConfig);
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }
-        X509TrustManager tm = new X509TrustManager()
-        {
-            @Override
-            public void checkClientTrusted( X509Certificate[] chain,
-                                            String authType ) throws CertificateException
-            {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void checkServerTrusted( X509Certificate[] chain,
-                                            String authType ) throws CertificateException
-            {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public X509Certificate[] getAcceptedIssuers()
-            {
-                // TODO Auto-generated method stub
-                return null;
-            }
-        };
-        try {
-            sslContext.init( null, new TrustManager[] {tm}, null);
+            httpClient=null;
         } catch (KeyManagementException e) {
             e.printStackTrace();
+            httpClient=null;
         }
-
-        ClientConfig clientConfig = new ClientConfig();
-        clientConfig.connectorProvider(new JettyConnectorProvider());
-
-        httpClient = ClientBuilder.newBuilder().sslContext(sslContext).newClient(clientConfig);
 
     }
 

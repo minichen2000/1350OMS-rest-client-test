@@ -131,6 +131,9 @@ public class CometdNotifyClient {
 															client.disconnect();
 															log.debug("reconnection to Server");
 															connectToCometdServer();
+														}else{
+															// Here we received a message on the channel
+															log.debug( "\nMessage:\n"+"On Channel: "+channel+"\n"+message );
 														}
 													}
 

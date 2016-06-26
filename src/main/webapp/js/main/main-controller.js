@@ -23,6 +23,11 @@
         vm.guiPassword='Lucent2.@';
         vm.omsUrl='/oms1350/data/plat/session/login';
 
+        vm.result={result: '', resultOptions: {mode: 'code'}};
+        vm.onLoad = function (instance) {
+            instance.expandAll();
+        };
+
         vm.onLogin=function(){
                 $http({
                     method: 'post',
@@ -95,6 +100,58 @@
 
 
         checkStatus();
+
+
+
+
+        vm.baseUrl='https://'+vm.otnIP+':'+vm.otnPort+'/oms1350';
+        vm.path=null;
+        vm.result="";
+        vm.postBody="";
+        vm.postBodyOptions={mode: 'code'};
+        vm.resultOptions={mode: 'code'};
+
+        vm.postBodyModeSwith=function(){
+            vm.postBodyOptions.mode=vm.postBodyOptions.mode=='code' ? 'tree' : 'code';
+        }
+
+        vm.resultModeSwith=function(){
+            vm.resultOptions.mode=vm.resultOptions.mode=='code' ? 'tree' : 'code';
+        }
+
+        function onRequest(method){
+            var url_=vm.baseUrl+vm.path;
+            logger.debug("url:["+method+']: '+url_);
+            $http({
+                method: 'post',
+                url: './op',
+                params: {
+                    'method': method,
+                    'url': url_,
+                    'contentType': 'application/json'
+                },
+                data: JSON.stringify(vm.postBody ? vm.postBody : "")
+            })
+                .then(function(rsp){
+                    var rlt=JSON.stringify(rsp, null, 2);
+                    logger.debug("rsp:"+rlt);
+                    vm.result=rsp.data;
+                })
+                .catch(function(rsp){
+                    var rlt=JSON.stringify(rsp, null, 2);
+                    logger.error("rsp:"+rlt);
+                    vm.result=rsp;
+                });
+        }
+        vm.onGet=function(){
+            onRequest('get');
+        }
+        vm.onPost=function(){
+            onRequest('post');
+        }
+        vm.onDelete=function(){
+            onRequest('delete');
+        }
     }
 })();
 
