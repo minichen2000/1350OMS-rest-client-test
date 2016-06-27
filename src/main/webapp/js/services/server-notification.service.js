@@ -18,7 +18,7 @@
         listener: {filter:function(),fun:function()}
         */
         var ws_listeners = [];
-        var worker = new Worker("./app/services/server-notification-worker.js");
+        var worker = new Worker("./js/services/server-notification-worker.js");
         var event_buffer = [];
         var scrollBusy = false;
         var lastScrollMS = 0;
@@ -27,10 +27,10 @@
 
 
         worker.onmessage = function (evt) {
-            //logger.log((new Date()).toString()+" push: event_buffer.length: "+event_buffer.length);
+            //logger.log((new Date()).toString()+" evt:"+JSON.stringify(evt.data));
 
             for (var i = 0; i < ws_listeners.length; i++) {
-                var listener = ws_listeners[i].fun(evt);
+                ws_listeners[i].fun(evt.data);
             }
         }
 
@@ -66,6 +66,7 @@
          * @memberOf Factories.ServerNotificationService
          */
         function connect(_addr, _heartbeat) {
+            logger.debug("_addr:"+_addr);
             worker.postMessage({ cmd: 'connect', addr: _addr, heartbeat: _heartbeat });
         };
 

@@ -24,7 +24,6 @@
     <script src="js/app.js"></script>
     <script src="js/services/logger.service.js"></script>
     <script src="js/services/common-util.service.js"></script>
-    <script src="js/services/server-notification-worker.js"></script>
     <script src="js/services/server-notification.service.js"></script>
     <script src="js/main/main-controller.js"></script>
     <script src="js/directives/oms-otn-rest-form.directive.js"></script>
@@ -118,14 +117,14 @@
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label class="col-sm-1 control-label">Base URL</label>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <input type="text" class="form-control" ng-model="vm.baseUrl"
                        placeholder="Base URL">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-1 control-label">Path</label>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <input type="text" class="form-control" ng-model="vm.path"
                        placeholder="Path">
             </div>
@@ -134,9 +133,9 @@
 
         <div class="form-group">
             <label class="col-sm-1 control-label">POST Body</label>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
-                     style="width:100%; height: 300px"></div>
+                     style="width:100%; height: 400px"></div>
             </div>
             <button class="col-sm-1 btn"
                     ng-class="{'btn-info': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
@@ -157,18 +156,41 @@
         </div>
         <div class="form-group">
             <label class="col-sm-1 control-label">Result</label>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
 
                 <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
-                     style="width:100%; height: 600px"></div>
+                     style="width:100%; height: 300px"></div>
             </div>
             <button class="col-sm-1 btn"
                     ng-class="{'btn-info': vm.resultOptions.mode=='code', 'btn-defult': vm.resultOptions.mode!='code'}"
                     ng-click="vm.resultModeSwith()">{{vm.resultOptions.mode=='code' ? 'Tree' : 'Code'}}
             </button>
         </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Notifications</label>
+            <div class="col-sm-7">
+                <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
+
+                <textarea id="notifArea" rows="16" style="width:100%; border: 1px solid cornflowerblue;">{{vm.notifications}}</textarea>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-8">
+                <button class=" btn btn-info"
+                        ng-click="vm.clearNotifications()">Clear
+                </button>
+                <button class=" btn btn-default"
+                        ng-class="{'btn-info': !vm.autoScroll, 'btn-defult': vm.autoScroll}"
+                        ng-click="vm.swithAutoScroll()">{{vm.autoScroll ? "StopScroll" : "AutoScroll"}}
+                </button>
+            </div>
+
+        </div>
     </form>
+
+
 
 </div>
 </body>

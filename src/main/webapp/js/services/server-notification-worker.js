@@ -8,7 +8,7 @@
 
     onmessage = function (evt) {
         var cmd = evt.data;
-        console.log("cmd:" + JSON.stringify(cmd));
+        //console.log("cmd:" + JSON.stringify(cmd));
         if (cmd.cmd == "connect") {
             connect(cmd.addr, cmd.heartbeat);
         } else if (cmd.cmd == "sendJSON") {
@@ -69,7 +69,7 @@
 
 
             ws.onmessage = function (event) {
-                //console.log("onmessage: " + event.data);
+                //console.log("ws.onmessage: " + event.data);
                 var data = JSON.parse(event.data);
                 postMessage(data);
 

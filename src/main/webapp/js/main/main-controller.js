@@ -24,8 +24,10 @@
         vm.omsUrl='/oms1350/data/plat/session/login';
 
         vm.result={result: '', resultOptions: {mode: 'code'}};
+        vm.notifications="";
+        vm.autoScroll=true;
         vm.onLoad = function (instance) {
-            instance.expandAll();
+            //instance.expandAll();
         };
 
         vm.onLogin=function(){
@@ -82,7 +84,7 @@
                 url: './status'
             })
                 .then(function(rsp){
-                    logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
+                    //logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
                     if(rsp.data.status.toLowerCase()=='connected'){
                         vm.connected=true;
                     }else{
@@ -93,7 +95,7 @@
                 })
                 .catch(function(rsp){
                     var error=JSON.stringify(rsp, null, 2);
-                    logger.error("rsp:"+error);
+                    //logger.error("rsp:"+error);
                     $timeout(checkStatus, 1000);
                 });
         }
@@ -153,13 +155,32 @@
             onRequest('delete');
         }
 
+        vm.clearNotifications=function(){
+            vm.notifications="";
+        }
+
+        function tryToAutoScroll(){
+            if(vm.autoScroll){
+                setTimeout(function(){
+                    document.getElementById("notifArea").scrollTop = document.getElementById("notifArea").scrollHeight;
+                }, 20);
+            }
+        }
+        vm.swithAutoScroll=function(){
+            vm.autoScroll=!vm.autoScroll;
+            tryToAutoScroll();
+        }
 
 
 
-        var listenerFun = function(evt) {
+
+        var listenerFun = function(evtData) {
             $scope.$apply(function() {
-                logger.debug(JSON.stringify(evt));
+                logger.debug("notification msg:"+JSON.stringify(evtData));
+                vm.notifications+=(JSON.stringify(evtData)+'\n');
             });
+            tryToAutoScroll();
+
         };
 
         serverNotificationService.connect(commonUtil.generateWSUrl(), "5000");

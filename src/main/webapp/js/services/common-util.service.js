@@ -17,10 +17,14 @@
 
     function generateWSUrl() {
       var absUrl = $location.absUrl();
-      logger.log("$location.absUrl()=" + absUrl);
-      logger.log("$location.url()=" + $location.url());
+      //logger.log("$location.absUrl()=" + absUrl);
+      //logger.log("$location.url()=" + $location.url());
       var rlt = absUrl.slice(absUrl.indexOf(':'), absUrl.lastIndexOf($location.url()));
-      return "ws" + rlt.replace(/\/#/g, '') + "/notification";
+      rlt=rlt.replace(/\/#/g, '');
+      if(rlt.lastIndexOf('/')==rlt.length-1){
+        rlt=rlt.substring(0, rlt.length-1);
+      }
+      return "ws" + rlt + "/notification";
     }
   }
 

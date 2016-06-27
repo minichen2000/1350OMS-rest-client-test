@@ -1,15 +1,16 @@
 package com.alu.restfulClientTestMgr.cometd;
 
-
+import org.apache.log4j.Logger;
+import org.cometd.bayeux.ChannelId;
 import org.cometd.bayeux.Message;
 import org.cometd.bayeux.client.ClientSessionChannel;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class CometdEntrance
 {
+    private static Logger log = Logger.getLogger( CometdEntrance.class );
     private static ClientSessionChannel.MessageListener l=new CometdEventListener();
 
     static public interface SecondHandListener{
@@ -50,5 +51,145 @@ public class CometdEntrance
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public static void FireSHMsgLoopTest(){
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for(;;){
+                    Message m=new Message(){
+                        @Override
+                        public int size() {
+                            return 0;
+                        }
+
+                        @Override
+                        public boolean isEmpty() {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean containsKey(Object key) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean containsValue(Object value) {
+                            return false;
+                        }
+
+                        @Override
+                        public Object get(Object key) {
+                            return null;
+                        }
+
+                        @Override
+                        public Object put(String key, Object value) {
+                            return null;
+                        }
+
+                        @Override
+                        public Object remove(Object key) {
+                            return null;
+                        }
+
+                        @Override
+                        public void putAll(Map<? extends String, ?> m) {
+
+                        }
+
+                        @Override
+                        public void clear() {
+
+                        }
+
+                        @Override
+                        public Set<String> keySet() {
+                            return null;
+                        }
+
+                        @Override
+                        public Collection<Object> values() {
+                            return null;
+                        }
+
+                        @Override
+                        public Set<Entry<String, Object>> entrySet() {
+                            return null;
+                        }
+
+                        @Override
+                        public Map<String, Object> getAdvice() {
+                            return null;
+                        }
+
+                        @Override
+                        public String getChannel() {
+                            return null;
+                        }
+
+                        @Override
+                        public ChannelId getChannelId() {
+                            return null;
+                        }
+
+                        @Override
+                        public String getClientId() {
+                            return null;
+                        }
+
+                        @Override
+                        public Object getData() {
+                            return null;
+                        }
+
+                        @Override
+                        public boolean isMeta() {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean isPublishReply() {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean isSuccessful() {
+                            return false;
+                        }
+
+                        @Override
+                        public Map<String, Object> getDataAsMap() {
+                            return null;
+                        }
+
+                        @Override
+                        public Map<String, Object> getExt() {
+                            return null;
+                        }
+
+                        @Override
+                        public String getId() {
+                            return null;
+                        }
+
+                        @Override
+                        public String getJSON() {
+                            return "{\"msg\": \"hello\"}";
+                        }
+                    };
+                    log.debug("fire one message:\n"+m.getJSON());
+                    fireSHMsg(m);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }).start();
+
     }
 }

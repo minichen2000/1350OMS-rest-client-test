@@ -38,6 +38,7 @@ public class NotificationWebSocket extends WebSocketAdapter {
 				@Override
 				public void onMessage(Message msg) {
 					try {
+						System.out.println("onMessage:"+msg.getJSON());
 						remote.sendString(msg.getJSON());
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -46,6 +47,8 @@ public class NotificationWebSocket extends WebSocketAdapter {
 			};
 		}
 		CometdEntrance.registerShL(l);
+
+		CometdEntrance.FireSHMsgLoopTest();
 
 	}
 
