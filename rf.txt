@@ -1,0 +1,477 @@
+
+
+List all TL:
+GET
+/data/npr/physicalConns
+
+
+取ID为44的TL的connectionID:
+GET
+/data/otn/physicalConns/44/otnConnectionId
+
+取connectionID为294的TL的客户侧连接层次
+GET
+/data/otn/connection/294/clientHierarchy
+
+
+
+
+
+channel
+:
+"/oms1350/events/155811cd03732/Request"
+
+////////////TL///////////////////
+get all TLs:
+GET
+/data/npr/physicalConns
+
+get one TL:
+GET
+/data/npr/physicalConns/{connectId}
+
+delete TL:
+DELETE
+/data/npr/physicalConns/{connectId}
+
+create TL:
+POST
+/data/npr/physicalConns
+
+Refined (2 Ends):
+{
+  "Tag": "CMD_WIZTYPE_createConn",
+  "userLabel": "cmm_2",
+  "connectionType": "chooserConnWdm",
+  "aNode": "NE4",
+  "aPort": "NE4/ITL-29-1-SIG",
+  "aPort_id": 7872,
+  "zNode": "NE1",
+  "zPort": "NE1/ITL-31-1-SIG",
+  "zPort_id": 8349
+}
+
+Refined (4 Ends):
+{
+  "Tag": "CMD_WIZTYPE_createConn",
+  "userLabel": "cmm_4",
+  "connectionType": "chooserConnWdm4EndedNew",
+  "aNode": "NE5",
+  "aPort": "NE5/AM2125B-2-17-LINEOUT",
+  "aPort_id": 7172,
+  "a2Port": "NE5/AM2125B-2-17-LINEIN",
+  "a2Port_id": 7173,
+  "zNode": "NE6",
+  "zPort": "NE6/AM2125B-2-17-LINEIN",
+  "zPort_id": 8349
+  "z2Port": "NE6/AM2125B-2-17-LINEOUT",
+  "z2Port_id": 8350
+}
+
+creation successfull notification:
+{data={targetObj={className=PhysicalConn, id=145}, attributes={wrkSt=WorkingState_normal, className=PhysicalConn, id=145}...
+
+
+
+{"Tag":"CMD_WIZTYPE_createConn","userLabel":"cmm_1","tecnologyDomain":"OTN","connectionType":"chooserConnWdm","WDMconnectionIwType":"Technology_wdm","WDMconnectionType":"WdmPortType_ots","constAllocation":"20","ultraLongSpan":"Boolean_false","aNode":"NE4","aNode_id":24,"aNode_guiLabel":"NE4","aNode_emlNeType":"1830PSS-PHN","aNode_productName":"1830PSS","aPort":"NE4/ITL-29-1-SIG","aPort_ObjectId":null,"aPort_EventType":null,"aPort_ClassType":null,"aPort_IdClass":4,"aPort_alarmStatus":"AlarmStatus_cleared","aPort_boardType":"MUX%LINE","aPort_cardType":"ITLB","aPort_clonePortPresent":"Boolean_false","aPort_compModule":null,"aPort_consistSt":"ConsistencyStatus_normal","aPort_currentFrequency":null,"aPort_direction":"Direction_bidirectional","aPort_displayLabel":"ITL-29-1-SIG","aPort_encoding":"Encoding_notMeaningful","aPort_ethInterfaceRate":"EthInterfaceRate_notMeaningful","aPort_ethInterfaceType":"EthInterType_notApplicable","aPort_fdnMapper":"NC_n=*EML_100_SNA/NE_n=*10/PTPn=*ITL-29-1-SIG/:PORT","aPort_fecType":"FecType_notMeaningful","aPort_frequency":"##","aPort_internalEmlAid":"29/1/1","aPort_involvedIn3R":"Boolean_false","aPort_involvedOnInternalCable":"Boolean_false","aPort_involvedOnPhyConn":"Boolean_false","aPort_neId":23,"aPort_neLabel":"NE4","aPort_networkInterfaceType":"NetworkInterfaceType_notMeaningful","aPort_operationalState":"OperationalState_enabled","aPort_otuSignalType":"OtuSignalType_notMeaningful","aPort_physicalPortType":"PortType_notMeaningful","aPort_portBitRate":null,"aPort_id":7872,"aPort_key":"Port/7872","aPort_className":"Port","aPort_technology":"Technology_wdm","aPort_uploadSt":"UploadStatus_normal","aPort_usedDir":"Direction_bidirectional","aPort_usedOnOtn":"Boolean_false","aPort_guiLabel":"NE4/ITL-29-1-SIG","aPort_wdmClientSignalType":"ClientSignalType_notMeaningful","aPort_wdmInterfaceType":"WdmInterfaceType_blackAndWhite","aPort_wdmPhysicalPortRate":null,"aPort_wdmPortType":"WdmPortType_ots","aPort_wdmTransmissionMode":"WdmTransMode_notMeaningful","aPort_width":null,"zNode":"NE1","zNode_id":45,"zNode_guiLabel":"NE1","zNode_emlNeType":"1830PSS-PHN","zNode_productName":"1830PSS","zPort":"NE1/ITL-31-1-SIG","zPort_ObjectId":null,"zPort_EventType":null,"zPort_ClassType":null,"zPort_IdClass":4,"zPort_alarmStatus":"AlarmStatus_cleared","zPort_boardType":"MUX%LINE","zPort_cardType":"ITLB","zPort_clonePortPresent":"Boolean_false","zPort_compModule":null,"zPort_consistSt":"ConsistencyStatus_normal","zPort_currentFrequency":null,"zPort_direction":"Direction_bidirectional","zPort_displayLabel":"ITL-31-1-SIG","zPort_encoding":"Encoding_notMeaningful","zPort_ethInterfaceRate":"EthInterfaceRate_notMeaningful","zPort_ethInterfaceType":"EthInterType_notApplicable","zPort_fdnMapper":"NC_n=*EML_100_SNA/NE_n=*31/PTPn=*ITL-31-1-SIG/:PORT","zPort_fecType":"FecType_notMeaningful","zPort_frequency":"##","zPort_internalEmlAid":"31/1/1","zPort_involvedIn3R":"Boolean_false","zPort_involvedOnInternalCable":"Boolean_false","zPort_involvedOnPhyConn":"Boolean_false","zPort_neId":44,"zPort_neLabel":"NE1","zPort_networkInterfaceType":"NetworkInterfaceType_notMeaningful","zPort_operationalState":"OperationalState_enabled","zPort_otuSignalType":"OtuSignalType_notMeaningful","zPort_physicalPortType":"PortType_notMeaningful","zPort_portBitRate":null,"zPort_id":8349,"zPort_key":"Port/8349","zPort_className":"Port","zPort_technology":"Technology_wdm","zPort_uploadSt":"UploadStatus_normal","zPort_usedDir":"Direction_bidirectional","zPort_usedOnOtn":"Boolean_false","zPort_guiLabel":"NE1/ITL-31-1-SIG","zPort_wdmClientSignalType":"ClientSignalType_notMeaningful","zPort_wdmInterfaceType":"WdmInterfaceType_blackAndWhite","zPort_wdmPhysicalPortRate":null,"zPort_wdmPortType":"WdmPortType_ots","zPort_wdmTransmissionMode":"WdmTransMode_notMeaningful","zPort_width":null}
+Internal TL:
+{"Tag":"CMD_WIZTYPE_createConn","userLabel":"cmm_x","tecnologyDomain":"OTN","connectionType":"chooserConnWdm","WDMconnectionIwType":"Technology_wdm","WDMconnectionType":"WdmPortType_ops0","interfacetype":"-","clientSignalType":"ClientSignalType_notMeaningful","OCSPhotonicInterworkingType":"notmeaningful","constAllocation":"20","aNode":"NE7","aNode_id":64,"aNode_guiLabel":"NE7","aNode_emlNeType":"1830PSS-PHN","aNode_productName":"1830PSS","aPort":"NE7/SFD-25-1-9170","aPort_ObjectId":null,"aPort_EventType":null,"aPort_ClassType":null,"aPort_IdClass":4,"aPort_alarmStatus":"AlarmStatus_cleared","aPort_boardType":"MUX%CLIENT","aPort_cardType":"SFD44","aPort_clonePortPresent":"Boolean_false","aPort_compModule":null,"aPort_consistSt":"ConsistencyStatus_normal","aPort_currentFrequency":"191.70","aPort_direction":"Direction_bidirectional","aPort_displayLabel":"SFD-25-1-9170","aPort_encoding":"Encoding_notMeaningful","aPort_ethInterfaceRate":"EthInterfaceRate_notMeaningful","aPort_ethInterfaceType":"EthInterType_notApplicable","aPort_fdnMapper":"NC_n=*EML_100_SNA/NE_n=*68/PTPn=*SFD-25-1-9170/:PORT","aPort_fecType":"FecType_notMeaningful","aPort_frequency":"191.70","aPort_internalEmlAid":"25/1/44","aPort_involvedIn3R":"Boolean_false","aPort_involvedOnInternalCable":"Boolean_false","aPort_involvedOnPhyConn":"Boolean_false","aPort_neId":62,"aPort_neLabel":"NE7","aPort_networkInterfaceType":"NetworkInterfaceType_notMeaningful","aPort_operationalState":"OperationalState_enabled","aPort_otuSignalType":"OtuSignalType_notMeaningful","aPort_physicalPortType":"PortType_notMeaningful","aPort_portBitRate":null,"aPort_id":8521,"aPort_key":"Port/8521","aPort_className":"Port","aPort_technology":"Technology_wdm","aPort_uploadSt":"UploadStatus_normal","aPort_usedDir":"Direction_bidirectional","aPort_usedOnOtn":"Boolean_false","aPort_guiLabel":"NE7/SFD-25-1-9170","aPort_wdmClientSignalType":"ClientSignalType_notMeaningful","aPort_wdmInterfaceType":"WdmInterfaceType_blackAndWhite","aPort_wdmPhysicalPortRate":null,"aPort_wdmPortType":"WdmPortType_ops0","aPort_wdmTransmissionMode":"WdmTransMode_notMeaningful","aPort_width":-1,"zNode":"NE7","zNode_id":64,"zNode_guiLabel":"NE7","zNode_emlNeType":"1830PSS-PHN","zNode_productName":"1830PSS","zPort":"NE7/260SCX2-2-14-L1","zPort_ObjectId":null,"zPort_EventType":null,"zPort_ClassType":null,"zPort_IdClass":4,"zPort_alarmStatus":"AlarmStatus_cleared","zPort_boardType":"TR%UNI%LINE","zPort_cardType":"260SCX2","zPort_clonePortPresent":"Boolean_false","zPort_compModule":null,"zPort_consistSt":"ConsistencyStatus_normal","zPort_currentFrequency":null,"zPort_direction":"Direction_bidirectional","zPort_displayLabel":"260SCX2-2-14-L1","zPort_encoding":"Encoding_pdmqpsk","zPort_ethInterfaceRate":"EthInterfaceRate_notMeaningful","zPort_ethInterfaceType":"EthInterType_notApplicable","zPort_fdnMapper":"NC_n=*EML_100_SNA/NE_n=*68/PTPn=*260SCX2-2-14-L1/:PORT","zPort_fecType":"FecType_sdfec","zPort_frequency":"B&W","zPort_internalEmlAid":"2/14/1","zPort_involvedIn3R":"Boolean_false","zPort_involvedOnInternalCable":"Boolean_false","zPort_involvedOnPhyConn":"Boolean_false","zPort_neId":62,"zPort_neLabel":"NE7","zPort_networkInterfaceType":"NetworkInterfaceType_uni","zPort_operationalState":"OperationalState_enabled","zPort_otuSignalType":"OtuSignalType_otu4","zPort_physicalPortType":"PortType_notMeaningful","zPort_portBitRate":"129280","zPort_id":8613,"zPort_key":"Port/8613","zPort_className":"Port","zPort_technology":"Technology_wdm","zPort_uploadSt":"UploadStatus_normal","zPort_usedDir":"Direction_bidirectional","zPort_usedOnOtn":"Boolean_false","zPort_guiLabel":"NE7/260SCX2-2-14-L1","zPort_wdmClientSignalType":"ClientSignalType_otu4","zPort_wdmInterfaceType":"WdmInterfaceType_blackAndWhite","zPort_wdmPhysicalPortRate":"100372.730Mbit/s","zPort_wdmPortType":"WdmPortType_ops0","zPort_wdmTransmissionMode":"WdmTransMode_addDrop","zPort_width":50}	
+
+
+
+
+////////////////Trail//////////////////
+get all trails:
+GET
+/data/otn/connections/trails
+
+get one trail:
+GET
+/data/otn/connections/trails/{id}
+/data/otn/connections/trails?guiLabel=cmm_trail1
+
+delete Trail (ODU2e):
+(the server layer OTU2 trail will be deleted automatically.)
+POST
+/data/otn/connections/1175/delete?type=NtwConnDelete
+{"Tag":"Cmd_RemoveConnection"}
+
+createTrail:(ODU2e)
+(the OTU2 trail and DSR path will be created automatically. )
+POST
+/data/otn/Connection
+{"containerRateMap":{"FC100":"TxContainer0","1GbE":"TxContainer0","FE":"TxContainer0","SDSDI":"TxContainer0","FC200":"TxContainer1","HDSDI":"TxContainer1","OC48":"TxContainer1","OC-48":"TxContainer1","STM16":"TxContainer1","STM-16":"TxContainer1","STM16MS":"TxContainer1","STM-16MS":"TxContainer1","OC192":"TxContainer2","OC-192":"TxContainer2","STM64":"TxContainer2","STM-64":"TxContainer2","STM64MS":"TxContainer2","STM-64MS":"TxContainer2","OC768":"TxContainer3","OC-768":"TxContainer3","STM256":"TxContainer3","STM-256":"TxContainer3","100GbE":"TxContainer4","FC400":"TxContainer5","FC800":"TxContainer11","40GbeMLD":"TxContainer5","DDR":"TxContainer5","3GSDI":"TxContainer5","10GbE":"TxContainer6","OC3":"TxContainer7","OC-3":"TxContainer7","OC12":"TxContainer7","OC-12":"TxContainer7","STM1":"TxContainer7","STM-1":"TxContainer7","STM4":"TxContainer7","STM-4":"TxContainer7","FC1200":"TxContainer9","FC1600":"TxContainer9","40GbE":"TxContainer3","CBR10G3":"TxContainer10","default":"TxContainer"},"ASONRouted":"false","preferredRestorationMode":"norestore","reversionMode":"manual","waitForServerRestoration":"false","protectiontype":"9","networkProtectionMode":"0","clientprotectiontype":"0","switchType":"0","revertive":"2","reversionTimer":"N/A","alarmEnable":"NOTSET","autoInService":"Disable","AutoInServiceTimer":"Default","pm15min":"false","pm24hr":"true","containerrate":"ODU4","LOSPropagation":"UseNEValue","xmnActualBitRate":"Default","serviceratetype":"Trail","servicerate":"100GbE","signalType":"Default","connshape":"8","lopc":"false","fecMode":"Default","wavekeyConfig":"Auto","routing":"1","autoprovision":"true","integratedprovision":"false","orderstep":"9","routedisplay":"true","allowUncommissioned":"true","provisionwavekey":"keyed","cirrate":"0","cbs":"CBS16","ebs":"CBS16","trailrate":"ODU2E","aendworkport":"porta","fec":"Use NE Value","MRNTunnel":"false","ASONConnectionType":"TermTunnel","showAllPorts":"false","fromporttype1":"Terminated","fromPort1XFP":"","toporttype1":"Terminated","toPort1XFP":"","fromporttype2":"Terminated","fromPort2XFP":"","toporttype2":"Terminated","toPort2XFP":"","fromaside":"working","toaside":"working","ycableswitchmode":"uni","ycablerevertivemode":"Disabled","ycablerestoretime":"5","ycabletimeslot":"1","odukTraceMismatchAction":"UseNevalue","odukTraceMismatchDectMode":"UseNevalue","ProvisionedBitRate":"UseNEValue","ProvisionedBitRateDsr":"UseNEValue","fecEnable":"UseNEValue","asymInterwk":"UseNEValue","Odu4InterworkingMode":"UseNEValue","encryptionState":"UseNEValue","encryptionSwitchOverToNextKey":"UseNEValue","PayloadTypeMismatchResponse":"UseNEValue","mappingmode":"UseNEValue","EncapsulationMode":"UseNEValue","apsEnable":"UseNEValue","ssmSupport":"UseNEValue","outQl":"UseNEValue","clientholdofftime":"0","clientprotectedMethod":"0","clientprotectingMethod":"0","clientsignaldegrade":"0","clientwaittime":"5","clientrevertivemode":"1","nwkprotectiontype":"0","nwkholdofftime":"0","nwkprotectedMethod":"0","nwkprotectingMethod":"0","nwksignaldegrade":"0","nwkwaittime":"5","nwkrevertivemode":"1","asonsubntwkprttype":"SNCP","routingeffort":"2","ignorealarm4route":"false","sysAssignFreq":"true","usecwdmfreq":"false","reinstate":"none","rearrange":"soft","ordersensitive":"false","tpmonitor15":"2","direction15":"0","reportinfo15":"1","pmdata15":"0","tpmonitor24":"2","direction24":"0","reportinfo24":"0","pmdata24":"0","wavekeytype":"auto","wavekeyassignment":"system","azwavekeypref":"none","zawavekeypref":"none","azwavekeyrekey":"NORekey","zawavekeyrekey":"NORekey","tcmLevel":"notcm","hasycable1":"no","txParamData":[{"parameter":"TTIMismatchConsequentAction","name":"CAonTIM","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"PayloadTypeResp","name":"PayloadTypeMismatchResponse","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"Payloadtype","name":"payloadType","currentValue":"Use NE Value","type":"String","editorArgs":null},{"parameter":"SourceAZTTI","name":"TrailTraceActualTx","currentValue":"Use NE Value","type":"String","editorArgs":{"options":null,"maxlength":15}},{"parameter":"SourceZATTI","name":"TrailTraceExpectedRx","currentValue":"Use NE Value","type":"String","editorArgs":{"options":null,"maxlength":15}},{"parameter":"TTIMonitor","name":"TrailTraceMonitor","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Source Enabled","Disabled"],"maxlength":0}},{"parameter":"TraceMismatchMonitor","name":"TrailTraceEnablePoints","currentValue":"Enable End-points only","type":"Enumeration","editorArgs":{"options":["Enable End-points only","Enable All","Use NE Value"],"maxlength":0}},{"parameter":"OTUkSourceAZTTI","name":"TrailTraceActualTx","currentValue":"Use NE Value","type":"String","editorArgs":{"options":null,"maxlength":15}},{"parameter":"OTUkSourceZATTI","name":"TrailTraceExpectedRx","currentValue":"Use NE Value","type":"String","editorArgs":{"options":null,"maxlength":15}},{"parameter":"TTIMonitor","name":"TrailTraceMonitor","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Source Enabled","Disabled"],"maxlength":0}},{"parameter":"OTUkTTIMismatchConsequentAction","name":"CAonTIM","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"ProvisionedBitRate","name":"ProvisionedBitRate","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","11.049","11.096"],"maxlength":0}}],"eirrate":"0","payloadType":"UseNEValue","fromne1":"NE1","fromne1_AdditionalInfo":{"type":"NODE","name":"NE1","id":45,"productName":"1830PSS"},"ycablefromne":"NE1","fromport1":"11OPE8-2-10-X2-1","fromport1_AdditionalInfo":{"neId":49,"neName":"NE1","portName":"11OPE8-2-10-X2-1","label":"11OPE8-2-10-X2-1","portid":165480,"cardName":"11OPE8","portGrpMode":"N/A","odukrate":"ODU2E"},"hasopsb":"no","hasycable":"no","hassdx":"no","tone1":"NE4","tone1_AdditionalInfo":{"type":"NODE","name":"NE4","id":24,"productName":"1830PSS"},"ycabletone":"NE4","toport1":"11OPE8-2-10-X1-1","toport1_AdditionalInfo":{"neId":27,"neName":"NE4","portName":"11OPE8-2-10-X1-1","label":"11OPE8-2-10-X1-1","portid":165113,"cardName":"11OPE8","portGrpMode":"N/A","odukrate":"ODU2E"},"connectionname":"cm_odu2e_1","operation":"create","routefrequency":"","requestId":859957,"eventChannel":"/oms1350/events/otn/prov/jobEvent/859957","otnRoutingConstraints":[],"defaultpriority":"4","defaultsetuppriority":"5","frombside":"Protection","tobside":"Protection","customerName":""}
+
+
+
+
+resp:
+{
+  "message": "Command Accepted",
+  "messageId": "I18N_COMMAND_ACCEPTED",
+  "messageSeverity": "I",
+  "status": "SUCCESS",
+  "connectionName": "g-cm_odu2e_1",
+  "connectionId": 1298,
+  "orderNumber": "",
+  "orderId": "",
+  "orderStep": 0,
+  "errorField": "",
+  "errorValue": ""
+}
+
+createTrail: (OTU2e)
+(the ODU2 trail and DSR path will be created automatically. )
+POST
+/data/otn/Connection
+{"containerRateMap":{"FC100":"TxContainer0","1GbE":"TxContainer0","FE":"TxContainer0","SDSDI":"TxContainer0","FC200":"TxContainer1","HDSDI":"TxContainer1","OC48":"TxContainer1","OC-48":"TxContainer1","STM16":"TxContainer1","STM-16":"TxContainer1","STM16MS":"TxContainer1","STM-16MS":"TxContainer1","OC192":"TxContainer2","OC-192":"TxContainer2","STM64":"TxContainer2","STM-64":"TxContainer2","STM64MS":"TxContainer2","STM-64MS":"TxContainer2","OC768":"TxContainer3","OC-768":"TxContainer3","STM256":"TxContainer3","STM-256":"TxContainer3","100GbE":"TxContainer4","FC400":"TxContainer5","FC800":"TxContainer11","40GbeMLD":"TxContainer5","DDR":"TxContainer5","3GSDI":"TxContainer5","10GbE":"TxContainer6","OC3":"TxContainer7","OC-3":"TxContainer7","OC12":"TxContainer7","OC-12":"TxContainer7","STM1":"TxContainer7","STM-1":"TxContainer7","STM4":"TxContainer7","STM-4":"TxContainer7","FC1200":"TxContainer9","FC1600":"TxContainer9","40GbE":"TxContainer3","CBR10G3":"TxContainer10","default":"TxContainer"},"ASONRouted":"false","preferredRestorationMode":"norestore","reversionMode":"manual","waitForServerRestoration":"false","protectiontype":"9","networkProtectionMode":"0","clientprotectiontype":"0","switchType":"0","revertive":"2","reversionTimer":"N/A","alarmEnable":"NOTSET","autoInService":"Disable","AutoInServiceTimer":"Default","pm15min":"false","pm24hr":"true","containerrate":"OTU2E","LOSPropagation":"UseNEValue","xmnActualBitRate":"Default","serviceratetype":"Trail","servicerate":"100GbE","signalType":"Default","connshape":"8","lopc":"false","fecMode":"Default","wavekeyConfig":"Auto","routing":"1","autoprovision":"true","integratedprovision":"false","orderstep":"9","routedisplay":"false","allowUncommissioned":"true","provisionwavekey":"keyed","cirrate":"0","cbs":"CBS16","ebs":"CBS16","trailrate":"OTU2E","aendworkport":"porta","fec":"Use NE Value","MRNTunnel":"false","ASONConnectionType":"TermTunnel","showAllPorts":"true","fromporttype1":"UnTerminated","fromPort1XFP":"","toporttype1":"UnTerminated","toPort1XFP":"","fromporttype2":"UnTerminated","fromPort2XFP":"","toporttype2":"UnTerminated","toPort2XFP":"","fromaside":"working","toaside":"working","ycableswitchmode":"uni","ycablerevertivemode":"Disabled","ycablerestoretime":"5","ycabletimeslot":"1","odukTraceMismatchAction":"UseNevalue","odukTraceMismatchDectMode":"UseNevalue","ProvisionedBitRate":"UseNEValue","ProvisionedBitRateDsr":"UseNEValue","fecEnable":"UseNEValue","asymInterwk":"UseNEValue","Odu4InterworkingMode":"UseNEValue","encryptionState":"UseNEValue","encryptionSwitchOverToNextKey":"UseNEValue","PayloadTypeMismatchResponse":"UseNEValue","mappingmode":"UseNEValue","EncapsulationMode":"UseNEValue","apsEnable":"UseNEValue","ssmSupport":"UseNEValue","outQl":"UseNEValue","clientholdofftime":"0","clientprotectedMethod":"0","clientprotectingMethod":"0","clientsignaldegrade":"0","clientwaittime":"5","clientrevertivemode":"1","nwkprotectiontype":"0","nwkholdofftime":"0","nwkprotectedMethod":"0","nwkprotectingMethod":"0","nwksignaldegrade":"0","nwkwaittime":"5","nwkrevertivemode":"1","asonsubntwkprttype":"SNCP","routingeffort":"2","ignorealarm4route":"false","sysAssignFreq":"true","usecwdmfreq":"false","reinstate":"none","rearrange":"soft","ordersensitive":"false","tpmonitor15":"2","direction15":"0","reportinfo15":"1","pmdata15":"0","tpmonitor24":"2","direction24":"0","reportinfo24":"0","pmdata24":"0","wavekeytype":"auto","wavekeyassignment":"system","azwavekeypref":"none","zawavekeypref":"none","azwavekeyrekey":"NORekey","zawavekeyrekey":"NORekey","tcmLevel":"notcm","hasycable1":"no","txParamData":[{"parameter":"SourceAZTTI","name":"TrailTraceActualTx","currentValue":"Use NE Value","type":"String","editorArgs":{"options":null,"maxlength":15}},{"parameter":"SourceZATTI","name":"TrailTraceExpectedRx","currentValue":"Use NE Value","type":"String","editorArgs":{"options":null,"maxlength":15}},{"parameter":"TTIMonitor","name":"TrailTraceMonitor","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Source Enabled","Disabled"],"maxlength":0}},{"parameter":"TTIMismatchConsequentAction","name":"CAonTIM","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"ProvisionedBitRate","name":"ProvisionedBitRate","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","11.049","11.096"],"maxlength":0}}],"eirrate":"0","payloadType":"UseNEValue","fromne1":"NE1","fromne1_AdditionalInfo":{"type":"NODE","name":"NE1","id":45,"productName":"1830PSS"},"fromport1":"11OPE8-2-10-X2","toport1":"11OPE8-2-10-X1","fromport2":"","toport2":"","ycablefromne":"NE1","fromport1_AdditionalInfo":{"neId":49,"neName":"NE1","portName":"11OPE8-2-10-X2","label":"11OPE8-2-10-X2","portid":165479,"cardName":"11OPE8","portGrpMode":"N/A","odukrate":"OTU2E"},"hasopsb":"no","hasycable":"no","hassdx":"no","tone1":"NE4","tone1_AdditionalInfo":{"type":"NODE","name":"NE4","id":24,"productName":"1830PSS"},"ycabletone":"NE4","toport1_AdditionalInfo":{"neId":27,"neName":"NE4","portName":"11OPE8-2-10-X1","label":"11OPE8-2-10-X1","portid":165112,"cardName":"11OPE8","portGrpMode":"N/A","odukrate":"OTU2E"},"connectionname":"cm_otu2e_1","operation":"create","routefrequency":"","requestId":554641,"eventChannel":"/oms1350/events/otn/prov/jobEvent/554641","otnRoutingConstraints":[],"defaultpriority":"4","defaultsetuppriority":"5","frombside":"Protection","tobside":"Protection","customerName":""}
+refined:
+{
+  "serviceratetype": "Trail",
+  "signalType": "Default", //*
+  "connshape": "8", //* 2Ends Bi(I)
+  "lopc": "false",
+  "fecMode": "Default",//*
+  "wavekeyConfig": "Auto", //*
+  "routing": "1", //*
+  "autoprovision": "true",
+  "integratedprovision": "false",
+  "orderstep": "9",
+  "routedisplay": "true",
+  "allowUncommissioned": "true", //*
+  "provisionwavekey": "keyed", //*
+  "cirrate": "0",
+  "cbs": "CBS16",
+  "ebs": "CBS16",
+  "trailrate": "ODU2E",
+  "aendworkport": "porta",
+  "fec": "Use NE Value",
+  "MRNTunnel": "false",
+  "ASONConnectionType": "TermTunnel",
+  "showAllPorts": "false",
+  "fromporttype1": "Terminated",
+  "fromPort1XFP": "",
+  "toporttype1": "Terminated",
+  "toPort1XFP": "",
+  "fromporttype2": "Terminated",
+  "fromPort2XFP": "",
+  "toporttype2": "Terminated",
+  "toPort2XFP": "",
+  "fromaside": "working",
+  "toaside": "working",
+  "ycableswitchmode": "uni",
+  "ycablerevertivemode": "Disabled",
+  "ycablerestoretime": "5",
+  "ycabletimeslot": "1",
+  "odukTraceMismatchAction": "UseNevalue",
+  "odukTraceMismatchDectMode": "UseNevalue",
+  "ProvisionedBitRate": "UseNEValue",
+  "ProvisionedBitRateDsr": "UseNEValue",
+  "fecEnable": "UseNEValue",
+  "asymInterwk": "UseNEValue",
+  "Odu4InterworkingMode": "UseNEValue",
+  "encryptionState": "UseNEValue",
+  "encryptionSwitchOverToNextKey": "UseNEValue",
+  "PayloadTypeMismatchResponse": "UseNEValue",
+  "mappingmode": "UseNEValue",
+  "EncapsulationMode": "UseNEValue",
+  "apsEnable": "UseNEValue",
+  "ssmSupport": "UseNEValue",
+  "outQl": "UseNEValue",
+  "clientholdofftime": "0",
+  "clientprotectedMethod": "0",
+  "clientprotectingMethod": "0",
+  "clientsignaldegrade": "0",
+  "clientwaittime": "5",
+  "clientrevertivemode": "1",
+  "nwkprotectiontype": "0",
+  "nwkholdofftime": "0",
+  "nwkprotectedMethod": "0",
+  "nwkprotectingMethod": "0",
+  "nwksignaldegrade": "0",
+  "nwkwaittime": "5",
+  "nwkrevertivemode": "1",
+  "asonsubntwkprttype": "SNCP",
+  "routingeffort": "2",
+  "ignorealarm4route": "false",
+  "sysAssignFreq": "true",
+  "usecwdmfreq": "false",
+  "reinstate": "none",
+  "rearrange": "soft",
+  "ordersensitive": "false",
+  "tpmonitor15": "2",
+  "direction15": "0",
+  "reportinfo15": "1",
+  "pmdata15": "0",
+  "tpmonitor24": "2",
+  "direction24": "0",
+  "reportinfo24": "0",
+  "pmdata24": "0",
+  "wavekeytype": "auto",
+  "wavekeyassignment": "system",
+  "azwavekeypref": "none",
+  "zawavekeypref": "none",
+  "azwavekeyrekey": "NORekey",
+  "zawavekeyrekey": "NORekey",
+  "tcmLevel": "notcm",
+  "hasycable1": "no",
+  "txParamData": [
+    {
+      "parameter": "TTIMismatchConsequentAction",
+      "name": "CAonTIM",
+      "currentValue": "Use NE Value",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Use NE Value",
+          "Enable",
+          "Disable"
+        ],
+        "maxlength": 0
+      }
+    },
+    {
+      "parameter": "PayloadTypeResp",
+      "name": "PayloadTypeMismatchResponse",
+      "currentValue": "Use NE Value",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Use NE Value",
+          "Enable",
+          "Disable"
+        ],
+        "maxlength": 0
+      }
+    },
+    {
+      "parameter": "Payloadtype",
+      "name": "payloadType",
+      "currentValue": "Use NE Value",
+      "type": "String",
+      "editorArgs": null
+    },
+    {
+      "parameter": "SourceAZTTI",
+      "name": "TrailTraceActualTx",
+      "currentValue": "Use NE Value",
+      "type": "String",
+      "editorArgs": {
+        "options": null,
+        "maxlength": 15
+      }
+    },
+    {
+      "parameter": "SourceZATTI",
+      "name": "TrailTraceExpectedRx",
+      "currentValue": "Use NE Value",
+      "type": "String",
+      "editorArgs": {
+        "options": null,
+        "maxlength": 15
+      }
+    },
+    {
+      "parameter": "TTIMonitor",
+      "name": "TrailTraceMonitor",
+      "currentValue": "Use NE Value",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Use NE Value",
+          "Source Enabled",
+          "Disabled"
+        ],
+        "maxlength": 0
+      }
+    },
+    {
+      "parameter": "TraceMismatchMonitor",
+      "name": "TrailTraceEnablePoints",
+      "currentValue": "Enable End-points only",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Enable End-points only",
+          "Enable All",
+          "Use NE Value"
+        ],
+        "maxlength": 0
+      }
+    },
+    {
+      "parameter": "OTUkSourceAZTTI",
+      "name": "TrailTraceActualTx",
+      "currentValue": "Use NE Value",
+      "type": "String",
+      "editorArgs": {
+        "options": null,
+        "maxlength": 15
+      }
+    },
+    {
+      "parameter": "OTUkSourceZATTI",
+      "name": "TrailTraceExpectedRx",
+      "currentValue": "Use NE Value",
+      "type": "String",
+      "editorArgs": {
+        "options": null,
+        "maxlength": 15
+      }
+    },
+    {
+      "parameter": "TTIMonitor",
+      "name": "TrailTraceMonitor",
+      "currentValue": "Use NE Value",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Use NE Value",
+          "Source Enabled",
+          "Disabled"
+        ],
+        "maxlength": 0
+      }
+    },
+    {
+      "parameter": "OTUkTTIMismatchConsequentAction",
+      "name": "CAonTIM",
+      "currentValue": "Use NE Value",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Use NE Value",
+          "Enable",
+          "Disable"
+        ],
+        "maxlength": 0
+      }
+    },
+    {
+      "parameter": "ProvisionedBitRate",
+      "name": "ProvisionedBitRate",
+      "currentValue": "Use NE Value",
+      "type": "Enumeration",
+      "editorArgs": {
+        "options": [
+          "Use NE Value",
+          "11.049",
+          "11.096"
+        ],
+        "maxlength": 0
+      }
+    }
+  ],
+  "eirrate": "0",
+  "payloadType": "UseNEValue",
+  "fromne1": "NE1",
+  "fromne1_AdditionalInfo": {
+    "type": "NODE",
+    "name": "NE1",
+    "id": 45,
+    "productName": "1830PSS"
+  },
+  "ycablefromne": "NE1",
+  "fromport1": "11OPE8-2-10-X2-1",
+  "fromport1_AdditionalInfo": {
+    "neId": 49,
+    "neName": "NE1",
+    "portName": "11OPE8-2-10-X2-1",
+    "label": "11OPE8-2-10-X2-1",
+    "portid": 165480,
+    "cardName": "11OPE8",
+    "portGrpMode": "N/A",
+    "odukrate": "ODU2E"
+  },
+  "hasopsb": "no",
+  "hasycable": "no",
+  "hassdx": "no",
+  "tone1": "NE4",
+  "tone1_AdditionalInfo": {
+    "type": "NODE",
+    "name": "NE4",
+    "id": 24,
+    "productName": "1830PSS"
+  },
+  "ycabletone": "NE4",
+  "toport1": "11OPE8-2-10-X1-1",
+  "toport1_AdditionalInfo": {
+    "neId": 27,
+    "neName": "NE4",
+    "portName": "11OPE8-2-10-X1-1",
+    "label": "11OPE8-2-10-X1-1",
+    "portid": 165113,
+    "cardName": "11OPE8",
+    "portGrpMode": "N/A",
+    "odukrate": "ODU2E"
+  },
+  "connectionname": "cm_odu2e_1",
+  "operation": "create",
+  "otnRoutingConstraints": [],
+  "defaultpriority": "4",
+  "defaultsetuppriority": "5",
+  "customerName": ""
+}
+
+
+////////////////Nodes////////////////////
+get all Nodes:
+GET
+https://135.251.96.33:8443/oms1350/data/npr/nodes
+
+
+get one Node (id=24):
+GET
+https://135.251.96.33:8443/oms1350/data/npr/nodes/24
+
+	
+//////////////////Port/////////////////////
+get all Port of neId=24	
+GET	
+https://135.251.96.33:8443/oms1350/data/npr/Port?neId=24
+
+
+
+
+
+
+/////////////////Path////////////////////////
+get all paths:
+GET
+/data/otn/connections/paths
+
+get one path:
+GET
+/data/otn/connections/paths/1093
+
+delete one path:
+POST
+/data/otn/connections/1214/delete?type=NtwConnDelete
+{"Tag":"Cmd_RemoveConnection"}
+
+
+
+
+
+/////////////////////100G dsr//////////////////////////
+create 100G dsr with server layer exist//////////////////////////
+POST
+/data/otn/Connection
+{"containerRateMap":{"FC100":"TxContainer0","1GbE":"TxContainer0","FE":"TxContainer0","SDSDI":"TxContainer0","FC200":"TxContainer1","HDSDI":"TxContainer1","OC48":"TxContainer1","OC-48":"TxContainer1","STM16":"TxContainer1","STM-16":"TxContainer1","STM16MS":"TxContainer1","STM-16MS":"TxContainer1","OC192":"TxContainer2","OC-192":"TxContainer2","STM64":"TxContainer2","STM-64":"TxContainer2","STM64MS":"TxContainer2","STM-64MS":"TxContainer2","OC768":"TxContainer3","OC-768":"TxContainer3","STM256":"TxContainer3","STM-256":"TxContainer3","100GbE":"TxContainer4","FC400":"TxContainer5","FC800":"TxContainer11","40GbeMLD":"TxContainer5","DDR":"TxContainer5","3GSDI":"TxContainer5","10GbE":"TxContainer6","OC3":"TxContainer7","OC-3":"TxContainer7","OC12":"TxContainer7","OC-12":"TxContainer7","STM1":"TxContainer7","STM-1":"TxContainer7","STM4":"TxContainer7","STM-4":"TxContainer7","FC1200":"TxContainer9","FC1600":"TxContainer9","40GbE":"TxContainer3","CBR10G3":"TxContainer10","default":"TxContainer"},"ASONRouted":"false","preferredRestorationMode":"norestore","reversionMode":"manual","waitForServerRestoration":"false","protectiontype":"9","networkProtectionMode":"0","clientprotectiontype":"0","switchType":"0","revertive":"2","reversionTimer":"N/A","alarmEnable":"NOTSET","autoInService":"Disable","AutoInServiceTimer":"Default","pm15min":"false","pm24hr":"true","containerrate":"ODU2e","LOSPropagation":"BothAZ","xmnActualBitRate":"Default","serviceratetype":"Ethernet","servicerate":"10GbE","signalType":"10GbE","connshape":"8","fecMode":"N/A","wavekeyConfig":"N/A","lopc":"false","routing":"1","autoprovision":"true","integratedprovision":"false","orderstep":"9","routedisplay":"false","allowUncommissioned":"true","provisionwavekey":"keyed","cirrate":"0","cbs":"CBS16","ebs":"CBS16","trailrate":"ODU0","aendworkport":"porta","fec":"UseNEValue","MRNTunnel":"false","ASONConnectionType":"TermTunnel","showAllPorts":"false","fromporttype1":"Terminated","fromPort1XFP":"","toporttype1":"Terminated","toPort1XFP":"","fromporttype2":"Terminated","fromPort2XFP":"","toporttype2":"Terminated","toPort2XFP":"","fromaside":"working","toaside":"working","ycableswitchmode":"uni","ycablerevertivemode":"Disabled","ycablerestoretime":"5","ycabletimeslot":"1","odukTraceMismatchAction":"UseNevalue","odukTraceMismatchDectMode":"UseNevalue","ProvisionedBitRate":"UseNEValue","ProvisionedBitRateDsr":"UseNEValue","fecEnable":"UseNEValue","asymInterwk":"UseNEValue","Odu4InterworkingMode":"UseNEValue","encryptionState":"UseNEValue","encryptionSwitchOverToNextKey":"UseNEValue","PayloadTypeMismatchResponse":"UseNEValue","mappingmode":"UseNEValue","EncapsulationMode":"UseNEValue","apsEnable":"UseNEValue","ssmSupport":"UseNEValue","outQl":"UseNEValue","clientholdofftime":"0","clientprotectedMethod":"0","clientprotectingMethod":"0","clientsignaldegrade":"0","clientwaittime":"5","clientrevertivemode":"1","nwkprotectiontype":"0","nwkholdofftime":"0","nwkprotectedMethod":"0","nwkprotectingMethod":"0","nwksignaldegrade":"0","nwkwaittime":"5","nwkrevertivemode":"1","asonsubntwkprttype":"SNCP","routingeffort":"2","ignorealarm4route":"false","sysAssignFreq":"true","usecwdmfreq":"false","reinstate":"none","rearrange":"soft","ordersensitive":"false","tpmonitor15":"2","direction15":"0","reportinfo15":"1","pmdata15":"0","tpmonitor24":"2","direction24":"0","reportinfo24":"0","pmdata24":"0","wavekeytype":"auto","wavekeyassignment":"system","azwavekeypref":"none","zawavekeypref":"none","azwavekeyrekey":"NORekey","zawavekeyrekey":"NORekey","tcmLevel":"notcm","hasycable1":"no","txParamData":[{"parameter":"AEndNegotn","name":"AEndnegotn","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"ZEndNegotn","name":"ZEndnegotn","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"ErroredFrameDrop","name":"ErroredFrameDropMode","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","Enable","Disable"],"maxlength":0}},{"parameter":"EncapsulationMode","name":"EncapsulationMode","currentValue":"Use NE Value","type":"Enumeration","editorArgs":{"options":["Use NE Value","CBRLAN11.049","CBRLAN11.096","GFP-F","GFP-P"],"maxlength":0}}],"eirrate":"0","payloadType":"UseNEValue","fromne1":"NE1","fromne1_AdditionalInfo":{"type":"NODE","name":"NE1","id":45,"productName":"1830PSS"},"ycablefromne":"NE1","fromport1":"11OPE8-2-10-X2-1","fromport1_AdditionalInfo":{"neId":49,"neName":"NE1","portName":"11OPE8-2-10-X2-1","label":"11OPE8-2-10-X2-1","portid":165477,"cardName":"11OPE8","portGrpMode":"N/A","odukrate":"10GbE"},"hasopsb":"no","hasycable":"no","hassdx":"no","tone1":"NE4","tone1_AdditionalInfo":{"type":"NODE","name":"NE4","id":24,"productName":"1830PSS"},"ycabletone":"NE4","toport1":"11OPE8-2-10-X1-1","toport1_AdditionalInfo":{"neId":27,"neName":"NE4","portName":"11OPE8-2-10-X1-1","label":"11OPE8-2-10-X1-1","portid":165110,"cardName":"11OPE8","portGrpMode":"N/A","odukrate":"10GbE"},"operation":"create","routefrequency":"","requestId":808332,"eventChannel":"/oms1350/events/otn/prov/jobEvent/808332","otnRoutingConstraints":[],"defaultpriority":"4","defaultsetuppriority":"5","frombside":"Protection","tobside":"Protection","customerName":"","connectionname":"cm_100G_dsr1"}
+
+resp:
+{"message":"Command Accepted","messageId":"I18N_COMMAND_ACCEPTED","messageSeverity":"I","status":"SUCCESS","connectionName":"cm_100G_dsr1","connectionId":1214,"orderNumber":"","orderId":"","orderStep":0,"errorField":"","errorValue":""}
+
+
+
+delete 100G dsr
+POST
+/data/otn/connections/1214/delete?type=NtwConnDelete
+{"Tag":"Cmd_RemoveConnection"}
+
+
+
+
+
+
+	

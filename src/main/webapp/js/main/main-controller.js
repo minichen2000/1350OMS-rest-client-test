@@ -8,8 +8,8 @@
         .module('starter')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$http', '$scope', 'commonUtil', 'logger', '$interval', '$timeout'];
-    function MainController($http, $scope, commonUtil, logger, $interval, $timeout) {
+    MainController.$inject = ['$http', '$scope', 'commonUtil', 'logger', '$interval', '$timeout', 'serverNotificationService'];
+    function MainController($http, $scope, commonUtil, logger, $interval, $timeout, serverNotificationService) {
         var vm = this;
         vm.connected=false;
 
@@ -152,6 +152,19 @@
         vm.onDelete=function(){
             onRequest('delete');
         }
+
+
+
+
+        var listenerFun = function(evt) {
+            $scope.$apply(function() {
+                logger.debug(JSON.stringify(evt));
+            });
+        };
+
+        serverNotificationService.connect(commonUtil.generateWSUrl(), "5000");
+        
+        serverNotificationService.addListener({ name: 'main', fun: listenerFun });
     }
 })();
 

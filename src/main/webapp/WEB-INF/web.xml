@@ -84,4 +84,19 @@
         <url-pattern>/op/*</url-pattern>
     </servlet-mapping>
 
+    <!--Notification-->
+    <servlet>
+        <servlet-name>notification</servlet-name>
+        <servlet-class>com.alu.restfulClientTestMgr.TestMgrServer.notification.NotificationServlet</servlet-class>
+        <init-param>
+            <param-name>useFileMappedBuffer</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>notification</servlet-name>
+        <url-pattern>/notification/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

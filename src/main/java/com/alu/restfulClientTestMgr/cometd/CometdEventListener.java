@@ -16,6 +16,7 @@ public class CometdEventListener implements
     {
         // Here we received a message on the channel
         log.debug( "\nMessage:\n"+"On Channel: "+channel+"\n"+message );
+        CometdEntrance.fireSHMsg(message);
 
     }
 }
