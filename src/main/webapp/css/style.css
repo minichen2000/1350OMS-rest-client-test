@@ -16,22 +16,33 @@ body{
 .tab-content-cmd-title-style{
   color:#222222;
   font-size: 28px;
-  margin-top:40px;
-  margin-bottom:6px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 
 .tab-content-single-name-style{
   color:#222222;
   font-weight: bold;
 }
+.tab-content-row-style{
+  padding: 10px 8px 4px 0px
+}
 .tab-content-single-value-style{
-  font-family: 'Courier New';
-  background-color: transparent;
   margin-left:20px;
-  padding-right:4px;
-  padding-left:4px
 }
 
 .tab-content-json-value-style{
-  margin:4px 400px 12px 0px
+  margin:8px 0px 12px 0px;
+  border-color: transparent;
+}
+
+.tab-content-secondary-area-style{
+  margin:4px 0px 10px 40px
+}
+
+.customized-tips-style{
+  border-radius: 3px;
+  border-color: transparent;
+  background-color: pink;
+  padding: 2px 4px 2px 4px;
 }

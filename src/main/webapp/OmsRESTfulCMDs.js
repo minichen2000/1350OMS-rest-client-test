@@ -127,7 +127,7 @@ OmsRESTfulCMDs = [
             {
                 "title": "Get one trail",
                 "method": "GET",
-                "path": "/data/otn/connections/trails/{id}",
+                "path": "/data/otn/connections/trails/{connectionId}",
                 "path_example": "/data/otn/connections/trails/44"
             },
             {
@@ -391,7 +391,7 @@ OmsRESTfulCMDs = [
                 },
                 "postBody_customized_part_examples": [
                     {
-                        "title": "OTU2e",
+                        "title": " create OTU2e trail",
                         "content": {
                             "connectionname": "cm_otu2e_1",
                             "trailrate": "OTU2E",
@@ -441,7 +441,7 @@ OmsRESTfulCMDs = [
                         }
                     },
                     {
-                        "title": "ODU2e",
+                        "title": "create ODU2e trail",
                         "content": {
                             "connectionname": "cm_odu2e_1",
                             "trailrate": "ODU2E",

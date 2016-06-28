@@ -28,9 +28,10 @@
     <script src="js/directives/oms-notif-line.directive.js"></script>
 </head>
 
-<body ng-app="starter" style="padding: 20px 5px 5px 5px">
-<div ng-controller="MainController as vm ">
-
+<body ng-app="starter" ng-controller="MainController as vm">
+<div  style="width:100%; height:100%;padding: 20px 5px 5px 5px">
+    <div style="position: relative;">
+        <a class="btn btn-warning btn-lg" style="position:absolute;right:100px; top:0px" href="doc.html" target="_blank"><i class="fa fa-question-circle fa-fw"></i>&nbsp;命令帮助</a>
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label class="col-sm-1 control-label">OtnIP</label>
@@ -99,17 +100,18 @@
 
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-1">
-                <button class="btn btn-success"
+                <button class="btn btn-success btn-lg"
                         ng-disabled="!(vm.otnIP&&vm.otnPort&&vm.casIP&&vm.casPort&&vm.casUrl&&vm.presentationIP&&vm.guiUsername&&vm.guiPassword&&vm.omsUrl) || vm.connected"
                         ng-click="vm.onLogin()">Login
                 </button>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-danger" ng-disabled="!vm.connected" ng-click="vm.onLogout()">Logout</button>
+                <button class="btn btn-danger btn-lg" ng-disabled="!vm.connected" ng-click="vm.onLogout()">Logout</button>
             </div>
         </div>
 
     </form>
+    </div>
 
     <br><br>
 
@@ -136,21 +138,24 @@
                 <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
                      style="width:100%; height: 400px"></div>
             </div>
-            <button class="col-sm-1 btn"
-                    ng-class="{'btn-info': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
-                    ng-click="vm.postBodyModeSwith()">{{vm.postBodyOptions.mode=='code' ? 'Tree' : 'Code'}}
-            </button>
+            <div class="col-sm-1">
+                <button class="btn"
+                        ng-class="{'btn-info': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
+                        ng-click="vm.postBodyModeSwith()">{{vm.postBodyOptions.mode=='code' ? 'Tree' : 'Code'}}
+                </button>
+            </div>
+
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-1">
-                <button class="btn btn-success" ng-click="vm.onGet()">Get</button>
+                <button class="btn btn-lg btn-success" ng-click="vm.onGet()">Get</button>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-primary" ng-click="vm.onPost()">Post</button>
+                <button class="btn btn-lg btn-primary" ng-click="vm.onPost()">Post</button>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-danger" ng-click="vm.onDelete()">Delete</button>
+                <button class="btn btn-lg btn-danger" ng-click="vm.onDelete()">Delete</button>
             </div>
         </div>
         <br>
@@ -211,6 +216,9 @@
 
 
 
+</div>
+<div ng-if="(vm.logining && !vm.connected) || (vm.logouting && vm.connected)" style="position:absolute; top: 0px; left:0px; width:100%;height:100%;background-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.5); text-align:center">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="position: absolute; top:50%; margin-left:-50px; margin-top:-20px"></i>
 </div>
 </body>
 </html>

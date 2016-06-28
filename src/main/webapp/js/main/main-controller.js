@@ -11,6 +11,8 @@
     MainController.$inject = ['$http', '$scope', 'commonUtil', 'logger', '$interval', '$timeout', 'serverNotificationService'];
     function MainController($http, $scope, commonUtil, logger, $interval, $timeout, serverNotificationService) {
         var vm = this;
+        vm.logining=false;
+        vm.logouting=false;
         vm.connected=false;
 
         vm.otnIP='135.251.96.33';
@@ -37,6 +39,7 @@
         vm.resultOptions={mode: 'code'};
 
         vm.onLogin=function(){
+            vm.logining=true;
                 $http({
                     method: 'post',
                     url: './login',
@@ -68,6 +71,7 @@
         }
 
         vm.onLogout=function(){
+            vm.logouting=true;
             $http({
                 method: 'post',
                 url: './logout'
@@ -93,8 +97,10 @@
                     //logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
                     if(rsp.data.status.toLowerCase()=='connected'){
                         vm.connected=true;
+                        vm.logining=false;
                     }else{
                         vm.connected=false;
+                        vm.logouting=false;
                     }
 
                     $timeout(checkStatus, 1000);

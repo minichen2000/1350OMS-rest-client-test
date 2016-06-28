@@ -12,6 +12,7 @@
     function DocController($scope) {
 
         var vm=this;
+        vm.groups=OmsRESTfulCMDs;
         vm.nodeGroupData=OmsRESTfulCMDs[0];
         vm.portGroupData=OmsRESTfulCMDs[1];
         vm.tlGroupData=OmsRESTfulCMDs[2];

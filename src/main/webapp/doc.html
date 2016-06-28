@@ -14,10 +14,13 @@
 
     <script src="bower_components/crypto-js/crypto-js.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
     <script src="bower_components/ng-jsoneditor/ng-jsoneditor.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/zeroclipboard/dist/ZeroClipboard.min.js"></script>
+    <script src="bower_components/angular-zeroclipboard/dist/angular-zeroclipboard.min.js"></script>
 
     <script src="js/scripts/hashmap.js"></script>
     <script src="OmsRESTfulCMDs.js"></script>
@@ -30,20 +33,8 @@
 <div ng-controller="DocController as vm ">
 
     <uib-tabset>
-        <uib-tab index="0" heading="{{vm.nodeGroupData.groupTitle}}">
-            <div ng-include="'./js/directives/tab-node.html'"></div>
-        </uib-tab>
-        <uib-tab index="1" heading="{{vm.portGroupData.groupTitle}}">
-            <div ng-include="'./js/directives/tab-port.html'"></div>
-        </uib-tab>
-        <uib-tab index="2" heading="{{vm.tlGroupData.groupTitle}}">
-            <div ng-include="'./js/directives/tab-topologicallink.html'"></div>
-        </uib-tab>
-        <uib-tab index="3" heading="{{vm.trailGroupData.groupTitle}}">
-            <div ng-include="'./js/directives/tab-trail.html'"></div>
-        </uib-tab>
-        <uib-tab index="4" heading="{{vm.pathGroupData.groupTitle}}">
-            <div ng-include="'./js/directives/tab-path.html'"></div>
+        <uib-tab ng-repeat="group in vm.groups" heading="{{group.groupTitle}}">
+            <tab-content group-data="group"></tab-content>
         </uib-tab>
     </uib-tabset>
 
