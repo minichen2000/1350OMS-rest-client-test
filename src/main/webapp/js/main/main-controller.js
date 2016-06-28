@@ -23,12 +23,18 @@
         vm.guiPassword='Lucent2.@';
         vm.omsUrl='/oms1350/data/plat/session/login';
 
-        vm.result={result: '', resultOptions: {mode: 'code'}};
-        vm.notifications="";
+        vm.notifications=[];
         vm.autoScroll=true;
         vm.onLoad = function (instance) {
             //instance.expandAll();
         };
+
+        vm.baseUrl='https://'+vm.otnIP+':'+vm.otnPort+'/oms1350';
+        vm.path=null;
+        vm.result=null;
+        vm.postBody=null;
+        vm.postBodyOptions={mode: 'code'};
+        vm.resultOptions={mode: 'code'};
 
         vm.onLogin=function(){
                 $http({
@@ -106,12 +112,7 @@
 
 
 
-        vm.baseUrl='https://'+vm.otnIP+':'+vm.otnPort+'/oms1350';
-        vm.path=null;
-        vm.result="";
-        vm.postBody="";
-        vm.postBodyOptions={mode: 'code'};
-        vm.resultOptions={mode: 'code'};
+
 
         vm.postBodyModeSwith=function(){
             vm.postBodyOptions.mode=vm.postBodyOptions.mode=='code' ? 'tree' : 'code';
@@ -136,12 +137,12 @@
             })
                 .then(function(rsp){
                     var rlt=JSON.stringify(rsp, null, 2);
-                    logger.debug("rsp:"+rlt);
+                    //logger.debug("rsp:"+rlt);
                     vm.result=rsp.data;
                 })
                 .catch(function(rsp){
                     var rlt=JSON.stringify(rsp, null, 2);
-                    logger.error("rsp:"+rlt);
+                    //logger.error("rsp:"+rlt);
                     vm.result=rsp;
                 });
         }
@@ -156,7 +157,7 @@
         }
 
         vm.clearNotifications=function(){
-            vm.notifications="";
+            vm.notifications.length=0;
         }
 
         function tryToAutoScroll(){
@@ -176,8 +177,13 @@
 
         var listenerFun = function(evtData) {
             $scope.$apply(function() {
-                logger.debug("notification msg:"+JSON.stringify(evtData));
-                vm.notifications+=(JSON.stringify(evtData)+'\n');
+
+                evtData=JSON.parse(evtData);
+                logger.debug("notification msg:\n"+JSON.stringify(evtData, null,2));
+                vm.notifications.push({
+                    line1: '['+(new Date()).toString()+']',
+                    line2: JSON.stringify(evtData, null,2)
+                });
             });
             tryToAutoScroll();
 

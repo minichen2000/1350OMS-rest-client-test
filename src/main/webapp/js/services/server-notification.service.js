@@ -27,7 +27,7 @@
 
 
         worker.onmessage = function (evt) {
-            //logger.log((new Date()).toString()+" evt:"+JSON.stringify(evt.data));
+            logger.log((new Date()).toString()+" evt");
 
             for (var i = 0; i < ws_listeners.length; i++) {
                 ws_listeners[i].fun(evt.data);

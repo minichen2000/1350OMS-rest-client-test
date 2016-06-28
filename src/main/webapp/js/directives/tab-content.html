@@ -1,0 +1,34 @@
+<div style="padding:1px 8px 8px 20px">
+    <div ng-repeat="cmd in groupData.cmds">
+        <div class="tab-content-cmd-title-style">{{$index+1+'.'+cmd.title}}</div>
+        <div ng-if="cmd.method">
+            <span class="tab-content-single-name-style">Method</span>
+            <span class="tab-content-single-value-style">{{cmd.method}}</span>
+        </div>
+        <div ng-if="cmd.path">
+            <span class="tab-content-single-name-style">Path</span>
+            <span class="tab-content-single-value-style">{{cmd.path}}</span>
+        </div>
+        <div ng-if="cmd.path_example">
+            <span class="tab-content-single-name-style">Path Example</span>
+            <span class="tab-content-single-value-style">{{cmd.path_example}}</span>
+        </div>
+        <div ng-if="cmd.postBody">
+            <span class="tab-content-single-name-style">Post Body</span>
+            <pre class="tab-content-json-value-style">{{jsonString(cmd.postBody)}}</pre>
+        </div>
+        <div ng-if="cmd.postBody_example">
+            <span class="tab-content-single-name-style">Post Body Example</span>
+            <pre class="tab-content-json-value-style">{{jsonString(cmd.postBody_example)}}</pre>
+        </div>
+        <div ng-if="cmd.postBody_fixed_part">
+            <span class="tab-content-single-name-style">Post Body Fixed Part</span>
+            <pre class="tab-content-json-value-style">{{jsonString(cmd.postBody_fixed_part)}}</pre>
+        </div>
+        <div ng-if="cmd.postBody_customized_part_examples">
+            <span class="tab-content-single-name-style">Post Body Customized Part Examples</span>
+            <pre class="tab-content-json-value-style">{{jsonString(cmd.postBody_customized_part_examples)}}</pre>
+        </div>
+
+    </div>
+</div>

@@ -7,8 +7,8 @@
     "font-awesome": "4.6.1",
     "angular": "1.5.5",
     "jquery": "~2.2.3",
-    "json-formatter": "v0.6.0",
-    "angular-tools/ng-jsoneditor": "v1.0.0"
+    "angular-tools/ng-jsoneditor": "v1.0.0",
+    "angular-bootstrap": "1.3.3"
   },
   "resolutions": {
     "angular": "1.5.5",

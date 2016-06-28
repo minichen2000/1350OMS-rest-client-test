@@ -496,7 +496,19 @@ OmsRESTfulCMDs = [
                 "title": "Delete trail/path",
                 "method": "POST",
                 "path": "/data/otn/connections/{connectionId}/delete?type=NtwConnDelete",
-                "path_example": "/data/otn/connections/1175/delete?type=NtwConnDelete"
+                "path_example": "/data/otn/connections/1175/delete?type=NtwConnDelete",
+                "postBody": {
+                    "Tag":"Cmd_RemoveConnection"
+                }
+            },
+            {
+                "title": "Delete trail with clients",
+                "method": "POST",
+                "path": "/data/otn/connections/{connectionId}/delete?type=NtwConnDeleteWithClients",
+                "path_example": "/data/otn/connections/1356/delete?type=NtwConnDeleteWithClients",
+                "postBody": {
+                    "Tag":"Cmd_RemoveConnectionWithClients"
+                }
             }
         ]
     },
@@ -511,7 +523,7 @@ OmsRESTfulCMDs = [
             {
                 "title": "Get one path",
                 "method": "GET",
-                "path": "/data/otn/connections/paths/{id}",
+                "path": "/data/otn/connections/paths/{connectionId}",
                 "path_example": "/data/otn/connections/paths/44"
             }
         ]

@@ -10,13 +10,11 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bower_components/json-formatter/dist/json-formatter.min.css" rel="stylesheet">
     <link href="bower_components/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet">
 
     <script src="bower_components/crypto-js/crypto-js.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/json-formatter/dist/json-formatter.min.js"></script>
     <script src="bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
     <script src="bower_components/ng-jsoneditor/ng-jsoneditor.min.js"></script>
 
@@ -27,6 +25,7 @@
     <script src="js/services/server-notification.service.js"></script>
     <script src="js/main/main-controller.js"></script>
     <script src="js/directives/oms-otn-rest-form.directive.js"></script>
+    <script src="js/directives/oms-notif-line.directive.js"></script>
 </head>
 
 <body ng-app="starter" style="padding: 20px 5px 5px 5px">
@@ -114,17 +113,17 @@
 
     <br><br>
 
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" ng-show="vm.connected">
         <div class="form-group">
             <label class="col-sm-1 control-label">Base URL</label>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <input type="text" class="form-control" ng-model="vm.baseUrl"
                        placeholder="Base URL">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-1 control-label">Path</label>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <input type="text" class="form-control" ng-model="vm.path"
                        placeholder="Path">
             </div>
@@ -133,7 +132,7 @@
 
         <div class="form-group">
             <label class="col-sm-1 control-label">POST Body</label>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
                      style="width:100%; height: 400px"></div>
             </div>
@@ -154,30 +153,50 @@
                 <button class="btn btn-danger" ng-click="vm.onDelete()">Delete</button>
             </div>
         </div>
+        <br>
+        <br>
         <div class="form-group">
-            <label class="col-sm-1 control-label">Result</label>
-            <div class="col-sm-7">
+            <div class="col-sm-offset-1 col-sm-5">
+                <label class="control-label">Response</label>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="control-label">Notifications</label>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-5">
                 <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
 
                 <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
-                     style="width:100%; height: 300px"></div>
+                     style="width:100%; height: 500px"></div>
             </div>
-            <button class="col-sm-1 btn"
-                    ng-class="{'btn-info': vm.resultOptions.mode=='code', 'btn-defult': vm.resultOptions.mode!='code'}"
-                    ng-click="vm.resultModeSwith()">{{vm.resultOptions.mode=='code' ? 'Tree' : 'Code'}}
-            </button>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-1 control-label">Notifications</label>
-            <div class="col-sm-7">
-                <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
+            <div class="col-sm-5">
 
-                <textarea id="notifArea" rows="16" style="width:100%; border: 1px solid cornflowerblue;">{{vm.notifications}}</textarea>
+                <!--<textarea id="notifArea" spellcheck="false" rows="16" style="font-weight: bold; font-family: 'Courier New'; width:100%; border: 1px solid cornflowerblue;">{{vm.notifications}}</textarea>-->
+                <div id="notifArea" style="width:100%; border: 1px solid cornflowerblue;height:500px; overflow: scroll">
+                    <oms-notif-line ng-repeat="ntf in vm.notifications"
+                                    line-one="ntf.line1"
+                                    line-one-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'blue'}"
+                                    line-two="ntf.line2"
+                                    line-two-style="{'color': '#888', 'font-family': 'Courier New'}">
+
+                    </oms-notif-line>
+                </div>
             </div>
 
         </div>
+
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-8">
+            <div class="col-sm-offset-1 col-sm-5">
+                <button class="btn"
+                        ng-class="{'btn-info': vm.resultOptions.mode=='code', 'btn-defult': vm.resultOptions.mode!='code'}"
+                        ng-click="vm.resultModeSwith()">{{vm.resultOptions.mode=='code' ? 'Tree' : 'Code'}}
+                </button>
+            </div>
+
+            <div class="col-sm-4">
                 <button class=" btn btn-info"
                         ng-click="vm.clearNotifications()">Clear
                 </button>

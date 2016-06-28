@@ -70,8 +70,8 @@
 
             ws.onmessage = function (event) {
                 //console.log("ws.onmessage: " + event.data);
-                var data = JSON.parse(event.data);
-                postMessage(data);
+                //var data = JSON.parse(event.data);
+                postMessage(event.data);
 
 
             };

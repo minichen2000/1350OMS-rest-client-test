@@ -19,7 +19,7 @@ public class NotificationWebSocket extends WebSocketAdapter {
 		// TODO Auto-generated method stub
 		super.onWebSocketClose(statusCode, reason);
 		System.out.println("onWebSocketClose");
-		CometdEntrance.registerShL(l);
+		CometdEntrance.unregisterShL(l);
 		l=null;
 	}
 	
@@ -38,8 +38,8 @@ public class NotificationWebSocket extends WebSocketAdapter {
 				@Override
 				public void onMessage(Message msg) {
 					try {
-						System.out.println("onMessage:"+msg.getJSON());
-						remote.sendString(msg.getJSON());
+						System.out.println("onMessage:"+msg);
+						remote.sendString(msg.getData().toString());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -48,8 +48,6 @@ public class NotificationWebSocket extends WebSocketAdapter {
 		}
 		CometdEntrance.registerShL(l);
 
-		CometdEntrance.FireSHMsgLoopTest();
-
 	}
 
 	@Override
@@ -57,7 +55,7 @@ public class NotificationWebSocket extends WebSocketAdapter {
 		// TODO Auto-generated method stub
 		super.onWebSocketError(cause);
 		System.out.println("onWebSocketError: " + cause.toString());
-		CometdEntrance.registerShL(l);
+		CometdEntrance.unregisterShL(l);
 		l=null;
 	}
 

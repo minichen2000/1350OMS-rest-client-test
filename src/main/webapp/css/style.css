@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
 body{
-  font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+  font-family: Microsoft YaHei,'宋体' , Lucida Console, Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
 }
 
 .text-center{
@@ -11,4 +11,27 @@ body{
 }
 .text-left{
   text-align:left;
+}
+
+.tab-content-cmd-title-style{
+  color:#222222;
+  font-size: 28px;
+  margin-top:40px;
+  margin-bottom:6px;
+}
+
+.tab-content-single-name-style{
+  color:#222222;
+  font-weight: bold;
+}
+.tab-content-single-value-style{
+  font-family: 'Courier New';
+  background-color: transparent;
+  margin-left:20px;
+  padding-right:4px;
+  padding-left:4px
+}
+
+.tab-content-json-value-style{
+  margin:4px 400px 12px 0px
 }
