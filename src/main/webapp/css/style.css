@@ -34,6 +34,24 @@ body{
 .tab-content-json-value-style{
   margin:8px 0px 12px 0px;
   border-color: transparent;
+  padding-top: 10px;
+  pading-bottom: 10px
+}
+.pre-copy-bt-postion{
+  position: absolute;
+  right:20px;
+  top:20px
+}
+.pre-accordion-bt-postion{
+  position: absolute;
+  right:60px;
+  top:20px
+}
+.pre-size-normal{
+  height:auto
+}
+.pre-size-accordion{
+  height:70px;
 }
 
 .tab-content-secondary-area-style{

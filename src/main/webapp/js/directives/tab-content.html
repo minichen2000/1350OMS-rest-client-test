@@ -30,11 +30,14 @@
                 <div ng-if="cmd.postBody" class="tab-content-row-style">
                     <span class="tab-content-single-name-style">Post Body</span>
                     <div style="position: relative">
-                    <pre class="tab-content-json-value-style">{{jsonString(cmd.postBody)}}</pre>
-                    <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
-                       zeroclip-text="{{jsonString(cmd.postBody)}}" style="position: absolute;right:0px;top:0px" data-toggle="tooltip"
-                       title="copy">
-                        <i class="fa fa-copy"></i></a>
+                        <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': postBodyAccordionOn, 'pre-size-normal': !postBodyAccordionOn}">{{jsonString(cmd.postBody)}}</pre>
+                        <a class="btn btn-link pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                           zeroclip-text="{{jsonString(cmd.postBody)}}" data-toggle="tooltip"
+                           title="copy">
+                            <i class="fa fa-copy"></i></a>
+                        <a class="btn btn-link  pre-accordion-bt-postion" ng-click="postBodyAccordionOn=!postBodyAccordionOn">
+                            <i class="fa fa-expand" ng-class="{'fa-expand': postBodyAccordionOn, 'fa-compress': !postBodyAccordionOn}"></i>
+                        </a>
                     </div>
                 </div>
                 <div ng-if="cmd.postBody_example" class="tab-content-row-style">
@@ -42,22 +45,29 @@
 
                     <div style="position: relative">
                         <pre class="tab-content-json-value-style">{{jsonString(cmd.postBody_example)}}</pre>
-                        <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
-                           zeroclip-text="{{jsonString(cmd.postBody_example)}}" style="position: absolute;right:0px;top:0px" data-toggle="tooltip"
+                        <a class="btn btn-link btn-sm pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                           zeroclip-text="{{jsonString(cmd.postBody_example)}}"
+                           data-toggle="tooltip"
                            title="copy">
-                            <i class="fa fa-copy"></i></a>
+                            <i class="fa fa-copy"></i>
+                        </a>
                     </div>
                 </div>
+
+
                 <div ng-if="cmd.postBody_fixed_part" class="tab-content-row-style">
                     <span class="tab-content-single-name-style">Post Body Fixed Part</span>
-
                     <div style="position: relative">
-                        <pre class="tab-content-json-value-style">{{makeJsonFixedPartString(cmd.postBody_fixed_part)}}  <span class="customized-tips-style">customized part goes here</span><br><br>  ...<br><br>}</pre>
-                        <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
-                           zeroclip-text="{{makeJsonFixedPartCopyString(cmd.postBody_fixed_part)}}" style="position: absolute;right:0px;top:0px" data-toggle="tooltip"
+                            <pre class="tab-content-json-value-style" style="height: auto">{{makeJsonFixedPartString(cmd.postBody_fixed_part)}}  <span
+                                    class="customized-tips-style">customized part goes here</span><br><br>  ...<br><br>}</pre>
+                        <a class="btn btn-link btn-sm pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                           zeroclip-text="{{makeJsonFixedPartCopyString(cmd.postBody_fixed_part)}}"
+                           data-toggle="tooltip"
                            title="copy">
-                            <i class="fa fa-copy"></i></a>
+                            <i class="fa fa-copy"></i>
+                        </a>
                     </div>
+
                 </div>
                 <div ng-if="cmd.postBody_customized_part_examples" class="tab-content-row-style">
                     <span class="tab-content-single-name-style">Post Body Customized Part Examples</span>
@@ -67,10 +77,12 @@
 
                             <div style="position: relative">
                                 <pre class="tab-content-json-value-style">{{makeJsonCustomizedPartString(example.content)}}</pre>
-                                <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
-                                   zeroclip-text="{{makeJsonCustomizedPartString(example.content)}}" style="position: absolute;right:0px;top:0px" data-toggle="tooltip"
+                                <a class="btn btn-link btn-sm pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                                   zeroclip-text="{{makeJsonCustomizedPartString(example.content)}}"
+                                   data-toggle="tooltip"
                                    title="copy">
-                                    <i class="fa fa-copy"></i></a>
+                                    <i class="fa fa-copy"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
