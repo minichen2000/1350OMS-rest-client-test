@@ -29,8 +29,24 @@ public class CometdNotifyClient {
 	private static CometdNotifyClient instance;
 	private HttpClient httpClient = new HttpClient(new SslContextFactory(true));
 	private BayeuxClient client;
-	private ScheduledThreadPoolExecutor tpe = new ScheduledThreadPoolExecutor(1);
+	private ScheduledThreadPoolExecutor tpe = null;
 	private ScheduledFuture<?> future;
+
+	private ClientSessionChannel.MessageListener metaL=new ClientSessionChannel.MessageListener() {
+		public void onMessage(ClientSessionChannel channel, Message message) {
+			log.debug( "\nMessage:\n"+"On Channel: "+channel+"\n"+message );
+			boolean success = message.isSuccessful();
+			if (!success) {
+				// Disconnect
+				log.debug("**************** Disconnected from Comet Server***************************");
+				isAttached = false;
+				client.disconnect();
+				log.debug("reconnection to Server");
+				connectToCometdServer();
+			}
+		}
+
+	};
 
 	private CometdNotifyClient() {
 	}
@@ -58,7 +74,7 @@ public class CometdNotifyClient {
 
 		log.debug("attachToCometServer started");
 		try {
-			if (httpClient != null)
+			if (!httpClient.isStopped())
 				httpClient.stop();
 			httpClient.start();
 		} catch (Exception ex) {
@@ -67,7 +83,6 @@ public class CometdNotifyClient {
 			throw ex;
 		}
 
-		tpe.setKeepAliveTime(10, TimeUnit.SECONDS);
 
 		Map<String, Object> transportOptions = new HashMap<String, Object>();
 		JSONContext.Client jsonContext = new Jackson2JSONContextClient();
@@ -87,7 +102,7 @@ public class CometdNotifyClient {
 
 		log.debug("**************** Inside connectToCometServer method***************************");
 
-		if (tpe != null && tpe.isShutdown()) {
+		if (tpe == null || tpe.isShutdown()) {
 			log.debug("Instantiating thread pool");
 			tpe = new ScheduledThreadPoolExecutor(1);
 			tpe.setKeepAliveTime(10, TimeUnit.SECONDS);
@@ -117,27 +132,14 @@ public class CometdNotifyClient {
 
 								future.cancel(false);
 
+								ClientSessionChannel.MessageListener l=new CometdEventListener();
+								subscribe("/oms1350/events/npr/PhysicalConn", l);
+								subscribe("/oms1350/events/otn/trail", l);
+								subscribe("/oms1350/events/otn/path", l);
+
 								// Subscribe to connect messages
 								client.getChannel(Channel.META_CONNECT)
-										.addListener(
-												new ClientSessionChannel.MessageListener() {
-													public void onMessage(ClientSessionChannel channel, Message message) {
-
-														boolean success = message.isSuccessful();
-														if (!success) {
-															// Disconnect
-															log.debug("**************** Disconnected from Comet Server***************************");
-															isAttached = false;
-															client.disconnect();
-															log.debug("reconnection to Server");
-															connectToCometdServer();
-														}else{
-															// Here we received a message on the channel
-															log.debug( "\nMessage:\n"+"On Channel: "+channel+"\n"+message );
-														}
-													}
-
-												});
+										.addListener(metaL);
 
 							}
 						}
@@ -180,7 +182,19 @@ public class CometdNotifyClient {
 	}
 
 	public void disconnect(){
+		if(null!=client){
+			client.getChannel(Channel.META_CONNECT).removeListener(metaL);
+		}
+
+		tpe.shutdownNow();
+		tpe=null;
+		setIsConnected(false);
 		client.disconnect();
+		try {
+			httpClient.stop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Boolean isConnected() {

@@ -85,6 +85,7 @@
             <scope>provided</scope>
         </dependency>
 
+
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-api</artifactId>
@@ -105,6 +106,8 @@
             <version>${jettyVersion}</version>
             <scope>provided</scope>
         </dependency>
+
+
 
 
 
@@ -197,6 +200,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jettyVersion}</version>
                 <configuration>
+                    <war>${project.basedir}/target/OMSRESTfulClient.war</war>
                     <jettyXml>jetty-conf/jetty.xml,jetty-conf/jetty-http.xml</jettyXml>
                     <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
                     <scanIntervalSeconds>3</scanIntervalSeconds>

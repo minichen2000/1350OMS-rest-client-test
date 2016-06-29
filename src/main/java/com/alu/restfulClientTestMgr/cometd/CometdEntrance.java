@@ -37,13 +37,34 @@ public class CometdEntrance
             CometdNotifyClient client = CometdNotifyClient.getInstance();
             if( client.isConnected() )
             {
-                client.setIsConnected( false );
                 client.disconnect();
             }
             client.attachToCometdServer();
-            client.subscribe("/oms1350/events/npr/PhysicalConn", l);
+            /*client.subscribe("/oms1350/events/npr/PhysicalConn", l);
             client.subscribe("/oms1350/events/otn/trail", l);
-            client.subscribe("/oms1350/events/otn/path", l);
+            client.subscribe("/oms1350/events/otn/path", l);*/
+
+        }
+        catch( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void stop()
+    {
+        try
+        {
+            CometdNotifyClient client = CometdNotifyClient.getInstance();
+            if( client.isConnected() )
+            {
+                log.debug("Cometed server stopped.");
+                client.disconnect();
+            }
+            /*client.subscribe("/oms1350/events/npr/PhysicalConn", l);
+            client.subscribe("/oms1350/events/otn/trail", l);
+            client.subscribe("/oms1350/events/otn/path", l);*/
 
         }
         catch( Exception e )

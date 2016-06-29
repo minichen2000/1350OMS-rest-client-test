@@ -1,6 +1,7 @@
 package com.alu.restfulClientTestMgr.TestMgrServer.servlet;
 
 import com.alu.restfulClientTestMgr.OmsClient.RestFulLoginManager;
+import com.alu.restfulClientTestMgr.cometd.CometdEntrance;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class Logout extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         RestFulLoginManager.getInstance().endSession();
+        CometdEntrance.stop();
         out.println("OK");
 
 
