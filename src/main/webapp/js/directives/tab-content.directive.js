@@ -23,7 +23,7 @@
                 scope.makeJsonFixedPartString=function(data){
                     var orig=scope.jsonString(data);
                     var s=orig.substring(0, orig.length-2);
-                    s+=',\n\n\n  ...\n\n';
+                    s+=',\n\n';
                     return s;
                 }
                 scope.makeJsonFixedPartCopyString=function(data){
@@ -34,7 +34,7 @@
                 }
                 scope.makeJsonCustomizedPartString=function(data){
                     var orig=scope.jsonString(data);
-                    var s=orig.substring(1, orig.length-1);
+                    var s=orig.substring(2, orig.length-1);
                     return s;
                 }
             }
