@@ -47,12 +47,41 @@ OmsRESTfulCMDs = [
                 "path_example": "/data/npr/physicalConns/44"
             },
             {
-                "title": "Create TL (2 Ends)",
+                "title": "Create internal TL",
                 "method": "POST",
                 "path": "/data/npr/physicalConns",
                 "postBody": {
                     "Tag": "CMD_WIZTYPE_createConn",
-                    "userLabel": "cmm_2",
+                    "userLabel": "cm_ne1_2-5-L2_9170",
+                    "connectionType": "chooserConnWdm",
+                    "clientSignalType": "ClientSignalType_otu2",
+                    "aNode": "NE1",
+                    "aPort": "NE1/11QPA4-2-5-L2",
+                    "aPort_id": 7884,
+                    "zNode": "NE1",
+                    "zPort": "NE1/SFD-25-1-9170",
+                    "zPort_id": 8115
+                },
+                "postBody_example": {
+                    "Tag": "CMD_WIZTYPE_createConn",
+                    "userLabel": "cm_ne1_2-5-L2_9170",
+                    "connectionType": "chooserConnWdm",
+                    "clientSignalType": "ClientSignalType_otu2",
+                    "aNode": "NE1",
+                    "aPort": "NE1/11QPA4-2-5-L2",
+                    "aPort_id": 7884,
+                    "zNode": "NE1",
+                    "zPort": "NE1/SFD-25-1-9170",
+                    "zPort_id": 8115
+                }
+            },
+            {
+                "title": "Create external TL (2 Ends)",
+                "method": "POST",
+                "path": "/data/npr/physicalConns",
+                "postBody": {
+                    "Tag": "CMD_WIZTYPE_createConn",
+                    "userLabel": "cm_pl_1_4",
                     "connectionType": "chooserConnWdm",
                     "aNode": "NE4",
                     "aPort": "NE4/ITL-29-1-SIG",
@@ -63,7 +92,7 @@ OmsRESTfulCMDs = [
                 },
                 "postBody_example": {
                     "Tag": "CMD_WIZTYPE_createConn",
-                    "userLabel": "cmm_2",
+                    "userLabel": "cm_pl_1_4",
                     "connectionType": "chooserConnWdm",
                     "aNode": "NE4",
                     "aPort": "NE4/ITL-29-1-SIG",
@@ -74,12 +103,12 @@ OmsRESTfulCMDs = [
                 }
             },
             {
-                "title": "Create TL (4 Ends)",
+                "title": "Create external TL (4 Ends)",
                 "method": "POST",
                 "path": "/data/npr/physicalConns",
                 "postBody": {
                     "Tag": "CMD_WIZTYPE_createConn",
-                    "userLabel": "cmm_4",
+                    "userLabel": "cm_pl_4e_1_4",
                     "connectionType": "chooserConnWdm4EndedNew",
                     "aNode": "NE5",
                     "aPort": "NE5/AM2125B-2-17-LINEOUT",
@@ -94,7 +123,7 @@ OmsRESTfulCMDs = [
                 },
                 "postBody_example": {
                     "Tag": "CMD_WIZTYPE_createConn",
-                    "userLabel": "cmm_4",
+                    "userLabel": "cm_pl_4e_1_4",
                     "connectionType": "chooserConnWdm4EndedNew",
                     "aNode": "NE5",
                     "aPort": "NE5/AM2125B-2-17-LINEOUT",
@@ -161,7 +190,6 @@ OmsRESTfulCMDs = [
                     "routing": "1",
                     "autoprovision": "true",
                     "integratedprovision": "false",
-                    "orderstep": "9",
                     "allowUncommissioned": "true",
                     "provisionwavekey": "keyed",
                     "cirrate": "0",
@@ -391,61 +419,12 @@ OmsRESTfulCMDs = [
                 },
                 "postBody_customized_part_examples": [
                     {
-                        "title": " create OTU2e trail",
+                        "title": " create OTU2 trail",
                         "content": {
-                            "connectionname": "cm_otu2e_1",
-                            "trailrate": "OTU2E",
+                            "connectionname": "cm_otu2_1",
+                            "trailrate": "OTU2",
                             "routedisplay": "false",
-                            "fromporttype1": "UnTerminated",
-                            "toporttype1": "UnTerminated",
-                            "fromporttype2": "UnTerminated",
-                            "toporttype2": "UnTerminated",
-                            "fromne1": "NE1",
-                            "fromne1_AdditionalInfo": {
-                                "type": "NODE",
-                                "name": "NE1",
-                                "id": 45,
-                                "productName": "1830PSS"
-                            },
-                            "fromport1": "11OPE8-2-10-X2",
-                            "fromport1_AdditionalInfo": {
-                                "neId": 49,
-                                "neName": "NE1",
-                                "portName": "11OPE8-2-10-X2",
-                                "label": "11OPE8-2-10-X2",
-                                "portid": 165479,
-                                "cardName": "11OPE8",
-                                "portGrpMode": "N/A",
-                                "odukrate": "OTU2E"
-                            },
-                            "tone1": "NE4",
-                            "tone1_AdditionalInfo": {
-                                "type": "NODE",
-                                "name": "NE4",
-                                "id": 24,
-                                "productName": "1830PSS"
-                            },
-                            "toport1": "11OPE8-2-10-X1",
-                            "toport1_AdditionalInfo": {
-                                "neId": 27,
-                                "neName": "NE4",
-                                "portName": "11OPE8-2-10-X1",
-                                "label": "11OPE8-2-10-X1",
-                                "portid": 165112,
-                                "cardName": "11OPE8",
-                                "portGrpMode": "N/A",
-                                "odukrate": "OTU2E"
-                            },
-                            "fromport2": "",
-                            "toport2": ""
-                        }
-                    },
-                    {
-                        "title": "create ODU2e trail",
-                        "content": {
-                            "connectionname": "cm_odu2e_1",
-                            "trailrate": "ODU2E",
-                            "routedisplay": "true",
+                            "orderstep": "9",
                             "fromporttype1": "Terminated",
                             "toporttype1": "Terminated",
                             "fromporttype2": "Terminated",
@@ -457,16 +436,16 @@ OmsRESTfulCMDs = [
                                 "id": 45,
                                 "productName": "1830PSS"
                             },
-                            "fromport1": "11OPE8-2-10-X2-1",
+                            "fromport1": "11QPA4-2-5-L1-1",
                             "fromport1_AdditionalInfo": {
                                 "neId": 49,
                                 "neName": "NE1",
-                                "portName": "11OPE8-2-10-X2-1",
-                                "label": "11OPE8-2-10-X2-1",
-                                "portid": 165480,
-                                "cardName": "11OPE8",
+                                "portName": "11QPA4-2-5-L1-1",
+                                "label": "11QPA4-2-5-L1-1",
+                                "portid": 165393,
+                                "cardName": "11QPA4",
                                 "portGrpMode": "N/A",
-                                "odukrate": "ODU2E"
+                                "odukrate": "OTU2"
                             },
                             "tone1": "NE4",
                             "tone1_AdditionalInfo": {
@@ -475,16 +454,67 @@ OmsRESTfulCMDs = [
                                 "id": 24,
                                 "productName": "1830PSS"
                             },
-                            "toport1": "11OPE8-2-10-X1-1",
+                            "toport1": "11QPA4-2-5-L1-1",
                             "toport1_AdditionalInfo": {
                                 "neId": 27,
                                 "neName": "NE4",
-                                "portName": "11OPE8-2-10-X1-1",
-                                "label": "11OPE8-2-10-X1-1",
-                                "portid": 165113,
-                                "cardName": "11OPE8",
+                                "portName": "11QPA4-2-5-L1-1",
+                                "label": "11QPA4-2-5-L1-1",
+                                "portid": 165007,
+                                "cardName": "11QPA4",
                                 "portGrpMode": "N/A",
-                                "odukrate": "ODU2E"
+                                "odukrate": "OTU2"
+                            },
+                            "fromport2": "",
+                            "toport2": ""
+                        }
+                    },
+                    {
+                        "title": " create ODU2 trail",
+                        "content": {
+                            "connectionname": "cm_odu2_1",
+                            "trailrate": "ODU2",
+                            "routedisplay": "false",
+                            "orderstep": "9",
+                            "fromporttype1": "Terminated",
+                            "toporttype1": "Terminated",
+                            "fromporttype2": "Terminated",
+                            "toporttype2": "Terminated",
+                            "fromne1": "NE1",
+                            "fromne1_AdditionalInfo": {
+                                "type": "NODE",
+                                "name": "NE1",
+                                "id": 45,
+                                "productName": "1830PSS"
+                            },
+                            "fromport1": "11QPA4-2-5-L1-1",
+                            "fromport1_AdditionalInfo": {
+                                "neId": 49,
+                                "neName": "NE1",
+                                "portName": "11QPA4-2-5-L1-1",
+                                "label": "11QPA4-2-5-L1-1",
+                                "portid": 165394,
+                                "cardName": "11QPA4",
+                                "portGrpMode": "N/A",
+                                "odukrate": "ODU2"
+                            },
+                            "tone1": "NE4",
+                            "tone1_AdditionalInfo": {
+                                "type": "NODE",
+                                "name": "NE4",
+                                "id": 24,
+                                "productName": "1830PSS"
+                            },
+                            "toport1": "11QPA4-2-5-L1-1",
+                            "toport1_AdditionalInfo": {
+                                "neId": 27,
+                                "neName": "NE4",
+                                "portName": "11QPA4-2-5-L1-1",
+                                "label": "11QPA4-2-5-L1-1",
+                                "portid": 165008,
+                                "cardName": "11QPA4",
+                                "portGrpMode": "N/A",
+                                "odukrate": "ODU2"
                             },
                             "fromport2": "",
                             "toport2": ""

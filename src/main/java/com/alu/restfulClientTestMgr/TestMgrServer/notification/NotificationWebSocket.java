@@ -38,8 +38,15 @@ public class NotificationWebSocket extends WebSocketAdapter {
 				@Override
 				public void onMessage(Message msg) {
 					try {
-						System.out.println("onMessage:"+msg);
-						remote.sendString(msg.getData().toString());
+						System.out.println("onMessage msg::"+msg);
+						System.out.println("onMessage getData:"+msg.getData());
+						System.out.println("onMessage getJSON:"+msg.getJSON());
+						String rltStr=msg.getJSON();
+						if(rltStr.contains("\\")){
+							rltStr=msg.getData().toString();
+						}
+
+						remote.sendString(rltStr);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

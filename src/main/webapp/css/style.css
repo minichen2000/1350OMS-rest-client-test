@@ -47,7 +47,8 @@ body{
 }
 .pre-size-normal{
   height:auto;
-  border-radius: 12px;
+  border: 1px dashed rgba(51, 122, 181, 0.6);
+  border-radius: 0px;
   background-color:#fafafa;
   border: 1px dashed #337ab7;
   color: #337ab7;
@@ -55,9 +56,9 @@ body{
 }
 .pre-size-accordion{
   height:70px;
-  border: 1px dashed #337ab7;
+  border: 1px dashed rgba(51, 122, 181, 0.4);
   color: #337ab7;
-  border-radius: 12px;
+  border-radius: 0px;
   overflow-y: hidden;
   background-color:#ffffff;
 }

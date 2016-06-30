@@ -58,13 +58,14 @@
 
 
                 <div ng-if="cmd.postBody_fixed_part" class="tab-content-row-style">
-                    <span class="tab-content-single-name-style">Post Body Fixed Part</span>
+                    <span class="tab-content-single-name-style">Post Body Template</span>
                     <div style="position: relative">
                         <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': !accordionNotOn, 'pre-size-normal': accordionNotOn}">
 {{makeJsonFixedPartString(cmd.postBody_fixed_part)}}
-  <span class="customized-tips-style">...</span><br>
+  <!--<span class="customized-tips-style">...</span><br>-->
   <span class="customized-tips-style">customized part goes here</span><br><br>
-  <span class="customized-tips-style">...</span><br>
+  <!--<span class="customized-tips-style">...</span><br>-->
+}
                         </pre>
                         <a class="btn btn-link btn-sm pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
                            zeroclip-text="{{makeJsonFixedPartCopyString(cmd.postBody_fixed_part)}}"
