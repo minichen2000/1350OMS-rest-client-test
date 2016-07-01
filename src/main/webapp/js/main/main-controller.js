@@ -11,6 +11,7 @@
     MainController.$inject = ['$http', '$scope', 'commonUtil', 'logger', '$interval', '$timeout', 'serverNotificationService'];
     function MainController($http, $scope, commonUtil, logger, $interval, $timeout, serverNotificationService) {
         var vm = this;
+        vm.requestProcessing=false;
         vm.logining=false;
         vm.logouting=false;
         vm.connected=false;
@@ -129,6 +130,7 @@
         }
 
         function onRequest(method){
+            vm.requestProcessing=true;
             var url_=vm.baseUrl+vm.path;
             logger.debug("url:["+method+']: '+url_);
             $http({
@@ -145,11 +147,13 @@
                     var rlt=JSON.stringify(rsp, null, 2);
                     //logger.debug("rsp:"+rlt);
                     vm.result=rsp.data;
+                    vm.requestProcessing=false;
                 })
                 .catch(function(rsp){
                     var rlt=JSON.stringify(rsp, null, 2);
                     //logger.error("rsp:"+rlt);
                     vm.result=rsp;
+                    vm.requestProcessing=false;
                 });
         }
         vm.onGet=function(){

@@ -136,6 +136,7 @@ public class CometdNotifyClient {
 								subscribe("/oms1350/events/npr/PhysicalConn", l);
 								subscribe("/oms1350/events/otn/trail", l);
 								subscribe("/oms1350/events/otn/path", l);
+								subscribe("/event/notif/common", l);
 
 								// Subscribe to connect messages
 								client.getChannel(Channel.META_CONNECT)
