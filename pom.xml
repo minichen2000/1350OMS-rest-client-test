@@ -71,12 +71,6 @@
             <version>1.9.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -134,36 +128,6 @@
             <artifactId>cometd-java-client</artifactId>
             <version>${cometdVersion}</version>
         </dependency>
-
-
-
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>${jerseyVersion}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.connectors/jersey-jetty-connector -->
-        <dependency>
-            <groupId>org.glassfish.jersey.connectors</groupId>
-            <artifactId>jersey-jetty-connector</artifactId>
-            <version>${jerseyVersion}</version>
-        </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.connectors/jersey-apache-connector -->
-        <dependency>
-            <groupId>org.glassfish.jersey.connectors</groupId>
-            <artifactId>jersey-apache-connector</artifactId>
-            <version>${jerseyVersion}</version>
-        </dependency>
-
-
-
-
-
-
 
     </dependencies>
 
