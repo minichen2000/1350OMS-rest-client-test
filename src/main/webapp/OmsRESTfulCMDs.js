@@ -251,7 +251,7 @@ OmsRESTfulCMDs = [
                 ]
             },
             {
-                "title": "Delete TL",
+                "title": "Delete external TL",
                 "method": "DELETE",
                 "path": "/data/npr/physicalConns/{connectId}",
                 "path_example": [
@@ -262,7 +262,7 @@ OmsRESTfulCMDs = [
                 ]
             },
             {
-                "title": "Delete internal TL(SFD)",
+                "title": "Delete internal TL",
                 "method": "DELETE",
                 "path": "/eqm/tl/{aPortName}/{bPortName}/{neGroupId}/{neId}/{neType}/{direction}",
                 "path_example": [
@@ -561,50 +561,50 @@ OmsRESTfulCMDs = [
                 },
                 "postBody_customized_part_examples": [
                     {
-                        "title": " create OTU2 trail",
+                        "title": " create ODU2 trail",
                         "content": {
-                            "connectionname": "cm_otu2_1",
-                            "trailrate": "OTU2",
-                            "routedisplay": "false",
+                            "connectionname": "cm_odu2_unpro_ne1_ne4_1",
+                            "trailrate": "ODU2",
+                            "routedisplay": "true",
                             "orderstep": "9",
                             "fromporttype1": "Terminated",
                             "toporttype1": "Terminated",
                             "fromporttype2": "Terminated",
                             "toporttype2": "Terminated",
                             "fromne1": "NE1",
-                            "fromport1": "11QPA4-2-5-L1-1",
+                            "fromport1": "11STAR1-1-6-L1-1",
                             "fromport1_AdditionalInfo": {
-                                "cardName": "11QPA4"
+                                "cardName": "11STAR1"
                             },
                             "tone1": "NE4",
-                            "toport1": "11QPA4-2-5-L1-1",
+                            "toport1": "11STAR1-1-6-L1-1",
                             "toport1_AdditionalInfo": {
-                                "cardName": "11QPA4"
+                                "cardName": "11STAR1"
                             },
                             "fromport2": "",
                             "toport2": ""
                         }
                     },
                     {
-                        "title": " create ODU2 trail",
+                        "title": " create OTU2 trail",
                         "content": {
-                            "connectionname": "cm_odu2_1",
-                            "trailrate": "ODU2",
+                            "connectionname": "cm_otu2_unpro_ne1_ne4_1",
+                            "trailrate": "OTU2",
                             "routedisplay": "false",
                             "orderstep": "9",
-                            "fromporttype1": "Terminated",
-                            "toporttype1": "Terminated",
-                            "fromporttype2": "Terminated",
-                            "toporttype2": "Terminated",
+                            "fromporttype1": "UnTerminated",
+                            "toporttype1": "UnTerminated",
+                            "fromporttype2": "UnTerminated",
+                            "toporttype2": "UnTerminated",
                             "fromne1": "NE1",
-                            "fromport1": "11QPA4-2-5-L1-1",
+                            "fromport1": "11STAR1-1-6-L1",
                             "fromport1_AdditionalInfo": {
-                                "cardName": "11QPA4"
+                                "cardName": "11STAR1"
                             },
                             "tone1": "NE4",
-                            "toport1": "11QPA4-2-5-L1-1",
+                            "toport1": "11STAR1-1-6-L1",
                             "toport1_AdditionalInfo": {
-                                "cardName": "11QPA4"
+                                "cardName": "11STAR1"
                             },
                             "fromport2": "",
                             "toport2": ""
@@ -1201,26 +1201,26 @@ OmsRESTfulCMDs = [
                 },
                 "postBody_customized_part_examples": [
                     {
-                        "title": " create 1GbE path",
+                        "title": " create 10GbE path",
                         "content": {
-                            "connectionname": "cm_dsr_1gbe_p_1",
+                            "connectionname": "cm_dsr_10gbe_unpro_1",
                             "serviceratetype": "Ethernet",
-                            "servicerate": "1GbE",
-                            "routedisplay": "true",
+                            "servicerate": "10GbE",
+                            "routedisplay": "false",
                             "orderstep": "9",
                             "fromporttype1": "Terminated",
                             "toporttype1": "Terminated",
                             "fromporttype2": "Terminated",
                             "toporttype2": "Terminated",
-                            "fromne1": "NE3",
-                            "fromport1": "11STGE12-1-3-C1",
+                            "fromne1": "NE1",
+                            "fromport1": "11STAR1-1-6-C1",
                             "fromport1_AdditionalInfo": {
-                                "cardName": "11STGE12"
+                                "cardName": "11STAR1"
                             },
                             "tone1": "NE4",
-                            "toport1": "11STGE12-1-3-C1",
+                            "toport1": "11STAR1-1-6-C1",
                             "toport1_AdditionalInfo": {
-                                "cardName": "11STGE12"
+                                "cardName": "11STAR1"
                             },
                             "fromport2": "",
                             "toport2": ""
