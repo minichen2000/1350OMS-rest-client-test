@@ -30,13 +30,19 @@ public class HttpCall
         {
             ContentResponse resp=req.send();
 
+            log.debug("resp Headers: \n"+resp.getHeaders());
+
             if( resp.getStatus() != 201
                     && resp.getStatus() != 200 )
             {
                 log.error( "HTTP ERROR CODE :" + resp.getStatus());
+                System.out.println( "HTTP ERROR CODE :" + resp.getStatus());
                 return "";
             }else{
-                return resp.getContentAsString();
+                byte[] buf=resp.getContent();
+                String rlt=resp.getContentAsString();
+                log.debug("EC: "+resp.getEncoding()+" MT: "+resp.getMediaType()+" byte len: "+buf.length);
+                return rlt;
             }
         }
         catch( Exception e )
