@@ -1,0 +1,135 @@
+AHPHG-1-6-LINE:
+
+1. Submit:
+Request	POST /oms1350/eqm/otdr/modifyOtdrParams/AHPHG-1-6-SIG?neId=5&neGroupId=100
+Request body:
+{
+  "entityType": "EQUIPMENT",
+  "groupId": "100",
+  "neId": "5",
+  "entityName": "AHPHG-1-6-SIG",
+  "paramList": [
+    {
+      "name": "connectedLDOTDRport",
+      "value": "OTDR-1-8-P1",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanProfileId",
+      "value": "PROFILE2",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanPulseLength",
+      "value": "1000",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanRange",
+      "value": "80000",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanResolution",
+      "value": "250",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanAvgTime",
+      "value": "3-0",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanDescription",
+      "value": "",
+      "isModified": false
+    },
+    {
+      "name": "otdrScanFileName",
+      "value": "cds3",
+      "isModified": true
+    },
+    {
+      "name": "otdrScanWaveLength",
+      "value": "1610",
+      "isModified": false
+    },
+    {
+      "name": "layer",
+      "value": 30,
+      "isModified": true
+    }
+  ]
+}
+
+Respose body:
+{
+  "opStatus": "SUCCESS",
+  "msg": "MODIFY  "
+}
+
+
+
+2. Start scan:
+Request	POST /oms1350/eqm/otdr/scan/5/100/AHPHG-1-6-SIG/START
+
+3. Get progress:
+Request	GET /oms1350/eqm/otdr/portScan/AHPHG-1-6-SIG?neId=5&neGroupId=100
+Response:(inprogress)
+{
+  "otdrScanResult": "INPROGRESS",
+  "estimatedTimeRemaining": "Not Scanning",
+  "otdrScanLastSuccessfulTime": "10/10/2016 10:47:35 AM",
+  "otdrScanTimeRemaining": "187"
+}
+Response:(finished)
+{
+  "otdrScanResult": "NOSCAN",
+  "estimatedTimeRemaining": "Not Scanning",
+  "otdrScanLastSuccessfulTime": "10/11/2016 03:31:14 AM",
+  "otdrScanTimeRemaining": "0"
+}
+
+4. Retrieve file list:
+Request	GET /oms1350/eqm/otdr/retrieveFileList/5/100/AHPHG-1-6-SIG/dummyVal
+Response body:
+[
+  "SUCCESS",
+  "cds5_01_06_LI_20161009_06-32-12.sor",
+  "cds3_01_06_LI_20161010_03-53-29.sor",
+  "cds3-30KM_01_06_LI_20161010_05-11-33.sor",
+  "cds3_01_06_LI_20161011_03-31-14.sor",
+  "cds3-30KM_01_06_LI_20161010_10-33-37.sor",
+  "cds3-30KM_01_06_LI_20161010_10-29-53.sor",
+  "cds3-1_01_06_LI_20161010_04-37-31.sor",
+  "cds3-30KM_01_06_LI_20161010_10-47-35.sor",
+  "cds3-30KM_01_06_LI_20161010_04-51-10.sor",
+  "cds3_01_06_LI_20161010_04-31-21.sor"
+]
+
+5. Post retrieve results:
+Request	POST /oms1350/eqm/otdr/retrieveResults/5/100/AHPHG-1-6-SIG/cds3_01_06_LI_20161011_03-31-14.sor
+Response body(not exists):
+{
+  "opStatus": "SUCCESS",
+  "msg": "  "
+}
+Response body(exists):
+{
+  "opStatus": "SUCCESS",
+  "msg": "file exists"
+}
+
+6. Transfer file
+Request	GET /oms1350/eqm/otdr/transferFile/5/100/AHPHG-1-6-SIG/cds3_01_06_LI_20161011_03-31-14.sor/usr-Systems-EML_1-swdl-swdlserv-data-100-OTDRSCANS-5
+Response:
+{
+  "opStatus": "SUCCESS",
+  "msg": "135.251.96.33:8443/oms1350/web/eqm/data/cds3_01_06_LI_20161011_03-31-14.sor"
+}
+
+7. Download file:
+Request	GET /oms1350/eqm/otdr/transferFileToPC/cds3_01_06_LI_20161011_03-31-14.sor.sor
+
+MT: application/octet-stream
+
