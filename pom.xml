@@ -12,7 +12,7 @@
     <properties>
         <jdkCompileVersion>1.7</jdkCompileVersion>
         <javaServletVersion>3.1.0</javaServletVersion>
-        <jettyVersion>9.3.6.v20151106</jettyVersion>
+        <jettyVersion>9.2.20.v20161216</jettyVersion>
         <cometdVersion>3.0.9</cometdVersion>
         <jerseyVersion>2.23.1</jerseyVersion>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
