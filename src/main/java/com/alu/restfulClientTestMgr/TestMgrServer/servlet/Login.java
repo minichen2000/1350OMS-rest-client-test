@@ -53,6 +53,7 @@ public class Login extends HttpServlet
 			ConfLoader.getInstance().setConf("guiusername", guiusername);
 			ConfLoader.getInstance().setConf("guipassword", guipassword);
 			ConfLoader.getInstance().setConf("omsurl", omsurl);
+			ConfLoader.getInstance().setConf("COMETDHOST", otnip);
 
 			resp.setStatus(HttpServletResponse.SC_OK);
 
