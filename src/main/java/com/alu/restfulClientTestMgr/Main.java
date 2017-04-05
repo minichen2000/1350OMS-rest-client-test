@@ -18,12 +18,18 @@ import java.net.URL;
  * Created by chenmin on 2017/3/30.
  */
 public class Main {
+    private static String CONF_FILE_NAME="omsRestClient.conf.properties";
+    private static String CONF_PATH_VARIABLE_NAME =ConfigKey.OMS_REST_CLIENT_CONFPATH;
     private static Logger log;
     public static void main(String[] args){
 
         String confPath = loadConf();
 
-        System.setProperty("log4j.configurationFile", confPath + "/"+ConfLoader.getInstance().getConf(ConfigKey.LOG_CONF_FILE_NAME, ConfigKey.DEFAULT_LOG_CONF_FILE_NAME));
+        try {
+            if(null!=confPath) System.setProperty("log4j.configurationFile", confPath + "/"+ConfLoader.getInstance().getConf(ConfigKey.LOG_CONF_FILE_NAME, ConfigKey.DEFAULT_LOG_CONF_FILE_NAME));
+        } catch (Exception e) {
+            System.out.println("No log4j2 configurationFile.");
+        }
         LoggerContext loggerContext = (LoggerContext) LogManager.getContext(false);
         loggerContext.reconfigure();
 
@@ -41,8 +47,8 @@ public class Main {
             throw new RuntimeException(String.format("No %s directory was found into the JAR file", "webapp"));
         }
         try {
-            log.debug("webAppDir: "+webAppDir.toString());
-            log.debug("webAppContext.setResourceBase: "+webAppDir.toURI().toString());
+            //log.debug("webAppDir: "+webAppDir.toString());
+            //log.debug("webAppContext.setResourceBase: "+webAppDir.toURI().toString());
             webAppContext.setResourceBase(webAppDir.toURI().toString());
             webAppContext.setParentLoaderPriority(true);
         } catch (URISyntaxException e) {
@@ -86,21 +92,21 @@ public class Main {
     }
 
     private static String loadConf() {
-        String confPath = System.getProperty(ConfigKey.OMS_REST_CLIENT_CONFPATH);
+        String confPath = System.getProperty(CONF_PATH_VARIABLE_NAME);
         if (null == confPath) {
-            confPath = System.getenv(ConfigKey.OMS_REST_CLIENT_CONFPATH);
+            confPath = System.getenv(CONF_PATH_VARIABLE_NAME);
         }
         if (null == confPath) {
             confPath = System.getProperty("user.home");
         }
 
         try {
-            ConfLoader.getInstance().loadConf(confPath + "/omsRestClient.conf.properties");
-        } catch (OmsRestClientException e) {
-            e.printStackTrace();
-            shutDown();
+            ConfLoader.getInstance().loadConf(confPath + "/"+CONF_FILE_NAME);
+        } catch (Exception e) {
+            System.out.println("Warning: '"+CONF_FILE_NAME+"' not found in you home directory or environment '"+ CONF_PATH_VARIABLE_NAME +"'.");
+            System.out.println("Using default values.");
+            return null;
         }
-
         return confPath;
     }
     private static void shutDown() {

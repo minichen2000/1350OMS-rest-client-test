@@ -2,6 +2,7 @@ package com.alu.restfulClientTestMgr.OmsClient;
 
 import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpCall;
 import com.alu.restfulClientTestMgr.constants.ConfLoader;
+import com.alu.restfulClientTestMgr.constants.ConfLoaderException;
 import com.alu.restfulClientTestMgr.exception.OmsRestClientException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +15,7 @@ public class RestClientLogin
 {
     private static Logger log = LogManager.getLogger( RestClientLogin.class );
 
-    public void login() throws OmsRestClientException {
+    public void login() throws OmsRestClientException, ConfLoaderException {
         String otnIp = ConfLoader.getInstance().getConf( "otnip");
         int otnPort = ConfLoader.getInstance().getInt( "otnport",
             RestFulConstant.OTNPORT );
