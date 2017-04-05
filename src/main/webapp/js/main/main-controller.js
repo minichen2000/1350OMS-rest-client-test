@@ -162,17 +162,17 @@
         }
         vm.onGet=function(){
             onRequest('get');
-        }
+        };
         vm.onPost=function(){
             onRequest('post');
-        }
+        };
         vm.onDelete=function(){
             onRequest('delete');
-        }
+        };
 
         vm.clearNotifications=function(){
             vm.notifications.length=0;
-        }
+        };
 
         function tryToAutoScroll(){
             if(vm.autoScroll){
@@ -184,7 +184,7 @@
         vm.swithAutoScroll=function(){
             vm.autoScroll=!vm.autoScroll;
             tryToAutoScroll();
-        }
+        };
 
 
 
