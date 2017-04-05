@@ -1,7 +1,10 @@
 package com.alu.restfulClientTestMgr.OmsClient;
 
 import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpCall;
-import org.apache.log4j.Logger;
+import com.alu.restfulClientTestMgr.constants.ConfLoader;
+import com.alu.restfulClientTestMgr.exception.OmsRestClientException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -9,10 +12,9 @@ import org.jsoup.select.Elements;
 
 public class RestClientLogin
 {
-    private static Logger log = Logger.getLogger( RestClientLogin.class );
+    private static Logger log = LogManager.getLogger( RestClientLogin.class );
 
-    public void login()
-    {
+    public void login() throws OmsRestClientException {
         String otnIp = ConfLoader.getInstance().getConf( "otnip");
         int otnPort = ConfLoader.getInstance().getInt( "otnport",
             RestFulConstant.OTNPORT );

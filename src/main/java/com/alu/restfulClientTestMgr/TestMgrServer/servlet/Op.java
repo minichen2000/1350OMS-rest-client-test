@@ -1,7 +1,8 @@
 package com.alu.restfulClientTestMgr.TestMgrServer.servlet;
 
 import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpCall;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import java.io.PrintWriter;
 
 public class Op extends HttpServlet
 {
-	private static Logger log = Logger.getLogger( Op.class );
+	private static Logger log = LogManager.getLogger( Op.class );
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
 		resp.setContentType("text/html;charset=utf-8");

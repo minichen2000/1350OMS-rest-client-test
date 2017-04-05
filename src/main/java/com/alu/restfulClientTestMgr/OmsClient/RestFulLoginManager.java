@@ -2,13 +2,16 @@ package com.alu.restfulClientTestMgr.OmsClient;
 
 import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpCall;
 import com.alu.restfulClientTestMgr.cometd.CometdEntrance;
-import org.apache.log4j.Logger;
+import com.alu.restfulClientTestMgr.constants.ConfLoader;
+import com.alu.restfulClientTestMgr.constants.ConfigKey;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 
 public class RestFulLoginManager implements ISession {
 	
-	private static Logger log = Logger.getLogger(RestFulLoginManager.class);
+	private static Logger log = LogManager.getLogger(RestFulLoginManager.class);
 	
 	private SessionTask sessionTask=null;
 	

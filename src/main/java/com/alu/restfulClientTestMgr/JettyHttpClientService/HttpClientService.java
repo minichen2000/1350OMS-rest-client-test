@@ -1,6 +1,7 @@
 package com.alu.restfulClientTestMgr.JettyHttpClientService;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.HttpCookieStore;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -10,7 +11,7 @@ import java.net.CookieStore;
 public class HttpClientService
 {
 
-    private static Logger log = Logger.getLogger( HttpClientService.class );
+    private static Logger log = LogManager.getLogger( HttpClientService.class );
 
     private static HttpClientService inst_ = null;
 

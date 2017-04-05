@@ -4,47 +4,108 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>rest-ful-client-test</groupId>
-    <artifactId>rest-ful-client-test</artifactId>
-    <packaging>war</packaging>
+    <groupId>com.alu.restfulClientTestMgr</groupId>
+    <artifactId>omsRestClient</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <jdkCompileVersion>1.7</jdkCompileVersion>
-        <javaServletVersion>3.1.0</javaServletVersion>
-        <jettyVersion>9.2.20.v20161216</jettyVersion>
-        <cometdVersion>3.0.9</cometdVersion>
-        <jerseyVersion>2.23.1</jerseyVersion>
+        <jettyVersion>9.2.21.v20170120</jettyVersion>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.7.5</jackson.version>
+        <log4j-version>2.6.2</log4j-version>
+        <cometdVersion>3.0.9</cometdVersion>
+        <maven-assembly-plugin-version>2.4.1</maven-assembly-plugin-version>
+        <maven-compiler-plugin-version>3.1</maven-compiler-plugin-version>
+        <javaWsRsApiVersion>2.0.1</javaWsRsApiVersion>
+        <jsoup-version>1.9.2</jsoup-version>
     </properties>
 
     <dependencies>
 
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jul</artifactId>
+            <version>${log4j-version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.20</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>${jettyVersion}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.20</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-client</artifactId>
+            <version>${jettyVersion}</version>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-api</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-client</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-servlet</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>javax-websocket-server-impl</artifactId>
+            <version>${jettyVersion}</version>
         </dependency>
 
         <dependency>
@@ -65,65 +126,19 @@
             <version>${jackson.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${javaWsRsApiVersion}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.9.2</version>
+            <version>${jsoup-version}</version>
         </dependency>
 
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${javaServletVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-api</artifactId>
-            <version>${jettyVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-client</artifactId>
-            <version>${jettyVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-servlet</artifactId>
-            <version>${jettyVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-
-
-
-        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-client -->
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-client</artifactId>
-            <version>${jettyVersion}</version>
-        </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-util -->
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <version>${jettyVersion}</version>
-        </dependency>
-
-
-
-        <!-- https://mvnrepository.com/artifact/org.cometd.java/cometd-java-client -->
         <dependency>
             <groupId>org.cometd.java</groupId>
             <artifactId>cometd-java-client</artifactId>
@@ -133,10 +148,12 @@
     </dependencies>
 
     <build>
+        <finalName>omsrestclient</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
                 <configuration>
                     <source>${jdkCompileVersion}</source>
                     <target>${jdkCompileVersion}</target>
@@ -145,43 +162,27 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin-version}</version>
                 <configuration>
-                    <warName>OMSRESTfulClient</warName>
-                    <!--<webResources>
-                        <resource>
-                            <directory>${project.basedir}/lib</directory>
-                            <targetPath>WEB-INF/lib</targetPath>
-                            <filtering>false</filtering>
-                            <includes>
-                                <include>**/*.jar</include>
-                            </includes>
-                        </resource>
-                    </webResources>-->
+                    <archive>
+                        <manifest>
+                            <mainClass>com.alu.restfulClientTestMgr.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptors>
+                        <descriptor>src/assembly/distribution.xml</descriptor>
+                    </descriptors>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jettyVersion}</version>
-                <configuration>
-                    <war>${project.basedir}/target/OMSRESTfulClient.war</war>
-                    <jettyXml>jetty-conf/jetty.xml,jetty-conf/jetty-http.xml</jettyXml>
-                    <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
-                    <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <scanTargets>
-                        <scanTarget>src/main/java</scanTarget>
-                    </scanTargets>
-
-                    <!--Below content is not neccessory. "/" is the default path; for defaultsDescriptor we can define some parameters in our webapp/WEB-INF/web.xml.
-                    for example: "useFileMappedBuffer" for default servlet.-->
-                    <!--<webApp>
-                      <contextPath>/</contextPath>
-                      <defaultsDescriptor>src/main/webapp/webdefault.xml</defaultsDescriptor>
-                    </webApp>-->
-
-                    <dumpOnStart>false</dumpOnStart>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

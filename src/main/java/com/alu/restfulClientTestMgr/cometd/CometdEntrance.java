@@ -1,6 +1,7 @@
 package com.alu.restfulClientTestMgr.cometd;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.cometd.bayeux.ChannelId;
 import org.cometd.bayeux.Message;
 import org.cometd.bayeux.client.ClientSessionChannel;
@@ -10,7 +11,7 @@ import java.util.*;
 
 public class CometdEntrance
 {
-    private static Logger log = Logger.getLogger( CometdEntrance.class );
+    private static Logger log = LogManager.getLogger( CometdEntrance.class );
     private static ClientSessionChannel.MessageListener l=new CometdEventListener();
 
     static public interface SecondHandListener{

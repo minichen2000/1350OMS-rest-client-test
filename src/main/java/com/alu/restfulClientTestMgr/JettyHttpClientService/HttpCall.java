@@ -1,6 +1,7 @@
 package com.alu.restfulClientTestMgr.JettyHttpClientService;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.util.StringContentProvider;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class HttpCall
 {
-    private static Logger log = Logger.getLogger( HttpCall.class );
+    private static Logger log = LogManager.getLogger( HttpCall.class );
 
     private HttpCall()
     {
