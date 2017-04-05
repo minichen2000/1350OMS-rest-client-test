@@ -32,7 +32,10 @@
             //instance.expandAll();
         };
 
-        vm.baseUrl='https://'+vm.otnIP+':'+vm.otnPort+'/oms1350';
+        function genBaseUrl(){
+            return 'https://'+vm.otnIP+':'+vm.otnPort+'/oms1350';
+        }
+
         vm.path=null;
         vm.result=null;
         vm.postBody=null;
@@ -69,7 +72,7 @@
                     logger.error("rsp:"+error);
                     //window.alert("Error:\n"+error);
                 });
-        }
+        };
 
         vm.onLogout=function(){
             vm.logouting=true;
@@ -86,7 +89,7 @@
                     logger.error("rsp:"+error);
                     //window.alert("Error:\n"+error);
                 });
-        }
+        };
 
 
         function checkStatus(){
@@ -97,6 +100,7 @@
                 .then(function(rsp){
                     //logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
                     if(rsp.data.status.toLowerCase()=='connected'){
+                        vm.baseUrl=genBaseUrl();
                         vm.connected=true;
                         vm.logining=false;
                     }else{
@@ -123,11 +127,11 @@
 
         vm.postBodyModeSwith=function(){
             vm.postBodyOptions.mode=vm.postBodyOptions.mode=='code' ? 'tree' : 'code';
-        }
+        };
 
         vm.resultModeSwith=function(){
             vm.resultOptions.mode=vm.resultOptions.mode=='code' ? 'tree' : 'code';
-        }
+        };
 
         function onRequest(method){
             vm.requestProcessing=true;
