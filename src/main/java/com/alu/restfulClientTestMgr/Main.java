@@ -86,7 +86,7 @@ public class Main {
         }).start();
     }
 
-    private static void confLog(){
+    private static void confLog() throws Exception{
         String log_conf_file=ConfLoader.getInstance().getConf(ConfigKey.log_conf_file, null);
         if((new File(log_conf_file).canRead())){
             System.setProperty("log4j.configurationFile", log_conf_file);
@@ -94,7 +94,7 @@ public class Main {
             loggerContext.reconfigure();
         }else{
             LoggerContext loggerContext = (LoggerContext) LogManager.getContext(false);
-            loggerContext.getConfiguration().getRootLogger().setLevel(Level.INFO);
+            loggerContext.getConfiguration().getRootLogger().setLevel(ConfLoader.getInstance().getBoolean(ConfigKey.debug) ? Level.DEBUG : Level.INFO);
         }
     }
 
@@ -127,13 +127,10 @@ public class Main {
             @Parameter(names={"-"+ConfigKey.proxy_port}, order = 4, description = "Http proxy port")
             private int proxy_port=0;
 
-            @Parameter(names={"-"+ConfigKey.session_register_interval}, order = 5, description = "Oms client session register interval")
-            private int session_register_interval=ConfigKey.default_session_register_interval;
+            @Parameter(names={"-"+ConfigKey.debug}, order = 5, description = "Debug mode (only in case log_conf_file is not available)")
+            private boolean debug=false;
 
-            @Parameter(names={"-"+ConfigKey.session_ping_interval}, order = 6, description = "Oms client session ping server interval")
-            private int session_ping_interval=ConfigKey.default_session_ping_interval;
-
-            @Parameter(names={"-help"}, order = 7, help=true, description = "Show this help")
+            @Parameter(names={"-help"}, order = 6, help=true, description = "Show this help")
             private boolean help=false;
         }
         Args args=new Args();
@@ -144,12 +141,12 @@ public class Main {
         }
 
         ConfLoader.getInstance().setInt(ConfigKey.server_port, args.server_port);
-        ConfLoader.getInstance().setConf(ConfigKey.proxy_host, args.proxy_host);
-        ConfLoader.getInstance().setInt(ConfigKey.proxy_port, args.proxy_port);
         ConfLoader.getInstance().setConf(ConfigKey.conf_file, args.conf_file);
         ConfLoader.getInstance().setConf(ConfigKey.log_conf_file, args.log_conf_file);
-        ConfLoader.getInstance().setInt(ConfigKey.session_register_interval, args.session_register_interval);
-        ConfLoader.getInstance().setInt(ConfigKey.session_ping_interval, args.session_ping_interval);
+        ConfLoader.getInstance().setConf(ConfigKey.proxy_host, args.proxy_host);
+        ConfLoader.getInstance().setInt(ConfigKey.proxy_port, args.proxy_port);
+        ConfLoader.getInstance().setBoolean(ConfigKey.debug, args.debug);
+
     }
     private static void shutDown() {
         log.info("Shutdown.");
