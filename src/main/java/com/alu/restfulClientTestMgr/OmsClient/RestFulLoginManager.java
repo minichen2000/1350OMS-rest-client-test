@@ -39,11 +39,11 @@ public class RestFulLoginManager implements ISession {
         {
             sessionTask = new SessionTask( this );
             sessionTask.setRegisterInterval( ConfLoader.getInstance().getInt(
-                ConfigKey.INTERNAL_REGISTER_INTERVAL,
-                ConfigKey.DEFAULT_INTERNAL_REGISTER_INTERVAL ) );
+                ConfigKey.session_register_interval,
+                ConfigKey.default_session_register_interval ) );
             sessionTask.setPingInterval( ConfLoader.getInstance().getInt(
-                ConfigKey.INTERNAL_PING_INTERVAL,
-                ConfigKey.DEFAULT_INTERNAL_PING_INTERVAL ) );
+                ConfigKey.session_ping_interval,
+                ConfigKey.default_session_ping_interval ) );
             sessionTask.start();
         }
     }
