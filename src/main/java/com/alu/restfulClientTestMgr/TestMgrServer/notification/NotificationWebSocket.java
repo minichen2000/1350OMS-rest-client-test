@@ -1,6 +1,8 @@
 package com.alu.restfulClientTestMgr.TestMgrServer.notification;
 
 import com.alu.restfulClientTestMgr.cometd.CometdEntrance;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.cometd.bayeux.Message;
 import org.eclipse.jetty.websocket.api.RemoteEndpoint;
 import org.eclipse.jetty.websocket.api.Session;
@@ -10,6 +12,7 @@ import java.io.IOException;
 
 
 public class NotificationWebSocket extends WebSocketAdapter {
+	private static Logger log = LogManager.getLogger(NotificationWebSocket.class);
 
 	private CometdEntrance.SecondHandListener l=null;
 
@@ -38,15 +41,18 @@ public class NotificationWebSocket extends WebSocketAdapter {
 				@Override
 				public void onMessage(Message msg) {
 					try {
-						System.out.println("onMessage msg::"+msg);
-						System.out.println("onMessage getData:"+msg.getData());
-						System.out.println("onMessage getJSON:"+msg.getJSON());
+						log.info("onMessage msg::"+msg);
+						log.info("onMessage getData:"+msg.getData());
+						log.info("onMessage getJSON:"+msg.getJSON());
 						String rltStr=msg.getJSON();
 						if(rltStr.contains("\\")){
-							rltStr=msg.getData().toString();
+							String data=msg.getData().toString();
+							String channel=msg.getChannel();
+							String id=msg.getId();
+							rltStr="{\"data\":"+data+", \"channel\": \""+channel+"\", \"id\": \""+id+"\"}";
 						}
-
 						remote.sendString(rltStr);
+						log.info("Sent string to client: \n"+rltStr);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

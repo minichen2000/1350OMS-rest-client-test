@@ -36,14 +36,14 @@ public class CometdNotifyClient {
 
 	private ClientSessionChannel.MessageListener metaL=new ClientSessionChannel.MessageListener() {
 		public void onMessage(ClientSessionChannel channel, Message message) {
-			log.debug( "\nMessage:\n"+"On Channel: "+channel+"\n"+message );
+			log.info( "\nMessage:\n"+"On Channel: "+channel+"\n"+message );
 			boolean success = message.isSuccessful();
 			if (!success) {
 				// Disconnect
-				log.debug("**************** Disconnected from Comet Server***************************");
+				log.info("**************** Disconnected from Comet Server***************************");
 				isAttached = false;
 				client.disconnect();
-				log.debug("reconnection to Server");
+				log.info("reconnection to Server");
 				connectToCometdServer();
 			}
 		}
@@ -72,9 +72,9 @@ public class CometdNotifyClient {
 
 		cometURL = baseUrl + ConfLoader.getInstance().getConf("COMETDSERVERURL", CometdConstant.notify_serverUrl);
 
-		log.debug("Comet Server URL is : " + cometURL);
+		log.info("Comet Server URL is : " + cometURL);
 
-		log.debug("attachToCometServer started");
+		log.info("attachToCometServer started");
 		try {
 			if (!httpClient.isStopped())
 				httpClient.stop();
@@ -102,10 +102,10 @@ public class CometdNotifyClient {
 
 	private void connectToCometdServer() {
 
-		log.debug("**************** Inside connectToCometServer method***************************");
+		log.info("**************** Inside connectToCometServer method***************************");
 
 		if (tpe == null || tpe.isShutdown()) {
-			log.debug("Instantiating thread pool");
+			log.info("Instantiating thread pool");
 			tpe = new ScheduledThreadPoolExecutor(1);
 			tpe.setKeepAliveTime(10, TimeUnit.SECONDS);
 		}
@@ -123,14 +123,14 @@ public class CometdNotifyClient {
 								client.disconnect();
 
 							client.handshake();
-							log.debug("Handshake initiated");
+							log.info("Handshake initiated");
 							boolean handshaken = client.waitFor(1000, BayeuxClient.State.CONNECTED);
 
 							if (handshaken) {
 								// Connected successfully to comet server
-								log.debug("Connected successfully to cometd server on URL "+ cometURL);
+								log.info("Connected successfully to cometd server on URL "+ cometURL);
 								isAttached = true;
-								log.debug("Set isAttached to true");
+								log.info("Set isAttached to true");
 
 								future.cancel(false);
 
@@ -139,7 +139,7 @@ public class CometdNotifyClient {
 								subscribe("/oms1350/events/otn/trail", l);
 								subscribe("/oms1350/events/otn/path", l);
 								subscribe("/event/notif/common", l);
-
+								subscribe("/oms1350/events/otn/rest/alarmEvent", l);
 								// Subscribe to connect messages
 								client.getChannel(Channel.META_CONNECT)
 										.addListener(metaL);
@@ -162,24 +162,24 @@ public class CometdNotifyClient {
 
 	public void subscribe(final String cometdChannel,
 						  ClientSessionChannel.MessageListener cometEventListener) {
-		log.debug("Subscribing to the channel : " + cometdChannel);
+		log.info("Subscribing to the channel : " + cometdChannel);
 
 		client.getChannel(cometdChannel).subscribe(cometEventListener, new ClientSessionChannel.MessageListener(){
 			@Override
 			public void onMessage(ClientSessionChannel clientSessionChannel, Message message) {
-				log.debug("Subscription successful: "+cometdChannel);
+				log.info("Subscription successful: "+cometdChannel);
 			}
 		});
 	}
 
 	public void unsubscribe(final String cometdChannel,
 							ClientSessionChannel.MessageListener cometEventListener) {
-		log.debug("Unsubscribing to the channel : " + cometdChannel);
+		log.info("Unsubscribing to the channel : " + cometdChannel);
 
 		client.getChannel(cometdChannel).unsubscribe(cometEventListener, new ClientSessionChannel.MessageListener(){
 			@Override
 			public void onMessage(ClientSessionChannel clientSessionChannel, Message message) {
-				log.debug("Unsubscription successful: "+cometdChannel);
+				log.info("Unsubscription successful: "+cometdChannel);
 			}
 		});
 	}

@@ -60,7 +60,7 @@ public class CometdEntrance
             CometdNotifyClient client = CometdNotifyClient.getInstance();
             if( client.isConnected() )
             {
-                log.debug("Cometed server stopped.");
+                log.info("Cometed server stopped.");
                 client.disconnect();
             }
             /*client.subscribe("/oms1350/events/npr/PhysicalConn", l);
@@ -201,7 +201,7 @@ public class CometdEntrance
                             return "{\"msg\": \"hello\"}";
                         }
                     };
-                    log.debug("fire one message:\n"+m.getJSON());
+                    log.info("fire one message:\n"+m.getJSON());
                     fireSHMsg(m);
                     try {
                         Thread.sleep(1000);
