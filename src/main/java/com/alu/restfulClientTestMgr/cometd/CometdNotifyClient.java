@@ -140,6 +140,10 @@ public class CometdNotifyClient {
 								subscribe("/oms1350/events/otn/path", l);
 								subscribe("/event/notif/common", l);
 								subscribe("/oms1350/events/otn/rest/alarmEvent", l);
+								subscribe("/oms1350/events/eml/Alarms", l);
+								subscribe("/oms1350/", l);
+								subscribe("/oms1350/*", l);
+								subscribe("/oms1350/events/*", l);
 								// Subscribe to connect messages
 								client.getChannel(Channel.META_CONNECT)
 										.addListener(metaL);
