@@ -16,15 +16,25 @@
         vm.logouting=false;
         vm.connected=false;
 
-        vm.otnIP='135.251.96.33';
+        vm.otnIP='172.24.168.79';
         vm.otnPort=8443;
-        vm.casIP='135.251.96.33';
+        vm.casIP='172.24.168.79';
         vm.casPort=8443;
         vm.casUrl='/cas/v1/tickets';
-        vm.presentationIP='135.251.96.34';
+        vm.presentationIP='172.24.168.80';
         vm.guiUsername='alcatel';
-        vm.guiPassword='Lucent2.@';
+        vm.guiPassword='Lucent1.!';
         vm.omsUrl='/oms1350/data/plat/session/login';
+
+        $timeout(function(){
+            vm.channelsBody=[
+                '/event/notif/common',
+                '/oms1350/events/otn/rest/alarmEvent',
+                '/oms1350/events/npr/PhysicalConn',
+                '/oms1350/events/otn/trail',
+                '/oms1350/events/otn/path'
+            ];
+        }, 1000);
 
         vm.notifications=[];
         vm.autoScroll=true;
@@ -39,6 +49,7 @@
         vm.path=null;
         vm.result=null;
         vm.postBody=null;
+        vm.postBodyNonJson=null;
         vm.postBodyOptions={mode: 'code'};
         vm.resultOptions={mode: 'code'};
 
@@ -46,7 +57,7 @@
             vm.logining=true;
                 $http({
                     method: 'post',
-                    url: './login',
+                    url: commonUtil.internalBaseUrl+'/login',
                     //url:'http://www.mobisoftwarestudio.com',
                     //url:'https://api.shanbay.com/bdc/search/',
                     //url:'http://127.0.0.1:8080/',
@@ -60,7 +71,8 @@
                         'presentationip': vm.presentationIP,
                         'guiusername': vm.guiUsername,
                         'guipassword': vm.guiPassword,
-                        'omsurl': vm.omsUrl
+                        'omsurl': vm.omsUrl,
+                        'commetchannels': JSON.stringify(vm.channelsBody)
                     }
                 })
                 .then(function(rsp){
@@ -78,7 +90,7 @@
             vm.logouting=true;
             $http({
                 method: 'post',
-                url: './logout'
+                url: commonUtil.internalBaseUrl+'/logout'
             })
                 .then(function(rsp){
                     logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
@@ -95,7 +107,7 @@
         function checkStatus(){
             $http({
                 method: 'post',
-                url: './status'
+                url: commonUtil.internalBaseUrl+'/status'
             })
                 .then(function(rsp){
                     //logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
@@ -133,24 +145,41 @@
             vm.resultOptions.mode=vm.resultOptions.mode=='code' ? 'tree' : 'code';
         };
 
+        function genContentType(body){
+            if(!body) return 'text/html';
+            if(body.trim().startsWith('<')){
+                return 'application/xml';
+            }else if(body.trim().startsWith('{') || body.trim().startsWith('[')){
+                return 'application/json';
+            }else{
+                return 'text/html';
+            }
+        }
+
         function onRequest(method){
             vm.requestProcessing=true;
             var url_=vm.baseUrl+vm.path;
             logger.debug("url:["+method+']: '+url_);
             $http({
                 method: 'post',
-                url: './op',
+                url: commonUtil.internalBaseUrl+'/op',
+                transformResponse: undefined,
                 params: {
                     'method': method,
                     'url': url_,
-                    'contentType': 'application/json'
+                    'contentType': genContentType(vm.postBodyNonJson ? vm.postBodyNonJson : JSON.stringify(vm.postBody))
                 },
-                data: JSON.stringify(vm.postBody ? vm.postBody : "")
+                data: vm.postBodyNonJson ? vm.postBodyNonJson : JSON.stringify(vm.postBody ? vm.postBody : "")
             })
                 .then(function(rsp){
                     var rlt=JSON.stringify(rsp, null, 2);
-                    //logger.debug("rsp:"+rlt);
-                    vm.result=rsp.data;
+                    logger.debug("rsp:"+rsp);
+                    var ss=rsp.data;
+                    if(!ss.startsWith('{') && !ss.startsWith('[') && ss.startsWith('<')){
+                        vm.resultNonJson=rsp.data;
+                    }else{
+                        vm.result=JSON.parse(rsp.data);
+                    }
                     vm.requestProcessing=false;
                 })
                 .catch(function(rsp){
@@ -165,6 +194,9 @@
         };
         vm.onPost=function(){
             onRequest('post');
+        };
+        vm.onPut=function(){
+            onRequest('put');
         };
         vm.onDelete=function(){
             onRequest('delete');

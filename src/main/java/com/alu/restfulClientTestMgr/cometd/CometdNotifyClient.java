@@ -2,6 +2,7 @@ package com.alu.restfulClientTestMgr.cometd;
 
 import com.alu.restfulClientTestMgr.constants.ConfLoader;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.cometd.bayeux.Channel;
@@ -15,7 +16,9 @@ import org.cometd.common.Jackson2JSONContextClient;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -98,7 +101,16 @@ public class CometdNotifyClient {
 		connectToCometdServer();
 	}
 
-	
+	private String[] obtainChannels(){
+		String cc=ConfLoader.getInstance().getConf("commetchannels", "");
+		try {
+			String[] ss=(new ObjectMapper()).readValue(cc, String[].class);
+			return ss;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new String[]{};
+		}
+	}
 
 	private void connectToCometdServer() {
 
@@ -135,15 +147,9 @@ public class CometdNotifyClient {
 								future.cancel(false);
 
 								ClientSessionChannel.MessageListener l=new CometdEventListener();
-								subscribe("/oms1350/events/npr/PhysicalConn", l);
-								subscribe("/oms1350/events/otn/trail", l);
-								subscribe("/oms1350/events/otn/path", l);
-								subscribe("/event/notif/common", l);
-								subscribe("/oms1350/events/otn/rest/alarmEvent", l);
-								subscribe("/oms1350/events/eml/Alarms", l);
-								subscribe("/oms1350/", l);
-								subscribe("/oms1350/*", l);
-								subscribe("/oms1350/events/*", l);
+								for(String s : obtainChannels()){
+									subscribe(s, l);
+								}
 								// Subscribe to connect messages
 								client.getChannel(Channel.META_CONNECT)
 										.addListener(metaL);

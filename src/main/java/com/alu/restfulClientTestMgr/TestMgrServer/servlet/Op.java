@@ -33,20 +33,21 @@ public class Op extends HttpServlet
 			sb.append(line);
 		String payloadData=sb.toString();
 
-
-		log.debug( "Op: [" + method+"]: "+url );
-		log.debug( "Op payloadData: \n" + payloadData);
-
 		if(null==payloadData || payloadData.length()==0){
 			payloadData="";
 		}
+		log.info( "Op: [" + method+"]: "+url );
+		log.info( "Op payloadData: \n" + payloadData);
+		log.info( "Op contentType: \n" + contentType);
 
 		resp.setStatus(HttpServletResponse.SC_OK);
 		String rlt=null;
 		if(method.toLowerCase().equals("get")){
 			rlt=HttpCall.instance().getCall( url, contentType );
 		}else if(method.toLowerCase().equals("post")){
-			rlt=HttpCall.instance().postCall( url, payloadData, contentType, contentType, null );
+			rlt=HttpCall.instance().postCall( url, payloadData, contentType, "*/*");
+		}else if(method.toLowerCase().equals("put")){
+			rlt=HttpCall.instance().putCall( url, payloadData, contentType, "*/*");
 		}else if(method.toLowerCase().equals("delete")){
 			rlt=HttpCall.instance().deleteCall( url);
 		}else {

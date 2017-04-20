@@ -35,16 +35,18 @@ public class Login extends HttpServlet
 			String guiusername=req.getParameter("guiusername");
 			String guipassword=req.getParameter("guipassword");
 			String omsurl=req.getParameter("omsurl");
+			String commetchannels=req.getParameter("commetchannels");
 
-			log.debug("otnip: "+otnip+"\n");
-			log.debug("otnport: "+otnport+"\n");
-			log.debug("casip: "+casip+"\n");
-			log.debug("casport: "+casport+"\n");
-			log.debug("casurl: "+casurl+"\n");
-			log.debug("presentationip: "+presentationip+"\n");
-			log.debug("guiusername: "+guiusername+"\n");
-			log.debug("guipassword: "+guipassword+"\n");
-			log.debug("omsurl: "+omsurl+"\n");
+			log.info("otnip: "+otnip+"\n");
+			log.info("otnport: "+otnport+"\n");
+			log.info("casip: "+casip+"\n");
+			log.info("casport: "+casport+"\n");
+			log.info("casurl: "+casurl+"\n");
+			log.info("presentationip: "+presentationip+"\n");
+			log.info("guiusername: "+guiusername+"\n");
+			log.info("guipassword: "+guipassword+"\n");
+			log.info("omsurl: "+omsurl+"\n");
+			log.info("commetchannels: "+commetchannels+"\n");
 
 			ConfLoader.getInstance().setConf("otnip", otnip);
 			ConfLoader.getInstance().setInt("otnport", otnport);
@@ -56,6 +58,7 @@ public class Login extends HttpServlet
 			ConfLoader.getInstance().setConf("guipassword", guipassword);
 			ConfLoader.getInstance().setConf("omsurl", omsurl);
 			ConfLoader.getInstance().setConf("COMETDHOST", otnip);
+			ConfLoader.getInstance().setConf("commetchannels", commetchannels);
 
 			resp.setStatus(HttpServletResponse.SC_OK);
 

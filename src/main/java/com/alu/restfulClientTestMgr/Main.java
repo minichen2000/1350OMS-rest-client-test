@@ -10,6 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.FilterHolder;
+import org.eclipse.jetty.servlet.FilterMapping;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
@@ -17,7 +20,6 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Properties;
 
 /**
  * Created by chenmin on 2017/3/30.
@@ -31,6 +33,8 @@ public class Main {
         log = LogManager.getLogger(Main.class);
 
         configProxy();
+
+
 
         //webapp context
         WebAppContext webAppContext = new WebAppContext();
@@ -62,6 +66,19 @@ public class Main {
             log.info("WebSocketServerContainerInitializer.configureContext failed.", e);
             shutDown();
         }
+
+        //CORS filter
+        FilterHolder filter = new FilterHolder(CrossOriginFilter.class);
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "POST,GET,OPTIONS,PUT,DELETE,HEAD,PATCH");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, "X-Requested-With, Content-Type, Accept, Origin, access-control-allow-origin");
+        filter.setName("cross-origin");
+        FilterMapping fm = new FilterMapping();
+        fm.setFilterName("cross-origin");
+        fm.setPathSpec("*");
+        webAppContext.getServletHandler().addFilter(filter, fm );
+
+        ////////////////////////
 
 
         new Thread(new Runnable() {

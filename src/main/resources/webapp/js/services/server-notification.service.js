@@ -32,7 +32,7 @@
             for (var i = 0; i < ws_listeners.length; i++) {
                 ws_listeners[i].fun(evt.data);
             }
-        }
+        };
 
         return {
             addListener: addListener,

@@ -43,29 +43,30 @@ public class RestClientLogin
     private String getTgtIdFromCas( String casIP, int casPort, String casUrl,
             String casUserName, String casPassword )
     {
+        log.info( "================getTgtIdFromCas================" );
         String url = "https://" + casIP + ":" + casPort + casUrl;
-        log.debug( "CAS URL = " + url );
+        log.info( "CAS URL = " + url );
         String inputparam = "username=" + casUserName + "&password="
                 + casPassword;
-        log.debug( "CAS data = " + inputparam );
+        log.info( "CAS data = " + inputparam );
 
         String output = HttpCall.instance().postCall( url, inputparam,
-            "application/x-www-form-urlencoded",null,  null );
-        log.debug( "Data Received = " + output );
+            "application/x-www-form-urlencoded",null);
+        log.info( "Data Received = " + output );
 
         Document htmlFile = null;
         try
         {
             htmlFile = Jsoup.parse( output );
             String title = htmlFile.title();
-            log.debug( "title : " + title );
+            log.info( "title : " + title );
             Elements links = htmlFile.select( "form" );
-            log.debug( "\nlink : " + links.attr( "action" ) );
-            log.debug( "\nlink : " + links.attr( "method" ) );
+            log.info( "\nlink : " + links.attr( "action" ) );
+            log.info( "\nlink : " + links.attr( "method" ) );
             String recvtgtString = links.attr( "action" );
             String[] tgtstringArr = recvtgtString.split( "/" );
             String tgtIdStr = tgtstringArr[tgtstringArr.length - 1];
-            log.debug( "TGT String : " + tgtIdStr );
+            log.info( "TGT String : " + tgtIdStr );
             return tgtIdStr;
         }
         catch( Exception e )
@@ -81,17 +82,18 @@ public class RestClientLogin
             String casUrl, String casTgtId, String otnIP, int otnPort )
 
     {
+        log.info( "================getServiceTicketFromCas================" );
         String url = "https://" + casIP + ":" + casPort + casUrl + "/"
                 + casTgtId;
-        log.debug( "CAS Service Ticket URL = " + url );
+        log.info( "CAS Service Ticket URL = " + url );
         String inputParam = "service=https://" + otnIP + ":" + otnPort
                 + "/oms1350";
-        log.debug( "CAS Service inputParam = " + inputParam );
+        log.info( "CAS Service inputParam = " + inputParam );
 
         String serviceTicket = HttpCall.instance().postCall( url, inputParam,
-            "application/x-www-form-urlencoded",null, null );
+            "application/x-www-form-urlencoded",null);
 
-        log.debug( "serviceTicket String : " + serviceTicket );
+        log.info( "serviceTicket String : " + serviceTicket );
         return serviceTicket;
     }
 
@@ -99,25 +101,26 @@ public class RestClientLogin
             String serviceTicket, String userName, String password,
             String presenIP, String otnIP, int otnPort, String omsUrl )
     {
+        log.info( "================authenticateOMS================" );
         String url = "https://" + otnIP + ":" + otnPort + omsUrl;
-        log.debug( "URL OMS = " + url );
+        log.info( "URL OMS = " + url );
         String inputParam = "user=alcatel&password=Lucent1.!&presentation="
                 + presenIP + "&ticket=" + serviceTicket.trim();
-        log.debug( "CAS Service inputParam = " + inputParam );
+        log.info( "CAS Service inputParam = " + inputParam );
 
         String rlt=HttpCall.instance().postCall( url, inputParam,
-            "application/x-www-form-urlencoded", null, null );
-        log.debug( "authenticateOMS rlt : " + rlt );
+            "application/x-www-form-urlencoded", null);
+        log.info( "authenticateOMS rlt : " + rlt );
     }
 
     public void getNodeInfo( String otnIP, int otnPort )
     {
         // TODO Auto-generated method stub
-        log.debug( "Exceuting getNodeInfo" );
+        log.info( "Exceuting getNodeInfo" );
         String url = "https://" + otnIP + ":" + otnPort
                 + "/oms1350/nodeCache/nodes";
         String contentType = "";
         String rlt=HttpCall.instance().getCall( url, contentType );
-        log.debug( "getNodeInfo rlt : " + rlt );
+        log.info( "getNodeInfo rlt : " + rlt );
     }
 }
