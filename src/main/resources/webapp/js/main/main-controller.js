@@ -26,14 +26,21 @@
         vm.guiPassword='Lucent1.!';
         vm.omsUrl='/oms1350/data/plat/session/login';
 
+        vm.aceLoaded = function(_editor) {
+            // Options
+            _editor.setFontSize(14);
+            _editor.setShowPrintMargin(true);
+        };
+
+
         $timeout(function(){
-            vm.channelsBody=[
+            vm.channelsBody=JSON.stringify([
                 '/event/notif/common',
                 '/oms1350/events/otn/rest/alarmEvent',
                 '/oms1350/events/npr/PhysicalConn',
                 '/oms1350/events/otn/trail',
                 '/oms1350/events/otn/path'
-            ];
+            ], null, 2);
         }, 1000);
 
         vm.notifications=[];
@@ -72,7 +79,7 @@
                         'guiusername': vm.guiUsername,
                         'guipassword': vm.guiPassword,
                         'omsurl': vm.omsUrl,
-                        'commetchannels': JSON.stringify(vm.channelsBody)
+                        'commetchannels': JSON.stringify(JSON.parse(vm.channelsBody))
                     }
                 })
                 .then(function(rsp){
@@ -176,7 +183,7 @@
                     logger.debug("rsp:"+rsp);
                     var ss=rsp.data;
                     if(!ss.startsWith('{') && !ss.startsWith('[') && ss.startsWith('<')){
-                        vm.resultNonJson=rsp.data;
+                        vm.resultNonJson=vkbeautify.xml(rsp.data);
                     }else{
                         vm.result=JSON.parse(rsp.data);
                     }

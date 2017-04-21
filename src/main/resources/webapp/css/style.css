@@ -75,3 +75,9 @@ body{
   background-color: #f9f2f4;
   border-radius: 4px;
 }
+
+.ace-border{
+  width:100%;
+  border: 1px solid lightgrey;
+  border-top: 20px solid #dfdfdf
+}

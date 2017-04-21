@@ -110,6 +110,27 @@
                     </div>
 
                 </div>
+
+                <div ng-if="cmd.responseBody_example" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Response Body Example</span>
+                    <div class="tab-content-secondary-area-style">
+                        <div ng-repeat="example in cmd.responseBody_example">
+                            <span class="tab-content-single-name-style">{{example.title}}</span>
+                            <div style="position: relative">
+                        <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': !accordionNotOn, 'pre-size-normal': accordionNotOn}">
+{{jsonString(example.content)}}</pre>
+                                <a class="btn btn-link pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                                   zeroclip-text="{{jsonString(example.content)}}"
+                                   data-toggle="tooltip"
+                                   title="copy">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                                <little-accordion-bt additional-class="'pre-accordion-bt-postion'" accordion-not-on="accordionNotOn"></little-accordion-bt>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

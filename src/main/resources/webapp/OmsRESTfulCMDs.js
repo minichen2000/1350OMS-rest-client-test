@@ -21,6 +21,27 @@ OmsRESTfulCMDs = [
         ]
     },
     {
+        "groupTitle": "Ne",
+        "cmds": [
+            {
+                "title": "List all Nes",
+                "method": "GET",
+                "path": "/data/npr/nes"
+            },
+            {
+                "title": "Get one Ne",
+                "method": "GET",
+                "path": "/data/npr/nes/{id}",
+                "path_example": [
+                    {
+                        "title": "",
+                        "content": "/data/npr/nes/1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "groupTitle": "Port",
         "cmds": [
             {
@@ -42,6 +63,33 @@ OmsRESTfulCMDs = [
                     {
                         "title": "",
                         "content": "/data/npr/Port/2685"
+                    }
+                ]
+            },
+            {
+                "title": "Get additionalInfo for one Port",
+                "method": "GET",
+                "path": "/eqm/Tp/AdditionalInfo/{neGroupId}/{neId}/{portName}",
+                "path_example": [
+                    {
+                        "title": "",
+                        "content": "/eqm/Tp/AdditionalInfo/100/1/AHPLG-1-2-LINE"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "groupTitle": "Equipment",
+        "cmds": [
+            {
+                "title": "List all equipments (shelf, slot, module) on NE",
+                "method": "GET",
+                "path": "/eqm/Equipment/All/{neGroupId}/{neId}",
+                "path_example": [
+                    {
+                        "title": "",
+                        "content": "/eqm/Equipment/All/100/1"
                     }
                 ]
             }
@@ -907,7 +955,7 @@ OmsRESTfulCMDs = [
                     }
                 ],
                 "postBody": {
-                    "Tag":"Cmd_RemoveConnection"
+                    "Tag": "Cmd_RemoveConnection"
                 }
             },
             {
@@ -921,7 +969,7 @@ OmsRESTfulCMDs = [
                     }
                 ],
                 "postBody": {
-                    "Tag":"Cmd_RemoveConnectionWithClients"
+                    "Tag": "Cmd_RemoveConnectionWithClients"
                 }
             }
         ]
@@ -1239,8 +1287,657 @@ OmsRESTfulCMDs = [
                     }
                 ],
                 "postBody": {
-                    "Tag":"Cmd_RemoveConnection"
+                    "Tag": "Cmd_RemoveConnection"
                 }
+            }
+        ]
+    },
+    {
+        "groupTitle": "Alarm",
+        "cmds": [
+            {
+                "title": "Get all active alarms for one node",
+                "method": "GET",
+                "path": "/data/eml/alarms?associatedNodeId={nodeId}",
+                "path_example": [
+                    {
+                        "title": "",
+                        "content": "/data/eml/alarms?associatedNodeId=3"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "groupTitle": "Pm",
+        "cmds": [
+            {
+                "title": "Get all pmtps for one node",
+                "method": "GET",
+                "path": "/data/cpm/showpmtps/{nodeId}/{cltTz}",
+                "path_example": [
+                    {
+                        "title": "",
+                        "content": "/data/cpm/showpmtps/3/480"
+                    }
+                ],
+                "responseBody_example": [
+                    {
+                        "title": "Returned pmtps",
+                        "content": {
+                            "identifier": "1",
+                            "items": [
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:FOFFR:NEND:Receive:1-DAY,260SCX2-1-11-L1||:20:5:2:2",
+                                    "type": "ANALOG",
+                                    "status": 1,
+                                    "collPeriod": "2017-04-07 18:30:00",
+                                    "id": "0",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "FOFFR;FOFFRH;FOFFRL",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "FOFFR",
+                                    "statusStr": "Not Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:OPR:NEND:Receive:1-DAY,260SCX2-1-11-L1||:20:5:2:2",
+                                    "type": "ANALOG",
+                                    "status": 1,
+                                    "collPeriod": "2017-04-07 18:30:00",
+                                    "id": "1",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "OPR-AVG;OPR-H;OPR-L",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OPR",
+                                    "statusStr": "Not Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:CDR:NEND:Receive:1-DAY,260SCX2-1-11-L1||:20:5:2:2",
+                                    "type": "ANALOG",
+                                    "status": 1,
+                                    "collPeriod": "2017-04-07 18:30:00",
+                                    "id": "2",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "CDR;CDRH;CDRL",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "CDR",
+                                    "statusStr": "Not Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:PreFECBits:NEND:Receive:1-DAY,260SCX2-1-11-L1||:20:5:2:2",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "3",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "PREFEC-AVG;PREFEC-MAX;PREFEC-MIN",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "PreFECBits",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-8-L1:OTU4:OPT:NEND:Transmit:1-DAY,260SCX2-1-8-L1||:20:5:1:2",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "4",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "OPT-AVG;OPT-H;OPT-L",
+                                    "tpLabel": "NE1/260SCX2-1-8-L1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OPT",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:OPT:NEND:Transmit:1-DAY,260SCX2-1-11-L1||:20:5:1:2",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "5",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "OPT-AVG;OPT-H;OPT-L",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OPT",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:DGDR:NEND:Receive:1-DAY,260SCX2-1-11-L1||:20:5:2:2",
+                                    "type": "ANALOG",
+                                    "status": 1,
+                                    "collPeriod": "2017-04-07 18:30:00",
+                                    "id": "6",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "DGDRH;DGDRL;DGDRR",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "DGDR",
+                                    "statusStr": "Not Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-8-L1:OTU4:PreFECBits:NEND:Receive:1-DAY,260SCX2-1-8-L1||:20:5:2:2",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "7",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "PREFEC-AVG;PREFEC-MAX;PREFEC-MIN",
+                                    "tpLabel": "NE1/260SCX2-1-8-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "PreFECBits",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:OPT:NEND:Transmit:15-MIN,260SCX2-1-11-C1||:20:5:1:1",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "8",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "OPT-AVG;OPT-H;OPT-L",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "OPT",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:OPT:NEND:Transmit:15-MIN,260SCX2-1-11-L1||:20:5:1:1",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "9",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "OPT-AVG;OPT-H;OPT-L",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OPT",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-L1:OTU4:PreFECBits:NEND:Receive:15-MIN,260SCX2-1-11-L1||:20:5:2:1",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "10",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "PREFEC-AVG;PREFEC-MAX;PREFEC-MIN",
+                                    "tpLabel": "NE1/260SCX2-1-11-L1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "OTU4",
+                                    "groupName": "PreFECBits",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:OPT:NEND:Transmit:1-DAY,260SCX2-1-11-C1||:20:5:1:2",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "11",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "OPT-AVG;OPT-H;OPT-L",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "1 Day",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "OPT",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/AHPHG-1-16-LINE:OTS:OPOUT:NEND:Transmit:15-MIN,AHPHG-1-16-LINE||:30:5:1:1",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "12",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "TOPT-AVG;TOPT-H;TOPT-L",
+                                    "tpLabel": "NE1/AHPHG-1-16-LINE",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "OTS",
+                                    "groupName": "OPOUT",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/AHPHG-1-16-LINE:OTS:OPIN:NEND:Receive:15-MIN,AHPHG-1-16-LINE||:30:5:2:1",
+                                    "type": "ANALOG",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "13",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "TOPR-AVG;TOPR-H;TOPR-L",
+                                    "tpLabel": "NE1/AHPHG-1-16-LINE",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "OTS",
+                                    "groupName": "OPIN",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:1-DAY,260SCX2-1-11-C1||:200:5:2:2",
+                                    "type": "ETH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "14",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "ETHBCSTPKTS;ETHCRCAE;ETHFRGMTS;ETHJABRS;ETHJUMBOPKTS;ETHMCSTPKTS;ETHOCTETS;ETHOVRSIZEPKTS;ETHPKTER;ETHPKTS;ETHPKTS1023OCTETS;ETHPKTS127OCTETS;ETHPKTS1518OCTETS;ETHPKTS255OCTETS;ETHPKTS511OCTETS;ETHPKTS64OCTETS;ETHUNDRSIZEPKTS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "Ethernet",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1",
+                                    "type": "ETH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "15",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "ETHBCSTPKTS;ETHCRCAE;ETHFRGMTS;ETHJABRS;ETHJUMBOPKTS;ETHMCSTPKTS;ETHOCTETS;ETHOVRSIZEPKTS;ETHPKTER;ETHPKTS;ETHPKTS1023OCTETS;ETHPKTS127OCTETS;ETHPKTS1518OCTETS;ETHPKTS255OCTETS;ETHPKTS511OCTETS;ETHPKTS64OCTETS;ETHUNDRSIZEPKTS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "Ethernet",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Transmit:1-DAY,260SCX2-1-11-C1||:200:5:1:2",
+                                    "type": "ETH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "16",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "ETHBCSTPKTS;ETHCRCAE;ETHFRGMTS;ETHJABRS;ETHJUMBOPKTS;ETHMCSTPKTS;ETHOCTETS;ETHOVRSIZEPKTS;ETHPKTER;ETHPKTS;ETHPKTS1023OCTETS;ETHPKTS127OCTETS;ETHPKTS1518OCTETS;ETHPKTS255OCTETS;ETHPKTS511OCTETS;ETHPKTS64OCTETS;ETHUNDRSIZEPKTS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "1 Day",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "Ethernet",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Transmit:15-MIN,260SCX2-1-11-C1||:200:5:1:1",
+                                    "type": "ETH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "17",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "ETHBCSTPKTS;ETHCRCAE;ETHFRGMTS;ETHJABRS;ETHJUMBOPKTS;ETHMCSTPKTS;ETHOCTETS;ETHOVRSIZEPKTS;ETHPKTER;ETHPKTS;ETHPKTS1023OCTETS;ETHPKTS127OCTETS;ETHPKTS1518OCTETS;ETHPKTS255OCTETS;ETHPKTS511OCTETS;ETHPKTS64OCTETS;ETHUNDRSIZEPKTS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "Ethernet",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Receive:1-DAY,260SCX2-1-11-C1||:200:5:2:2",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "18",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "CV-PCS;ES-PCS;SEFS-PCS;SES-PCS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "PCS",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "19",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "CV-PCS;ES-PCS;SEFS-PCS;SES-PCS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "PCS",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Transmit:1-DAY,260SCX2-1-11-C1||:200:5:1:2",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "20",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "CV-PCS;ES-PCS;SEFS-PCS;SES-PCS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "1 Day",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "PCS",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Transmit:15-MIN,260SCX2-1-11-C1||:200:5:1:1",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "21",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "CV-PCS;ES-PCS;SEFS-PCS;SES-PCS",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "100GIGE",
+                                    "groupName": "PCS",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/OTUODU4-1-11-L1-CH1:ODU4:ODURX:NEND:Receive:1-DAY,260SCX2-1-11-L1||/odu4=1:236:5:2:2",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "22",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "BBE-ODU;ES-ODU;SES-ODU;UAS-ODU",
+                                    "tpLabel": "NE1/OTUODU4-1-11-L1-CH1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "ODU4",
+                                    "groupName": "ODURX",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/OTUODU4-1-11-L1-CH1:ODU4:ODURX:NEND:Receive:15-MIN,260SCX2-1-11-L1||/odu4=1:236:5:2:1",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "23",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "BBE-ODU;ES-ODU;SES-ODU;UAS-ODU",
+                                    "tpLabel": "NE1/OTUODU4-1-11-L1-CH1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "ODU4",
+                                    "groupName": "ODURX",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/OTU-1-8-L1-CH1:OTU4:OTU:NEND:Receive:1-DAY,260SCX2-1-8-L1||/frequency=tunable-number=1:234:5:2:2",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "24",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "BBE-OTU;ES-OTU;IAES;SES-OTU;UAS-OTU",
+                                    "tpLabel": "NE1/OTU-1-8-L1-CH1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OTU",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/OTU-1-11-L1-CH1:OTU4:OTU:NEND:Receive:1-DAY,260SCX2-1-11-L1||/frequency=tunable-number=1:234:5:2:2",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-11 18:30:00",
+                                    "id": "25",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "BBE-OTU;ES-OTU;IAES;SES-OTU;UAS-OTU",
+                                    "tpLabel": "NE1/OTU-1-11-L1-CH1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "1 Day",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OTU",
+                                    "statusStr": "Active"
+                                },
+                                {
+                                    "userabel": "NE1/OTU-1-11-L1-CH1:OTU4:OTU:NEND:Receive:15-MIN,260SCX2-1-11-L1||/frequency=tunable-number=1:234:5:2:1",
+                                    "type": "SDH",
+                                    "status": 0,
+                                    "collPeriod": "2017-04-13 03:15:00",
+                                    "id": "26",
+                                    "neLabel": "NE1",
+                                    "supportedCounters": "BBE-OTU;ES-OTU;IAES;SES-OTU;UAS-OTU",
+                                    "tpLabel": "NE1/OTU-1-11-L1-CH1",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "granularity": "15 Minutes",
+                                    "layerRate": "OTU4",
+                                    "groupName": "OTU",
+                                    "statusStr": "Active"
+                                }
+                            ],
+                            "colnames": "",
+                            "status": null,
+                            "operTime": null
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Query history pm data",
+                "method": "POST",
+                "path": "/pm/pmdata",
+                "postBody": {
+                    "clientTz": 480,
+                    "fromTime": "2017-04-01-17:42",
+                    "endTime": "2017-04-13-17:42",
+                    "granularity": "15 minutes",
+                    "selectedEntities": "NE1@NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1",
+                    "expFormat": "",
+                    "operationType": 0
+                },
+                "postBody_example": [
+                    {
+                        "title": "15 minutes",
+                        "content": {
+                            "clientTz": 480,
+                            "fromTime": "2017-04-01-17:42",
+                            "endTime": "2017-04-13-17:42",
+                            "granularity": "15 minutes",
+                            "selectedEntities": "NE1@NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1",
+                            "expFormat": "",
+                            "operationType": 0
+                        }
+                    },
+                    {
+                        "title": "day",
+                        "content": {
+                            "clientTz": 480,
+                            "fromTime": "2017-04-01-14:26",
+                            "endTime": "2017-04-13-14:26",
+                            "granularity": "day",
+                            "selectedEntities": "NE1@NE1/260SCX2-1-8-L1:OTU4:OPT:NEND:Transmit:1-DAY,260SCX2-1-8-L1||:20:5:1:2",
+                            "expFormat": "",
+                            "operationType": 0
+                        }
+                    },
+                    {
+                        "title": "ALL",
+                        "content": {
+                            "clientTz": 480,
+                            "fromTime": "2017-04-01-17:31",
+                            "endTime": "2017-04-13-17:31",
+                            "granularity": "ALL",
+                            "selectedEntities": "NE1@NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:1-DAY,260SCX2-1-11-C1||:200:5:2:2^NE1@NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1^NE1@NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Transmit:1-DAY,260SCX2-1-11-C1||:200:5:1:2^NE1@NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Transmit:15-MIN,260SCX2-1-11-C1||:200:5:1:1^NE1@NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Receive:1-DAY,260SCX2-1-11-C1||:200:5:2:2^NE1@NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1^NE1@NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Transmit:1-DAY,260SCX2-1-11-C1||:200:5:1:2^NE1@NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Transmit:15-MIN,260SCX2-1-11-C1||:200:5:1:1",
+                            "expFormat": "",
+                            "operationType": 0
+                        }
+                    }
+                ],
+                "responseBody_example": [
+                    {
+                        "title": "Query result example (15min & day)",
+                        "content": {
+                            "identifier": "1",
+                            "items": [
+                                {
+                                    "timestamp": "2017-04-09 18:30:00 - 2017-04-10 18:30:00",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "status": 0,
+                                    "granularity": 0,
+                                    "neLabel": "NE1",
+                                    "id": "0",
+                                    "connName": "NE1/260SCX2-1-11-C1 NE3/260SCX2-1-11-C1 100GbE",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "pmData": {
+                                        "ETHPKTS511OCTETS": "0",
+                                        "ETHOCTETS": "0",
+                                        "ETHBCSTPKTS": "0",
+                                        "ETHFRGMTS": "0",
+                                        "ETHPKTS1023OCTETS": "0",
+                                        "ETHPKTER": "0",
+                                        "ETHJUMBOPKTS": "0",
+                                        "ETHPKTS64OCTETS": "0",
+                                        "ETHCRCAE": "0",
+                                        "ETHUNDRSIZEPKTS": "0",
+                                        "ETHPKTS": "0",
+                                        "ETHMCSTPKTS": "0",
+                                        "ETHPKTS1518OCTETS": "0",
+                                        "ETHPKTS255OCTETS": "0",
+                                        "ETHOVRSIZEPKTS": "0",
+                                        "ETHJABRS": "0",
+                                        "ETHPKTS127OCTETS": "0"
+                                    },
+                                    "layerRate": "100GIGE",
+                                    "hookmapper": "NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Receive:1-DAY,260SCX2-1-11-C1||:200:5:2:2",
+                                    "groupName": "Ethernet"
+                                },
+                                {
+                                    "timestamp": "2017-04-09 18:30:00 - 2017-04-10 18:30:00",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "status": 0,
+                                    "granularity": 0,
+                                    "neLabel": "NE1",
+                                    "id": "1",
+                                    "connName": "NE1/260SCX2-1-11-C1 NE3/260SCX2-1-11-C1 100GbE",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "pmData": {
+                                        "ETHPKTS511OCTETS": "0",
+                                        "ETHOCTETS": "0",
+                                        "ETHBCSTPKTS": "0",
+                                        "ETHFRGMTS": "0",
+                                        "ETHPKTS1023OCTETS": "0",
+                                        "ETHPKTER": "0",
+                                        "ETHJUMBOPKTS": "0",
+                                        "ETHPKTS64OCTETS": "0",
+                                        "ETHCRCAE": "0",
+                                        "ETHUNDRSIZEPKTS": "0",
+                                        "ETHPKTS": "0",
+                                        "ETHMCSTPKTS": "0",
+                                        "ETHPKTS1518OCTETS": "0",
+                                        "ETHPKTS255OCTETS": "0",
+                                        "ETHOVRSIZEPKTS": "0",
+                                        "ETHJABRS": "0",
+                                        "ETHPKTS127OCTETS": "0"
+                                    },
+                                    "layerRate": "100GIGE",
+                                    "hookmapper": "NE1/260SCX2-1-11-C1:100GIGE:Ethernet:NEND:Transmit:1-DAY,260SCX2-1-11-C1||:200:5:1:2",
+                                    "groupName": "Ethernet"
+                                },
+                                {
+                                    "timestamp": "2017-04-13 03:45:00 - 2017-04-13 04:00:00",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "status": 0,
+                                    "granularity": 2,
+                                    "neLabel": "NE1",
+                                    "id": "818",
+                                    "connName": "NE1/260SCX2-1-11-C1 NE3/260SCX2-1-11-C1 100GbE",
+                                    "location": "Near End",
+                                    "direction": "Receive",
+                                    "pmData": {
+                                        "CV-PCS": "0",
+                                        "ES-PCS": "899",
+                                        "SEFS-PCS": "899",
+                                        "SES-PCS": "899"
+                                    },
+                                    "layerRate": "100GIGE",
+                                    "hookmapper": "NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Receive:15-MIN,260SCX2-1-11-C1||:200:5:2:1",
+                                    "groupName": "PCS"
+                                },
+                                {
+                                    "timestamp": "2017-04-13 03:45:00 - 2017-04-13 04:00:00",
+                                    "tpLabel": "NE1/260SCX2-1-11-C1",
+                                    "status": 0,
+                                    "granularity": 2,
+                                    "neLabel": "NE1",
+                                    "id": "819",
+                                    "connName": "NE1/260SCX2-1-11-C1 NE3/260SCX2-1-11-C1 100GbE",
+                                    "location": "Near End",
+                                    "direction": "Transmit",
+                                    "pmData": {
+                                        "CV-PCS": "0",
+                                        "ES-PCS": "899",
+                                        "SEFS-PCS": "899",
+                                        "SES-PCS": "899"
+                                    },
+                                    "layerRate": "100GIGE",
+                                    "hookmapper": "NE1/260SCX2-1-11-C1:100GIGE:PCS:NEND:Transmit:15-MIN,260SCX2-1-11-C1||:200:5:1:1",
+                                    "groupName": "PCS"
+                                }
+                            ],
+                            "colnames": "ETHUNDRSIZEPKTS,ETHPKTS64OCTETS,ETHPKTS511OCTETS,ETHPKTS255OCTETS,ETHPKTS1518OCTETS,ETHPKTS127OCTETS,ETHPKTS1023OCTETS,ETHPKTS,ETHPKTER,ETHOVRSIZEPKTS,ETHOCTETS,ETHMCSTPKTS,ETHJUMBOPKTS,ETHJABRS,ETHFRGMTS,ETHCRCAE,ETHBCSTPKTS,SES-PCS,SEFS-PCS,ES-PCS,CV-PCS",
+                            "status": "OK",
+                            "operTime": null
+                        }
+                    }
+                ]
+
             }
         ]
     }

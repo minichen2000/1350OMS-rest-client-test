@@ -17,8 +17,12 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
     <script src="bower_components/ng-jsoneditor/ng-jsoneditor.min.js"></script>
+    <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script src="bower_components/ace-builds/src-min-noconflict/theme-clouds.js"></script>
+    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
 
     <script src="js/scripts/hashmap.js"></script>
+    <script src="js/scripts/vkbeautify.0.99.00.beta.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services/logger.service.js"></script>
     <script src="js/services/common-util.service.js"></script>
@@ -112,9 +116,16 @@
 
             </form>
             <div class="col-sm-4">
-                <label class="control-label">Comet Channels</label><br>
-                <div ng-jsoneditor="vm.onLoad" ng-model="vm.channelsBody" options="{mode: 'code'}"
-                     style="width:100%; height: 300px"></div>
+                <label class="control-label">Comet channels to subscribe:</label><br>
+                <div class="ace-border" ui-ace="{
+                          useWrapMode : false,
+                          showGutter: true,
+                          theme:'clouds',
+                          mode: 'json',
+                          firstLineNumber: 1,
+                          onLoad: vm.aceLoaded
+                        }" ng-model="vm.channelsBody" style="height: 200px;">
+                </div>
             </div>
         </div>
     </div>
@@ -139,7 +150,7 @@
 
 
         <div class="form-group">
-            <label class="col-sm-1 control-label">POST Body (JSON)<br>
+            <label class="col-sm-1 control-label">Body (JSON)<br>
                 <button class="btn"
                         ng-class="{'btn-info': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
                         ng-click="vm.postBodyModeSwith()">{{vm.postBodyOptions.mode=='code' ? 'Tree' : 'Code'}}
@@ -149,9 +160,18 @@
                 <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
                      style="width:100%; height: 400px"></div>
             </div>
-            <label class="col-sm-1 control-label">POST Body (PLAIN)</label>
+            <label class="col-sm-1 control-label">Body (XML)</label>
+
             <div class="col-sm-4">
-                <textarea style="width:100%; height: 400px" ng-model="vm.postBodyNonJson"></textarea>
+                <div class="ace-border" ui-ace="{
+                          useWrapMode : false,
+                          showGutter: true,
+                          theme:'clouds',
+                          mode: 'xml',
+                          firstLineNumber: 1,
+                          onLoad: vm.aceLoaded
+                        }" ng-model="vm.postBodyNonJson" style="height: 400px;">
+                </div>
             </div>
 
         </div>
@@ -204,8 +224,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <label class="control-label">Response (PLAIN)</label>
-                    <textarea style="width:100%; height: 200px" ng-model="vm.resultNonJson"></textarea>
+                    <label class="control-label">Response (XML)</label>
+                    <div class="ace-border" ui-ace="{
+                          useWrapMode : false,
+                          showGutter: true,
+                          theme:'clouds',
+                          mode: 'xml',
+                          firstLineNumber: 1,
+                          onLoad: vm.aceLoaded
+                        }" readonly ng-model="vm.resultNonJson" style="height: 200px">
+                    </div>
                 </div>
             </div>
             <div class="col-sm-5">
