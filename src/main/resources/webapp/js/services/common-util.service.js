@@ -10,8 +10,8 @@
 
   function commonUtil(logger, $q, $timeout, $interval, $location) {
 
-    //var internalBaseUrl="";
-    var internalBaseUrl="http://localhost:8080";
+    var internalBaseUrl="";
+    //var internalBaseUrl="http://localhost:8080";
     var service = {
       internalBaseUrl: internalBaseUrl,
       generateWSUrl: generateWSUrl

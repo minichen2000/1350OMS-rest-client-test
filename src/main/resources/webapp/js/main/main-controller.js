@@ -26,6 +26,8 @@
         vm.guiPassword='Lucent1.!';
         vm.omsUrl='/oms1350/data/plat/session/login';
 
+        vm.bodyType="json";
+
         vm.aceLoaded = function(_editor) {
             // Options
             _editor.setFontSize(14);
@@ -153,13 +155,14 @@
         };
 
         function genContentType(body){
-            if(!body) return 'text/html';
-            if(body.trim().startsWith('<')){
-                return 'application/xml';
-            }else if(body.trim().startsWith('{') || body.trim().startsWith('[')){
+            if(vm.bodyType=='json'){
                 return 'application/json';
             }else{
-                return 'text/html';
+                if(body && body.trim().startsWith('<')){
+                    return 'application/xml';
+                }else{
+                    return 'text/html';
+                }
             }
         }
 
