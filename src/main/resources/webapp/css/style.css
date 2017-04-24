@@ -55,7 +55,7 @@ body{
   /*#337ab7*/
 }
 .pre-size-accordion{
-  height:70px;
+  height:120px;
   border: 1px dashed rgba(51, 122, 181, 0.4);
   color: #337ab7;
   border-radius: 0px;
@@ -80,4 +80,20 @@ body{
   width:100%;
   border: 1px solid lightgrey;
   border-top: 20px solid #dfdfdf
+}
+
+.zero-add{
+  padding:0px;
+  margin:0px;
+}
+
+.rest-action-bt-area-border{
+  width:100%;
+  border: 1px dashed lightgrey;
+  border-radius: 4px;
+  padding:4px;
+  margin-left: 8px
+}
+.rest-action-bt{
+  padding: 1px 8px;
 }

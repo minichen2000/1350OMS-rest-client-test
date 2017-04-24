@@ -17,5 +17,5 @@
             templateUrl: 'js/directives/little-accordion-bt.html',
             replace: true
         };
-    };
+    }
 })();

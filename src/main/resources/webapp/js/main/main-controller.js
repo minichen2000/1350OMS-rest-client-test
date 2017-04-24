@@ -27,11 +27,20 @@
         vm.omsUrl='/oms1350/data/plat/session/login';
 
         vm.bodyType="json";
+        vm.resultBodyType='';
+        vm.reqJsonAccordionNotOn=false;
+        vm.rspJsonAccordionNotOn=false;
+        vm.reqXmlAccordionNotOn=false;
+        vm.rspXmlAccordionNotOn=false;
+        vm.notificationAccordionNotOn=false;
 
         vm.aceLoaded = function(_editor) {
             // Options
             _editor.setFontSize(14);
             _editor.setShowPrintMargin(true);
+        };
+        vm.jsonString=function(data){
+            return JSON.stringify(data, null, 2);
         };
 
 
@@ -183,12 +192,17 @@
             })
                 .then(function(rsp){
                     var rlt=JSON.stringify(rsp, null, 2);
-                    logger.debug("rsp:"+rsp);
                     var ss=rsp.data;
+                    logger.debug("rsp.data:"+rsp.data);
                     if(!ss.startsWith('{') && !ss.startsWith('[') && ss.startsWith('<')){
                         vm.resultNonJson=vkbeautify.xml(rsp.data);
-                    }else{
+                        vm.resultBodyType='xml';
+                    }else if(ss.trim().startsWith('{') || ss.trim().startsWith('[')){
                         vm.result=JSON.parse(rsp.data);
+                        vm.resultBodyType='json';
+                    }else{
+                        vm.result=ss;
+                        vm.resultBodyType='json';
                     }
                     vm.requestProcessing=false;
                 })

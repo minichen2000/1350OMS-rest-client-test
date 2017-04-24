@@ -17,9 +17,10 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
     <script src="bower_components/ng-jsoneditor/ng-jsoneditor.min.js"></script>
-    <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
-    <script src="bower_components/ace-builds/src-min-noconflict/theme-clouds.js"></script>
+    <!--<script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>-->
     <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+    <script src="bower_components/zeroclipboard/dist/ZeroClipboard.min.js"></script>
+    <script src="bower_components/angular-zeroclipboard/dist/angular-zeroclipboard.min.js"></script>
 
     <script src="js/scripts/hashmap.js"></script>
     <script src="js/scripts/vkbeautify.0.99.00.beta.js"></script>
@@ -134,36 +135,71 @@
 
     <form class="form-horizontal" role="form" ng-show="vm.connected">
         <div class="form-group">
-            <label class="col-sm-1 control-label">Base URL</label>
-            <div class="col-sm-5">
+            <label class="col-sm-1 control-label">URL</label>
+            <div class="col-sm-3">
                 <input type="text" class="form-control" ng-model="vm.baseUrl"
                        placeholder="Base URL">
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-1 control-label">Path</label>
-            <div class="col-sm-5">
+
+            <!--<label class="col-sm-1 control-label">+</label>-->
+            <div class="col-sm-4">
                 <input type="text" class="form-control" ng-model="vm.path"
                        placeholder="Path">
             </div>
         </div>
 
 
-        <div class="form-group">
-            <div class="col-sm-1" style="text-align: right">
-                <label class="btn col-sm-12 control-label">Body (JSON)<br><input type="radio"  value="json" ng-model="vm.bodyType"></label>
-                <br>
-                <button class="btn" ng-disabled="vm.bodyType=='xml'"
-                        ng-class="{'btn-info': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
-                        ng-click="vm.postBodyModeSwith()">{{vm.postBodyOptions.mode=='code' ? 'Tree' : 'Code'}}
+        <div class="form-group ">
+            <div class="col-sm-1" style="text-align: right; padding-right:0px; margin-right:0px">
+
+                <label class="col-sm-12 control-label"
+                       ng-style="{color: vm.bodyType=='json' ? 'black' : 'lightgray'}">Request (JSON)<br><input
+                        type="radio" value="json"
+                        ng-model="vm.bodyType"><br></label>
+
+                <button class="btn btn-default btn-sm" ng-disabled="vm.bodyType=='xml'"
+                        ng-click="vm.postBodyModeSwith()"  data-toggle="tooltip" title="{{vm.postBodyOptions.mode=='code' ? 'Tree view' : 'Code view'}}">
+                    <i class="fa"
+                       ng-class="{'fa-th-list': vm.postBodyOptions.mode=='code', 'fa-code': vm.postBodyOptions.mode!='code'}"></i>
                 </button>
+
+                <button class="btn btn-default btn-sm" ng-disabled="vm.bodyType=='xml'"
+                        ng-click="vm.reqJsonAccordionNotOn=!vm.reqJsonAccordionNotOn"  data-toggle="tooltip" title="{{vm.reqJsonAccordionNotOn ? 'Collapse ' : 'Expand'}}">
+                    <i class="fa"
+                       ng-class="{'fa-expand': !vm.reqJsonAccordionNotOn, 'fa-compress': vm.reqJsonAccordionNotOn}"></i>
+                </button>
+
+
+
+                <div class="rest-action-bt-area-border" style="margin-top:10px">
+                    <div class="rest-action-bt">
+                        <button class="btn btn-block btn-success" ng-click="vm.onGet()">Get</button>
+                    </div>
+                    <div class="rest-action-bt">
+                        <button class="btn  btn-block  btn-primary" ng-click="vm.onPost()">Post</button>
+                    </div>
+                    <div class="rest-action-bt">
+                        <button class="btn  btn-block  btn-primary" ng-click="vm.onPut()">Put</button>
+                    </div>
+                    <div class="rest-action-bt">
+                        <button class="btn  btn-block  btn-danger" ng-click="vm.onDelete()">Delete</button>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-5" >
-                <div  ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
-                     style="width:100%; height: 400px"></div>
+            <div class="col-sm-5">
+                <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
+                     style="width:100%;" ng-style="{height: vm.reqJsonAccordionNotOn ? '540px' : '270px'}"></div>
             </div>
-            <div class="col-sm-1"  style="text-align: right">
-                <label class="btn col-sm-12 control-label">Body (XML)<br><input type="radio"  value="xml" ng-model="vm.bodyType"></label>
+            <div class="col-sm-1" style="text-align: right">
+                <label class="col-sm-12 control-label"
+                       ng-style="{color: vm.bodyType=='xml' ? 'black' : 'lightgray'}">Request
+                    (XML)<br><input type="radio" value="xml"
+                                ng-model="vm.bodyType"><br></label>
+                <button class="btn btn-default btn-sm" ng-disabled="vm.bodyType=='json'"
+                        ng-click="vm.reqXmlAccordionNotOn=!vm.reqXmlAccordionNotOn"   data-toggle="tooltip" title="{{vm.reqXmlAccordionNotOn ? 'Collapse ' : 'Expand'}}">
+                    <i class="fa"
+                       ng-class="{'fa-expand': !vm.reqXmlAccordionNotOn, 'fa-compress': vm.reqXmlAccordionNotOn}"></i>
+                </button>
             </div>
 
 
@@ -175,77 +211,87 @@
                           mode: 'xml',
                           firstLineNumber: 1,
                           onLoad: vm.aceLoaded
-                        }" ng-model="vm.postBodyNonJson" style="height: 400px;">
+                        }" ng-model="vm.postBodyNonJson"  ng-style="{height: vm.reqXmlAccordionNotOn ? '540px' : '270px'}">
                 </div>
             </div>
 
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-1">
-                <button class="btn btn-lg btn-success" ng-click="vm.onGet()">Get</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-lg btn-primary" ng-click="vm.onPost()">Post</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-lg btn-primary" ng-click="vm.onPut()">Put</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-lg btn-danger" ng-click="vm.onDelete()">Delete</button>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-5">
-                <label class="control-label">Response (JSON)
-                    <button class="btn"
-                            ng-class="{'btn-info': vm.resultOptions.mode=='code', 'btn-defult': vm.resultOptions.mode!='code'}"
-                            ng-click="vm.resultModeSwith()">{{vm.resultOptions.mode=='code' ? 'Tree' : 'Code'}}
-                    </button>
-                </label>
-            </div>
 
+        <div class="form-group">
+            <div class="col-sm-1" style="text-align: right; padding-right:0px; margin-right:0px">
+                <label class="control-label" ng-style="{color: vm.resultBodyType=='json' ? 'black' : 'lightgray'}">Response
+                    (JSON)<br><br>
+                </label>
+
+                <button class="btn btn-default btn-sm"
+                        ng-click="vm.resultModeSwith()"  data-toggle="tooltip" title="{{vm.resultOptions.mode=='code' ? 'Tree view' : 'Code view'}}">
+                    <i class="fa"
+                       ng-class="{'fa-th-list': vm.resultOptions.mode=='code', 'fa-code': vm.resultOptions.mode!='code'}"></i>
+                </button>
+
+                <button class="btn btn-default btn-sm"
+                        ng-click="vm.rspJsonAccordionNotOn=!vm.rspJsonAccordionNotOn"  data-toggle="tooltip" title="{{vm.rspJsonAccordionNotOn ? 'Collapse ' : 'Expand'}}">
+                    <i class="fa"
+                       ng-class="{'fa-expand': !vm.rspJsonAccordionNotOn, 'fa-compress': vm.rspJsonAccordionNotOn}"></i>
+                </button>
+
+            </div>
+            <div class="col-sm-5">
+                <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
+                     style="width:100%; height: 250px" ng-style="{height: vm.rspJsonAccordionNotOn ? '540px' : '250px'}">
+                </div>
+            </div>
+            <div class="col-sm-1"  style="text-align: right">
+            <label class="control-label" ng-style="{color: vm.resultBodyType=='xml' ? 'black' : 'lightgray'}">Response
+                (XML)<br><br></label>
+            <button class="btn btn-default btn-sm"
+                    ng-click="vm.rspXmlAccordionNotOn=!vm.rspXmlAccordionNotOn"  data-toggle="tooltip" title="{{vm.rspXmlAccordionNotOn ? 'Collapse ' : 'Expand'}}">
+                <i class="fa"
+                   ng-class="{'fa-expand': !vm.rspXmlAccordionNotOn, 'fa-compress': vm.rspXmlAccordionNotOn}"></i>
+            </button>
+            </div>
             <div class="col-sm-4">
-                <label class="control-label">Notifications
-                    <button class=" btn btn-info"
-                            ng-click="vm.clearNotifications()">Clear
-                    </button>
-                    <button class=" btn btn-default"
-                            ng-class="{'btn-info': !vm.autoScroll, 'btn-defult': vm.autoScroll}"
-                            ng-click="vm.swithAutoScroll()">{{vm.autoScroll ? "StopScroll" : "AutoScroll"}}
-                    </button>
-                </label>
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-5">
-                <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
-                <div class="row">
-                    <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
-                         style="width:100%; height: 315px">
-                    </div>
-                </div>
-                <div class="row">
-                    <label class="control-label">Response (XML)</label>
-                    <div class="ace-border" ui-ace="{
+                <div class="ace-border" ui-ace="{
                           useWrapMode : false,
                           showGutter: true,
                           theme:'clouds',
                           mode: 'xml',
                           firstLineNumber: 1,
                           onLoad: vm.aceLoaded
-                        }" readonly ng-model="vm.resultNonJson" style="height: 200px">
-                    </div>
+                        }" readonly ng-model="vm.resultNonJson" ng-style="{height: vm.rspXmlAccordionNotOn ? '540px' : '250px'}">
                 </div>
             </div>
-            <div class="col-sm-5">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-1" style="text-align: right; padding-right:0px; margin-right:0px">
+                <label class="control-label">Notifications
+                </label><br><br>
+                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Clear content"
+                        ng-click="vm.clearNotifications()">
+                    <i class="fa fa-trash-o"></i>
+                </button>
 
-                <!--<textarea id="notifArea" spellcheck="false" rows="16" style="font-weight: bold; font-family: 'Courier New'; width:100%; border: 1px solid cornflowerblue;">{{vm.notifications}}</textarea>-->
+                <button class="btn btn-default btn-sm" ng-class="{'btn-info': !vm.autoScroll, 'btn-defult': vm.autoScroll}"
+                        ng-click="vm.swithAutoScroll()"  data-toggle="tooltip" title="{{vm.autoScroll ? 'Pin scroll' : 'Auto scroll'}}">
+                    <i class="fa fa-thumb-tack"></i>
+                </button>
+                <br><br>
+                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Copy content to clipboard"
+                        ui-zeroclip zeroclip-copied="copied=true"
+                        zeroclip-text="{{vm.jsonString(vm.notifications)}}">
+                    <i class="fa fa-copy"></i>
+                </button>
+
+                <button class="btn btn-default btn-sm"
+                        ng-click="vm.notificationAccordionNotOn=!vm.notificationAccordionNotOn"  data-toggle="tooltip" title="{{vm.notificationAccordionNotOn ? 'Collapse ' : 'Expand'}}">
+                    <i class="fa"
+                       ng-class="{'fa-expand': !vm.notificationAccordionNotOn, 'fa-compress': vm.notificationAccordionNotOn}"></i>
+                </button>
+            </div>
+            <div class="col-sm-10">
                 <div id="notifArea"
-                     style="width:100%; border: 1px solid cornflowerblue;height:542px; overflow: scroll">
+                     style="width:100%; border: 1px solid cornflowerblue;overflow: scroll" ng-style="{height: vm.notificationAccordionNotOn ? '540px' : '300px'}">
                     <oms-notif-line ng-repeat="ntf in vm.notifications"
                                     line-one="ntf.line1"
                                     line-one-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'blue'}"
@@ -254,7 +300,6 @@
 
                     </oms-notif-line>
                 </div>
-
             </div>
         </div>
     </form>
