@@ -12,7 +12,7 @@ config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
         swfPath: 'bower_components/zeroclipboard/dist/ZeroClipboard.swf'
     });
 
-}])
+}]);
 
 
 

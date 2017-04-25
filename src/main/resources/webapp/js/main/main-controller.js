@@ -33,6 +33,7 @@
         vm.reqXmlAccordionNotOn=false;
         vm.rspXmlAccordionNotOn=false;
         vm.notificationAccordionNotOn=false;
+        vm.notificationCopied=false;
 
         vm.aceLoaded = function(_editor) {
             // Options
@@ -240,6 +241,21 @@
         vm.swithAutoScroll=function(){
             vm.autoScroll=!vm.autoScroll;
             tryToAutoScroll();
+        };
+
+        vm.notificationAreaCopied=function(){
+            vm.notificationCopied=true;
+            $timeout(function(){
+                vm.notificationCopied=false;
+            }, 550);
+        };
+
+        vm.getNotificationAreaContent=function(){
+            var rlt="";
+            for(var i=0; i<vm.notifications.length;i++){
+                rlt+=(vm.notifications[i].line1+'\n'+vm.notifications[i].line2+'\n\n');
+            }
+            return rlt;
         };
 
 

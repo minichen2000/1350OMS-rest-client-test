@@ -97,3 +97,11 @@ body{
 .rest-action-bt{
   padding: 1px 8px;
 }
+
+.blink_me {
+  animation: blinker 0.25s linear 2;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}

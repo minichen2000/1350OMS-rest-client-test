@@ -278,8 +278,8 @@
                 </button>
                 <br><br>
                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Copy content to clipboard"
-                        ui-zeroclip zeroclip-copied="copied=true"
-                        zeroclip-text="{{vm.jsonString(vm.notifications)}}">
+                        ui-zeroclip zeroclip-copied="vm.notificationAreaCopied()"
+                        zeroclip-text="{{vm.getNotificationAreaContent()}}">
                     <i class="fa fa-copy"></i>
                 </button>
 
@@ -291,13 +291,13 @@
             </div>
             <div class="col-sm-10">
                 <div id="notifArea"
-                     style="width:100%; border: 1px solid cornflowerblue;overflow: scroll" ng-style="{height: vm.notificationAccordionNotOn ? '540px' : '300px'}">
-                    <oms-notif-line ng-repeat="ntf in vm.notifications"
+                     style="width:100%; border: 1px solid cornflowerblue;overflow: scroll;" ng-style="{height: vm.notificationAccordionNotOn ? '540px' : '300px'}">
+                    <oms-notif-line ng-class="{'blink_me': vm.notificationCopied}"
+                            ng-repeat="ntf in vm.notifications"
                                     line-one="ntf.line1"
                                     line-one-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'blue'}"
                                     line-two="ntf.line2"
                                     line-two-style="{'color': '#888', 'font-family': 'Courier New'}">
-
                     </oms-notif-line>
                 </div>
             </div>
