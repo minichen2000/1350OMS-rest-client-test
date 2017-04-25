@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.alu.restfulClientTestMgr</groupId>
-    <artifactId>omsRestClient</artifactId>
+    <artifactId>oms-rest-client</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -157,7 +157,6 @@
             <artifactId>cometd-java-client</artifactId>
             <version>${cometdVersion}</version>
         </dependency>
-
 
 
 
