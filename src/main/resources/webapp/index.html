@@ -39,15 +39,15 @@
         <a class="btn btn-link btn-sm" style="position:absolute;right:10px; top:0px" ng-click="vm.interServerAddrBt()">
             <i class="fa fa-optin-monster fa-fw"></i>
         </a>
-        <a class="btn btn-warning btn-lg" style="position:absolute;right:50px; top:0px" href="doc.html" target="_blank">
-            <i class="fa fa-question-circle fa-fw"></i>&nbsp;命令帮助
+        <a class="btn btn-warning btn-lg" style="position:absolute;right:60px; top:0px" href="doc.html" target="_blank">
+            <i class="fa fa-question-circle fa-fw"></i>&nbsp;Help
         </a>
-        <button class="btn btn-success btn-lg" style="position:absolute;right:336px; top:0px"
+        <button class="btn btn-success btn-lg" style="position:absolute;right:314px; top:0px"
                 ng-disabled="!(vm.otnIP&&vm.otnPort&&vm.casIP&&vm.casPort&&vm.casUrl&&vm.presentationIP&&vm.guiUsername&&vm.guiPassword&&vm.omsUrl) || vm.connected"
                 ng-click="vm.onLogin()"><i class="fa fa-sign-in fa-fw"></i>&nbsp;Login
         </button>
 
-        <button class="btn btn-danger btn-lg" style="position:absolute;right:200px; top:0px" ng-disabled="!vm.connected"
+        <button class="btn btn-danger btn-lg" style="position:absolute;right:178px; top:0px" ng-disabled="!vm.connected"
                 ng-click="vm.onLogout()"><i class="fa fa-sign-out fa-fw"></i>&nbsp;Logout
         </button>
 
