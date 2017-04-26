@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    var ws;
+    var toClose=false;
+    var ws=null;
     var ws_state = 0; //0: not connected, 1: connected, 2: trying to connect
     var heartbeatLaunched = false;
 
@@ -10,14 +11,34 @@
         var cmd = evt.data;
         //console.log("cmd:" + JSON.stringify(cmd));
         if (cmd.cmd == "connect") {
-            connect(cmd.addr, cmd.heartbeat);
+            connect_wrap(cmd.addr, cmd.heartbeat);
         } else if (cmd.cmd == "sendJSON") {
             sendJSON(cmd.obj);
         } else if (cmd.cmd == "sendMessage") {
             sendMessage(cmd.str);
+        } else if (cmd.cmd == "close") {
+            close();
         }
+    };
+
+
+    function close(){
+        toClose=true;
+        if(ws){
+            ws.onclose=function(){};
+            ws.onerror=function(){};
+            ws.onmessage=function(){};
+            ws.onopen=function(){};
+            ws.close();
+            ws=null;
+        }
+        ws_state=0;
     }
 
+    function connect_wrap(addr, heartbeat) {
+        toClose=false;
+        connect(addr, heartbeat);
+    }
 
     /**
      * @name connect
@@ -28,6 +49,7 @@
      * @memberOf Factories.ServerNotificationService
      */
     function connect(addr, heartbeat) {
+        if(toClose) return;
         if (connectOnce(addr, heartbeat)) {
             return true;
         } else {

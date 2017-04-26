@@ -38,6 +38,7 @@
             addListener: addListener,
             removeListener: removeListener,
             connect: connect,
+            close: close,
             sendJSON: sendJSON,
             sendMessage: sendMessage
         };
@@ -46,11 +47,11 @@
             ws_listeners.push(listener);
             logger.log("After addListener: " + listener.name + ", ws_listeners.length: " + ws_listeners.length);
         }
-        function removeListener(listener) {
+        function removeListener(listenerName) {
             for (var i = 0; i < ws_listeners.length; i++) {
-                if (ws_listeners[i] == listener) {
+                if (ws_listeners[i].name == listenerName) {
                     ws_listeners.splice(i, 1);
-                    logger.log("After removeListener: " + listener.name + ", ws_listeners.length: " + ws_listeners.length);
+                    logger.log("After removeListener: " + listenerName + ", ws_listeners.length: " + ws_listeners.length);
                     return;
                 }
             }
@@ -68,7 +69,10 @@
         function connect(_addr, _heartbeat) {
             logger.debug("_addr:"+_addr);
             worker.postMessage({ cmd: 'connect', addr: _addr, heartbeat: _heartbeat });
-        };
+        }
+        function close() {
+            worker.postMessage({ cmd: 'close'});
+        }
 
         function sendJSON(_obj) {
             worker.postMessage({ cmd: 'sendJSON', obj: _obj });

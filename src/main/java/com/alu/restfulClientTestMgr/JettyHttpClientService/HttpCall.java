@@ -42,8 +42,11 @@ public class HttpCall
             if( resp.getStatus() != 201
                     && resp.getStatus() != 200 )
             {
-                log.error( "HTTP ERROR CODE :" + resp.getStatus());
-                return "";
+                String rlt="Http code: "+resp.getStatus()+"\nReason: "+resp.getReason()+"\nContent:\n"+resp.getContentAsString();
+                log.error( "Http code:" + resp.getStatus());
+                log.error( "Reason:" + resp.getReason());
+                log.error( "Content:" + resp.getContentAsString());
+                return rlt;
             }else{
                 byte[] buf=resp.getContent();
                 String rlt=resp.getContentAsString();
@@ -54,7 +57,7 @@ public class HttpCall
         catch( Exception e )
         {
             log.error( e );
-            return null;
+            return e.toString();
         }
     }
 
@@ -79,8 +82,7 @@ public class HttpCall
         if(null!=acceptContentType && acceptContentType.length()>0){
             req.header("Accept", acceptContentType);
         }
-
-
+        req.header("Content-Type", contentType);
         return sendRequest(req);
 
     }

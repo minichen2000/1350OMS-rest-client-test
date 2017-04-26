@@ -16,6 +16,8 @@
         vm.logouting=false;
         vm.connected=false;
 
+        var logined=false;
+
         vm.otnIP='172.24.168.79';
         vm.otnPort=8443;
         vm.casIP='172.24.168.79';
@@ -34,6 +36,50 @@
         vm.rspXmlAccordionNotOn=false;
         vm.notificationAccordionNotOn=false;
         vm.notificationCopied=false;
+
+        vm.path=null;
+        vm.postBody='';
+        vm.postBodyNonJson='';
+        vm.result='';
+        vm.resultNonJson='';
+        vm.postBodyOptions={mode: 'code'};
+        vm.resultOptions={mode: 'code'};
+        vm.notifications=[];
+        vm.autoScroll=true;
+
+        vm.onReqJsonEditorLoad = function (jsonEditor) {
+            logger.debug("vm.onReqJsonEditorLoad");
+            vm.reqJsonEditor=jsonEditor;
+        };
+        vm.onRspJsonEditorLoad = function (jsonEditor) {
+            vm.rspJsonEditor=jsonEditor;
+        };
+
+        vm.interServerAddrBt=function(){
+            var rlt= prompt("Internal Server:", commonUtil.internalBaseUrl.url);
+            if(rlt!==null) {
+                commonUtil.internalBaseUrl.url=rlt;
+            }
+        };
+
+        /*
+         vm.reqJsonAccordionNotOn=false;
+         vm.rspJsonAccordionNotOn=false;
+        */
+        $scope.$watch(function(){return vm.reqJsonAccordionNotOn}, function(newValue, oldValue){
+            if(newValue!=oldValue){
+                $timeout(function(){
+                    vm.reqJsonEditor && vm.reqJsonEditor.resize();
+                }, 100);
+            }
+        });
+        $scope.$watch(function(){return vm.rspJsonAccordionNotOn}, function(newValue, oldValue){
+            if(newValue!=oldValue){
+                $timeout(function(){
+                    vm.rspJsonEditor && vm.rspJsonEditor.resize();
+                }, 100);
+            }
+        });
 
         vm.aceLoaded = function(_editor) {
             // Options
@@ -55,28 +101,19 @@
             ], null, 2);
         }, 1000);
 
-        vm.notifications=[];
-        vm.autoScroll=true;
-        vm.onLoad = function (instance) {
-            //instance.expandAll();
-        };
+
 
         function genBaseUrl(){
             return 'https://'+vm.otnIP+':'+vm.otnPort+'/oms1350';
         }
 
-        vm.path=null;
-        vm.result=null;
-        vm.postBody=null;
-        vm.postBodyNonJson=null;
-        vm.postBodyOptions={mode: 'code'};
-        vm.resultOptions={mode: 'code'};
+
 
         vm.onLogin=function(){
             vm.logining=true;
                 $http({
                     method: 'post',
-                    url: commonUtil.internalBaseUrl+'/login',
+                    url: commonUtil.internalBaseUrl.url+'/login',
                     //url:'http://www.mobisoftwarestudio.com',
                     //url:'https://api.shanbay.com/bdc/search/',
                     //url:'http://127.0.0.1:8080/',
@@ -97,6 +134,11 @@
                 .then(function(rsp){
                     logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
                     //window.alert("OK");
+                    logined=true;
+                    checkStatus();
+                    serverNotificationService.connect(commonUtil.generateWSUrl(), "5000");
+                    serverNotificationService.addListener({ name: 'main', fun: listenerFun });
+
                 })
                 .catch(function(rsp){
                     var error=JSON.stringify(rsp, null, 2);
@@ -109,24 +151,32 @@
             vm.logouting=true;
             $http({
                 method: 'post',
-                url: commonUtil.internalBaseUrl+'/logout'
+                url: commonUtil.internalBaseUrl.url+'/logout'
             })
                 .then(function(rsp){
                     logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
                     //window.alert("OK");
+                    serverNotificationService.removeListener('main');
+                    serverNotificationService.close();
+                    logined=false;
+                    vm.connected=false;
+                    vm.logining=false;
+                    vm.logouting=false;
                 })
                 .catch(function(rsp){
                     var error=JSON.stringify(rsp, null, 2);
                     logger.error("rsp:"+error);
                     //window.alert("Error:\n"+error);
+                    vm.logouting=false;
                 });
         };
 
 
         function checkStatus(){
+            if(!logined) return;
             $http({
                 method: 'post',
-                url: commonUtil.internalBaseUrl+'/status'
+                url: commonUtil.internalBaseUrl.url+'/status'
             })
                 .then(function(rsp){
                     //logger.debug("rsp:"+JSON.stringify(rsp, null, 2));
@@ -134,6 +184,7 @@
                         vm.baseUrl=genBaseUrl();
                         vm.connected=true;
                         vm.logining=false;
+
                     }else{
                         vm.connected=false;
                         vm.logouting=false;
@@ -149,13 +200,6 @@
         }
 
 
-        checkStatus();
-
-
-
-
-
-
         vm.postBodyModeSwith=function(){
             vm.postBodyOptions.mode=vm.postBodyOptions.mode=='code' ? 'tree' : 'code';
         };
@@ -164,11 +208,11 @@
             vm.resultOptions.mode=vm.resultOptions.mode=='code' ? 'tree' : 'code';
         };
 
-        function genContentType(body){
-            if(vm.bodyType=='json'){
+        function genContentType(bodyType, body){
+            if(bodyType=='json'){
                 return 'application/json';
             }else{
-                if(body && body.trim().startsWith('<')){
+                if(body && commonUtil.startsWith(body.trim(), '<')){
                     return 'application/xml';
                 }else{
                     return 'text/html';
@@ -182,27 +226,27 @@
             logger.debug("url:["+method+']: '+url_);
             $http({
                 method: 'post',
-                url: commonUtil.internalBaseUrl+'/op',
+                url: commonUtil.internalBaseUrl.url+'/op',
                 transformResponse: undefined,
                 params: {
                     'method': method,
                     'url': url_,
-                    'contentType': genContentType(vm.postBodyNonJson ? vm.postBodyNonJson : JSON.stringify(vm.postBody))
+                    'contentType': genContentType(vm.bodyType, vm.postBodyNonJson)
                 },
-                data: vm.postBodyNonJson ? vm.postBodyNonJson : JSON.stringify(vm.postBody ? vm.postBody : "")
+                data: vm.bodyType=='json' ? vm.postBody : vm.postBodyNonJson
             })
                 .then(function(rsp){
-                    var rlt=JSON.stringify(rsp, null, 2);
-                    var ss=rsp.data;
-                    logger.debug("rsp.data:"+rsp.data);
-                    if(!ss.startsWith('{') && !ss.startsWith('[') && ss.startsWith('<')){
-                        vm.resultNonJson=vkbeautify.xml(rsp.data);
+                    //var rlt=JSON.stringify(rsp, null, 2);
+                    var rspData=rsp.data;
+                    logger.debug("rsp.data:"+rspData);
+                    if(!commonUtil.startsWith(rspData.trim(), '{') && !commonUtil.startsWith(rspData.trim(), '[') && commonUtil.startsWith(rspData.trim(), '<')){
+                        vm.resultNonJson=commonUtil.formatXml(rspData);
                         vm.resultBodyType='xml';
-                    }else if(ss.trim().startsWith('{') || ss.trim().startsWith('[')){
-                        vm.result=JSON.parse(rsp.data);
+                    }else if(commonUtil.startsWith(rspData.trim(), '{') || commonUtil.startsWith(rspData.trim(), '[')){
+                        vm.result=commonUtil.formatJson(rspData,' ');
                         vm.resultBodyType='json';
                     }else{
-                        vm.result=ss;
+                        vm.result=rspData;
                         vm.resultBodyType='json';
                     }
                     vm.requestProcessing=false;
@@ -210,7 +254,8 @@
                 .catch(function(rsp){
                     var rlt=JSON.stringify(rsp, null, 2);
                     //logger.error("rsp:"+rlt);
-                    vm.result=rsp;
+                    vm.resultBodyType='json';
+                    vm.result=rlt;
                     vm.requestProcessing=false;
                 });
         }
@@ -275,9 +320,6 @@
 
         };
 
-        serverNotificationService.connect(commonUtil.generateWSUrl(), "5000");
-        
-        serverNotificationService.addListener({ name: 'main', fun: listenerFun });
     }
 })();
 

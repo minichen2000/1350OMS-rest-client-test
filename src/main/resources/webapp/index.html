@@ -36,16 +36,19 @@
 <body ng-app="starter" ng-controller="MainController as vm">
 <div style="width:100%; height:100%;padding: 20px 5px 1px 5px">
     <div style="position: relative;">
+        <a class="btn btn-link btn-sm" style="position:absolute;right:10px; top:0px" ng-click="vm.interServerAddrBt()">
+            <i class="fa fa-optin-monster fa-fw"></i>
+        </a>
         <a class="btn btn-warning btn-lg" style="position:absolute;right:50px; top:0px" href="doc.html" target="_blank">
             <i class="fa fa-question-circle fa-fw"></i>&nbsp;命令帮助
         </a>
-        <button class="btn btn-success btn-lg" style="position:absolute;right:306px; top:0px"
+        <button class="btn btn-success btn-lg" style="position:absolute;right:336px; top:0px"
                 ng-disabled="!(vm.otnIP&&vm.otnPort&&vm.casIP&&vm.casPort&&vm.casUrl&&vm.presentationIP&&vm.guiUsername&&vm.guiPassword&&vm.omsUrl) || vm.connected"
-                ng-click="vm.onLogin()">Login
+                ng-click="vm.onLogin()"><i class="fa fa-sign-in fa-fw"></i>&nbsp;Login
         </button>
 
         <button class="btn btn-danger btn-lg" style="position:absolute;right:200px; top:0px" ng-disabled="!vm.connected"
-                ng-click="vm.onLogout()">Logout
+                ng-click="vm.onLogout()"><i class="fa fa-sign-out fa-fw"></i>&nbsp;Logout
         </button>
 
         <div class="row">
@@ -159,13 +162,13 @@
 
                 <button class="btn btn-default btn-sm" ng-disabled="vm.bodyType=='xml'"
                         ng-click="vm.postBodyModeSwith()"  data-toggle="tooltip" title="{{vm.postBodyOptions.mode=='code' ? 'Tree view' : 'Code view'}}">
-                    <i class="fa"
+                    <i class="fa  fa-fw"
                        ng-class="{'fa-th-list': vm.postBodyOptions.mode=='code', 'fa-code': vm.postBodyOptions.mode!='code'}"></i>
                 </button>
 
                 <button class="btn btn-default btn-sm" ng-disabled="vm.bodyType=='xml'"
                         ng-click="vm.reqJsonAccordionNotOn=!vm.reqJsonAccordionNotOn"  data-toggle="tooltip" title="{{vm.reqJsonAccordionNotOn ? 'Collapse ' : 'Expand'}}">
-                    <i class="fa"
+                    <i class="fa fa-fw"
                        ng-class="{'fa-expand': !vm.reqJsonAccordionNotOn, 'fa-compress': vm.reqJsonAccordionNotOn}"></i>
                 </button>
 
@@ -187,7 +190,7 @@
                 </div>
             </div>
             <div class="col-sm-5">
-                <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
+                <div ng-jsoneditor="vm.onReqJsonEditorLoad" ng-model="vm.postBody" options="vm.postBodyOptions" prefer-text="true"
                      style="width:100%; height: 270px" ng-style="{height: vm.reqJsonAccordionNotOn ? '540px' : '270px'}"></div>
             </div>
             <div class="col-sm-1" style="text-align: right">
@@ -197,7 +200,7 @@
                                 ng-model="vm.bodyType"><br></label>
                 <button class="btn btn-default btn-sm" ng-disabled="vm.bodyType=='json'"
                         ng-click="vm.reqXmlAccordionNotOn=!vm.reqXmlAccordionNotOn"   data-toggle="tooltip" title="{{vm.reqXmlAccordionNotOn ? 'Collapse ' : 'Expand'}}">
-                    <i class="fa"
+                    <i class="fa fa-fw"
                        ng-class="{'fa-expand': !vm.reqXmlAccordionNotOn, 'fa-compress': vm.reqXmlAccordionNotOn}"></i>
                 </button>
             </div>
@@ -226,19 +229,19 @@
 
                 <button class="btn btn-default btn-sm"
                         ng-click="vm.resultModeSwith()"  data-toggle="tooltip" title="{{vm.resultOptions.mode=='code' ? 'Tree view' : 'Code view'}}">
-                    <i class="fa"
+                    <i class="fa fa-fw"
                        ng-class="{'fa-th-list': vm.resultOptions.mode=='code', 'fa-code': vm.resultOptions.mode!='code'}"></i>
                 </button>
 
                 <button class="btn btn-default btn-sm"
                         ng-click="vm.rspJsonAccordionNotOn=!vm.rspJsonAccordionNotOn"  data-toggle="tooltip" title="{{vm.rspJsonAccordionNotOn ? 'Collapse ' : 'Expand'}}">
-                    <i class="fa"
+                    <i class="fa fa-fw"
                        ng-class="{'fa-expand': !vm.rspJsonAccordionNotOn, 'fa-compress': vm.rspJsonAccordionNotOn}"></i>
                 </button>
 
             </div>
             <div class="col-sm-5">
-                <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
+                <div ng-jsoneditor="vm.onRspJsonEditorLoad" ng-model="vm.result" options="vm.resultOptions" prefer-text="true"
                      style="width:100%; height: 250px" ng-style="{height: vm.rspJsonAccordionNotOn ? '540px' : '250px'}">
                 </div>
             </div>
@@ -247,7 +250,7 @@
                 (XML)<br><br></label>
             <button class="btn btn-default btn-sm"
                     ng-click="vm.rspXmlAccordionNotOn=!vm.rspXmlAccordionNotOn"  data-toggle="tooltip" title="{{vm.rspXmlAccordionNotOn ? 'Collapse ' : 'Expand'}}">
-                <i class="fa"
+                <i class="fa fa-fw"
                    ng-class="{'fa-expand': !vm.rspXmlAccordionNotOn, 'fa-compress': vm.rspXmlAccordionNotOn}"></i>
             </button>
             </div>
@@ -269,23 +272,23 @@
                 </label><br><br>
                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Clear content"
                         ng-click="vm.clearNotifications()">
-                    <i class="fa fa-trash-o"></i>
+                    <i class="fa fa-fw fa-trash-o"></i>
                 </button>
 
                 <button class="btn btn-default btn-sm" ng-class="{'btn-info': !vm.autoScroll, 'btn-defult': vm.autoScroll}"
                         ng-click="vm.swithAutoScroll()"  data-toggle="tooltip" title="{{vm.autoScroll ? 'Pin scroll' : 'Auto scroll'}}">
-                    <i class="fa fa-thumb-tack"></i>
+                    <i class="fa fa-fw fa-thumb-tack"></i>
                 </button>
                 <br><br>
                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Copy content to clipboard"
                         ui-zeroclip zeroclip-copied="vm.notificationAreaCopied()"
                         zeroclip-text="{{vm.getNotificationAreaContent()}}">
-                    <i class="fa fa-copy"></i>
+                    <i class="fa fa-fw fa-copy"></i>
                 </button>
 
                 <button class="btn btn-default btn-sm"
                         ng-click="vm.notificationAccordionNotOn=!vm.notificationAccordionNotOn"  data-toggle="tooltip" title="{{vm.notificationAccordionNotOn ? 'Collapse ' : 'Expand'}}">
-                    <i class="fa"
+                    <i class="fa fa-fw"
                        ng-class="{'fa-expand': !vm.notificationAccordionNotOn, 'fa-compress': vm.notificationAccordionNotOn}"></i>
                 </button>
             </div>
