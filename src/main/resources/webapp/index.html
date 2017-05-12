@@ -111,10 +111,17 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">OmsUrl</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" ng-model="vm.omsUrl"
                                placeholder="OmsUrl">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" ng-click="vm.sessioninfo=!vm.sessioninfo">SessionInfo</label>
+                    <label class="col-sm-1  control-label">
+                        <input class="pull-left" type="checkbox"  ng-model="vm.sessioninfo">
+                    </label>
+                    <span class="col-sm-8 control-label pull-left" style="cursor: default; text-align: left; color: dodgerblue; font-style: italic" ng-click="vm.sessioninfo=!vm.sessioninfo">(Need for release 14.2 or higher)</span>
                 </div>
 
 

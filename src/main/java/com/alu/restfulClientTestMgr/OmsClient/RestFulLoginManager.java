@@ -1,6 +1,7 @@
 package com.alu.restfulClientTestMgr.OmsClient;
 
 import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpCall;
+import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpClientService;
 import com.alu.restfulClientTestMgr.cometd.CometdEntrance;
 import com.alu.restfulClientTestMgr.constants.ConfLoader;
 import com.alu.restfulClientTestMgr.constants.ConfigKey;
@@ -55,6 +56,7 @@ public class RestFulLoginManager implements ISession {
         sessionTask.terminate();
         sessionTask = null;
 		isConnected=false;
+		HttpClientService.instance().closeClient();
     }
 
 	@Override

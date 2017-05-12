@@ -17,7 +17,7 @@ public class HttpClientService
 
     private HttpClient httpClient = null;
 
-    private CookieStore cookieStore = new HttpCookieStore();
+    private CookieStore cookieStore = null;
 
     public HttpClient getHttpClient()
     {
@@ -29,7 +29,7 @@ public class HttpClientService
         return cookieStore;
     }
 
-    void init()
+    public void newClient()
     {
 
         SslContextFactory sf = new SslContextFactory(true);
@@ -66,7 +66,7 @@ public class HttpClientService
             }
         };
         try {
-            sslContext.init( null, new TrustManager[] {tm}, null );
+            sslContext.newClient( null, new TrustManager[] {tm}, null );
         } catch (KeyManagementException e) {
             e.printStackTrace();
         }
@@ -75,6 +75,7 @@ public class HttpClientService
 
         httpClient=new HttpClient(sf);
         httpClient.setFollowRedirects(false);
+        cookieStore=new HttpCookieStore();
         httpClient.setCookieStore(cookieStore);
         try {
             httpClient.start();
@@ -83,12 +84,24 @@ public class HttpClientService
         }
     }
 
+    public void closeClient(){
+        if(null!=httpClient){
+            try {
+                httpClient.stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            httpClient=null;
+        }
+    }
+
     public static HttpClientService instance()
     {
-        if( inst_ == null )
-        {
+        if( null==inst_ ){
             inst_ = new HttpClientService();
-            inst_.init();
+        }
+        if(null==inst_.httpClient){
+            inst_.newClient();
         }
         return inst_;
     }

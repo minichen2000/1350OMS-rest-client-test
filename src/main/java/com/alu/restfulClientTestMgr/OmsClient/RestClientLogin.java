@@ -37,6 +37,11 @@ public class RestClientLogin
         authenticateOMS( casIp, casPort, serviceTicket.trim(), userName,
             password, presentationIp, otnIp, otnPort, omsUrl );
 
+        if( ConfLoader.getInstance().getBoolean("sessioninfo", false)){
+            getSessionInfo(otnIp, otnPort);
+        }
+
+
         getNodeInfo( otnIp, otnPort );
     }
 
@@ -111,6 +116,15 @@ public class RestClientLogin
         String rlt=HttpCall.instance().postCall( url, inputParam,
             "application/x-www-form-urlencoded", null);
         log.info( "authenticateOMS rlt : " + rlt );
+    }
+
+    private void getSessionInfo(String otnIP, int otnPort)
+    {
+        log.info( "================getSessionInfo================" );
+        String url = "https://" + otnIP + ":" + otnPort + RestFulConstant.SESSION_INFO_URL;
+        log.info( "URL getSessionInfo = " + url );
+        String rlt=HttpCall.instance().getCall( url, null);
+        log.info( "getSessionInfo rlt : " + rlt );
     }
 
     public void getNodeInfo( String otnIP, int otnPort )

@@ -1,5 +1,6 @@
 package com.alu.restfulClientTestMgr.TestMgrServer.servlet;
 
+import com.alu.restfulClientTestMgr.JettyHttpClientService.HttpClientService;
 import com.alu.restfulClientTestMgr.OmsClient.RestFulLoginManager;
 import com.alu.restfulClientTestMgr.constants.ConfLoader;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +36,7 @@ public class Login extends HttpServlet
 			String guiusername=req.getParameter("guiusername");
 			String guipassword=req.getParameter("guipassword");
 			String omsurl=req.getParameter("omsurl");
+			String sessioninfo=req.getParameter("sessioninfo");
 			String commetchannels=req.getParameter("commetchannels");
 
 			log.info("otnip: "+otnip+"\n");
@@ -46,6 +48,7 @@ public class Login extends HttpServlet
 			log.info("guiusername: "+guiusername+"\n");
 			log.info("guipassword: "+guipassword+"\n");
 			log.info("omsurl: "+omsurl+"\n");
+			log.info("sessioninfo: "+sessioninfo+"\n");
 			log.info("commetchannels: "+commetchannels+"\n");
 
 			ConfLoader.getInstance().setConf("otnip", otnip);
@@ -57,6 +60,7 @@ public class Login extends HttpServlet
 			ConfLoader.getInstance().setConf("guiusername", guiusername);
 			ConfLoader.getInstance().setConf("guipassword", guipassword);
 			ConfLoader.getInstance().setConf("omsurl", omsurl);
+			ConfLoader.getInstance().setBoolean("sessioninfo", Boolean.valueOf(sessioninfo));
 			ConfLoader.getInstance().setConf("COMETDHOST", otnip);
 			ConfLoader.getInstance().setConf("commetchannels", commetchannels);
 
@@ -67,6 +71,7 @@ public class Login extends HttpServlet
 			if( RestFulLoginManager.getInstance().isConnected()){
 				RestFulLoginManager.getInstance().endSession();
 			}
+			HttpClientService.instance().closeClient();
 			RestFulLoginManager.getInstance().startSession();
 			out.println("OK");
 

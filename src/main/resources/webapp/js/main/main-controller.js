@@ -27,6 +27,7 @@
         vm.guiUsername='alcatel';
         vm.guiPassword='Lucent1.!';
         vm.omsUrl='/oms1350/data/plat/session/login';
+        vm.sessioninfo=false;
 
         vm.bodyType="json";
         vm.resultBodyType='';
@@ -128,6 +129,7 @@
                         'guiusername': vm.guiUsername,
                         'guipassword': vm.guiPassword,
                         'omsurl': vm.omsUrl,
+                        'sessioninfo': vm.sessioninfo,
                         'commetchannels': JSON.stringify(JSON.parse(vm.channelsBody))
                     }
                 })
