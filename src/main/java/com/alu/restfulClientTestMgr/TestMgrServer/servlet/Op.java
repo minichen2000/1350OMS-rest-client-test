@@ -45,9 +45,9 @@ public class Op extends HttpServlet
 		if(method.toLowerCase().equals("get")){
 			rlt=HttpCall.instance().getCall( url, contentType );
 		}else if(method.toLowerCase().equals("post")){
-			rlt=HttpCall.instance().postCall( url, payloadData, contentType, "*/*");
+			rlt=HttpCall.instance().postCall( url, payloadData, contentType, contentType);
 		}else if(method.toLowerCase().equals("put")){
-			rlt=HttpCall.instance().putCall( url, payloadData, contentType, "*/*");
+			rlt=HttpCall.instance().putCall( url, payloadData, contentType, contentType);
 		}else if(method.toLowerCase().equals("delete")){
 			rlt=HttpCall.instance().deleteCall( url);
 		}else {
